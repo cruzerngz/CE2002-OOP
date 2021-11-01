@@ -31,6 +31,7 @@ public class RevenueReport {
                 System.out.println("Going back ….");
             }
         } while (choice < 3);
+        sc.close();
     }
 
     //Case 1 method

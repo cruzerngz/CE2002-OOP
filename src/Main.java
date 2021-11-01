@@ -47,5 +47,6 @@ public class Main {
                     System.out.println("Program terminating ….");
             }
         } while (choice < 8);
+        sc.close();
     }
 }

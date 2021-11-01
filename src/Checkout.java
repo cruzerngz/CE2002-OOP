@@ -1,5 +1,3 @@
-
-
 import java.util.Scanner;
 
 public class Checkout {
@@ -31,7 +29,9 @@ public class Checkout {
             case 3:
                 System.out.println("Going back ….");
             }
+            
         } while (choice < 3);
+        sc.close();
     }
 
     //Case 1 method
