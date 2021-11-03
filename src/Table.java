@@ -145,8 +145,9 @@ public class Table {
         orderID = order;
     }
 
-     /**
+    /**
      * A method to unreserve the table
+     * @param time the time that the reservation was made for
      */
     public void unreserve(int time){ 
         reserved[time/100 - 11] = false;
@@ -167,4 +168,5 @@ public class Table {
         orderID = -1;
         System.out.println("Table Unassigned.");
     }
+        
 }

@@ -14,7 +14,7 @@ public class Reservation {
         System.out.println("(2) Check for reservation booking");
         System.out.println("(3) Remove reservation booking");
         System.out.println("(4) List existing reservation booking");
-        System.out.println("(5) Back");
+        System.out.println("(0) Back");
         do {
             System.out.println("");
             System.out.printf("Enter your choice: ");

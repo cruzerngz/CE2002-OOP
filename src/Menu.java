@@ -14,7 +14,7 @@ public class Menu {
         System.out.println("(2) Create a new menu item");
         System.out.println("(3) Edit an existing menu item’s details");
         System.out.println("(4) Delete a menu item");
-        System.out.println("(5) Back");
+        System.out.println("(0) Back");
         do {
             System.out.println("");
             System.out.printf("Enter your choice: ");

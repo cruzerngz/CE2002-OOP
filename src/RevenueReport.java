@@ -13,7 +13,7 @@ public class RevenueReport {
         System.out.println("");
         System.out.println("(1) Generate for a day");
         System.out.println("(2) Generate for a period");
-        System.out.println("(3) Back");
+        System.out.println("(0) Back");
         do {
             System.out.println("");
             System.out.printf("Enter your choice: ");

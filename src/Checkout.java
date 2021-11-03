@@ -12,7 +12,7 @@ public class Checkout {
         System.out.println("");
         System.out.println("(1) Checkout");
         System.out.println("(2) Reprint Invoice");
-        System.out.println("(3) Back");
+        System.out.println("(0) Back");
         do {
             System.out.println("");
             System.out.printf("Enter your choice: ");

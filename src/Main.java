@@ -15,7 +15,7 @@ public class Main {
         System.out.println("(5) Checkout/Print Bill Invoice");
         System.out.println("(6) Printing sales revenue report per day and for a range period");
         System.out.println("(7) Managing staff for the program");
-        System.out.println("(8) Exit");
+        System.out.println("(0) Exit");
         
         do {
             System.out.println("");
