@@ -1,8 +1,10 @@
 import java.util.Scanner;
 
 public class Checkout {
-    public Checkout() {
-        
+    private int orderID;
+    
+    public Checkout(int orderID) {
+        this.orderID = orderID; //assigned from outside for use later       
     }
 
     public void printOptions() {
