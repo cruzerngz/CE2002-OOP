@@ -11,7 +11,7 @@ public class DateTime {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     SimpleDateFormat dateTimeFormat = new SimpleDateFormat("E dd/MM/yyyy HH:mm");
 
-    DateTime() {
+    public DateTime() {
         deltaH = 0; //hour offset
         deltaD = 0; //day offset
         update();
