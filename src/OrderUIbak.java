@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+* Menu for managing orders
+ 
+*/
 public class OrderUI{
 
     public void printOptions(){
@@ -21,6 +25,7 @@ public class OrderUI{
     //         choice = sc.nextInt();
     //         switch (choice) {
             
+<<<<<<< Updated upstream
     //         case 1:
     //             Order tempOrder = new Order();
     //             System.out.println("Order created!");
@@ -51,5 +56,38 @@ public class OrderUI{
     //             break;
     //         }
     //     } while (choice);
+=======
+            case 1:
+                Order tempOrder = new Order();
+                System.out.println("Order created!");
+                break;
+            case 2:
+                System.out.println("Enter order ID");
+                orderID = sc.nextInt();
+                Order.printOrder(orderID);
+                break;
+            case 3:
+                System.out.println("Enter order ID");
+                orderID = sc.nextInt();
+                Order.addItem(orderID); //how to add goes to order class
+                break;
+            case 4:
+                System.out.println("Enter order ID");
+                orderID = sc.nextInt();
+                Order.removeItem(orderID);
+                break;
+            case 5:
+                System.out.println("Enter order ID");
+                orderID = sc.nextInt();
+                Checkout(orderID); //how to use constructor ah?
+            case 0:
+                System.out.println("Going back ….");
+            default:
+                System.out.println("Invalid choice");
+                break;
+            }
+        } while (choice);
+        sc.close();
+>>>>>>> Stashed changes
     }
 }
