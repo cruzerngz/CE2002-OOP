@@ -79,7 +79,7 @@ public class Seating {
     /**
      * Method to reserve table. Provide table number, phone and time
      */
-    public void reserveTable(int tableNo, int phoneNo, int time, String cust_name) {
+    public void reserveTable(int tableNo, int time, String cust_name, int phoneNo) {
             table[tableNo - 1].reserve(phoneNo, time, cust_name);
     }
 
@@ -97,6 +97,5 @@ public class Seating {
         for (int i = 0; i < table.length; ++i) {
             table[i].reservedStatus();
         }
-
     }
 }

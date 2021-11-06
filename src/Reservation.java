@@ -23,7 +23,7 @@ public class Reservation {
             switch (choice) {
             //each of these cases call another method within this class
             case 1:
-
+                
                 break;
             case 2:
 
