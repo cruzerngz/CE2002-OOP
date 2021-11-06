@@ -1,10 +1,9 @@
+package ui;
 import java.util.Scanner;
 
-public class Checkout {
-    private int orderID;
-    
-    public Checkout(int orderID) {
-        this.orderID = orderID; //assigned from outside for use later       
+public class Menu {
+
+    public Menu() {
     }
 
     public void printOptions() {
@@ -12,8 +11,10 @@ public class Checkout {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("");
-        System.out.println("(1) Checkout");
-        System.out.println("(2) Reprint Invoice");
+        System.out.println("(1) Print existing menu");
+        System.out.println("(2) Create a new menu item");
+        System.out.println("(3) Edit an existing menu item’s details");
+        System.out.println("(4) Delete a menu item");
         System.out.println("(0) Back");
         do {
             System.out.println("");
@@ -29,11 +30,15 @@ public class Checkout {
 
                 break;
             case 3:
+
+                break;
+            case 4:
+
+                break;
+            case 5:
                 System.out.println("Going back ….");
             }
-            
-        } while (choice < 3);
-        sc.close();
+        } while (choice < 5);
     }
 
     //Case 1 method
@@ -41,4 +46,7 @@ public class Checkout {
     //Case 2 method
 
     //Case 3 method
+
+    //Case 4 method
+
 }

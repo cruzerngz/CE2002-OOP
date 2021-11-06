@@ -1,4 +1,4 @@
-package Menu;
+package ui;
 
 import java.io.BufferedWriter;
 import java.io.File;

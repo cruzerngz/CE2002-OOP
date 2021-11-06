@@ -1,8 +1,11 @@
+package ui;
 import java.util.Scanner;
 
-public class Reservation {
-    public Reservation() {
-        
+public class Checkout {
+    private int orderID;
+    
+    public Checkout(int orderID) {
+        this.orderID = orderID; //assigned from outside for use later       
     }
 
     public void printOptions() {
@@ -10,10 +13,8 @@ public class Reservation {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("");
-        System.out.println("(1) Create a new reservation booking");
-        System.out.println("(2) Check for reservation booking");
-        System.out.println("(3) Remove reservation booking");
-        System.out.println("(4) List existing reservation booking");
+        System.out.println("(1) Checkout");
+        System.out.println("(2) Reprint Invoice");
         System.out.println("(0) Back");
         do {
             System.out.println("");
@@ -23,21 +24,17 @@ public class Reservation {
             switch (choice) {
             //each of these cases call another method within this class
             case 1:
-                
+
                 break;
             case 2:
 
                 break;
             case 3:
-
-                break;
-            case 4:
-
-                break;
-            case 5:
                 System.out.println("Going back ….");
             }
-        } while (choice < 5);
+            
+        } while (choice < 3);
+        sc.close();
     }
 
     //Case 1 method
@@ -45,6 +42,4 @@ public class Reservation {
     //Case 2 method
 
     //Case 3 method
-
-    //Case 4 method
 }

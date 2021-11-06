@@ -1,8 +1,8 @@
-
+package ui;
 import java.util.Scanner;
 
-public class RevenueReport {
-    public RevenueReport() {
+public class Reservation {
+    public Reservation() {
         
     }
 
@@ -11,8 +11,10 @@ public class RevenueReport {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("");
-        System.out.println("(1) Generate for a day");
-        System.out.println("(2) Generate for a period");
+        System.out.println("(1) Create a new reservation booking");
+        System.out.println("(2) Check for reservation booking");
+        System.out.println("(3) Remove reservation booking");
+        System.out.println("(4) List existing reservation booking");
         System.out.println("(0) Back");
         do {
             System.out.println("");
@@ -22,16 +24,21 @@ public class RevenueReport {
             switch (choice) {
             //each of these cases call another method within this class
             case 1:
-
+                
                 break;
             case 2:
 
                 break;
             case 3:
+
+                break;
+            case 4:
+
+                break;
+            case 5:
                 System.out.println("Going back ….");
             }
-        } while (choice < 3);
-        sc.close();
+        } while (choice < 5);
     }
 
     //Case 1 method

@@ -1,3 +1,4 @@
+package objects;
 public class Seating {
     /**
      * Restaurant is made up of many tables

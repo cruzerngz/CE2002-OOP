@@ -1,8 +1,10 @@
+package ui;
+
 import java.util.Scanner;
 
-public class Menu {
-
-    public Menu() {
+public class RevenueReport {
+    public RevenueReport() {
+        
     }
 
     public void printOptions() {
@@ -10,10 +12,8 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("");
-        System.out.println("(1) Print existing menu");
-        System.out.println("(2) Create a new menu item");
-        System.out.println("(3) Edit an existing menu item’s details");
-        System.out.println("(4) Delete a menu item");
+        System.out.println("(1) Generate for a day");
+        System.out.println("(2) Generate for a period");
         System.out.println("(0) Back");
         do {
             System.out.println("");
@@ -29,15 +29,10 @@ public class Menu {
 
                 break;
             case 3:
-
-                break;
-            case 4:
-
-                break;
-            case 5:
                 System.out.println("Going back ….");
             }
-        } while (choice < 5);
+        } while (choice < 3);
+        sc.close();
     }
 
     //Case 1 method
@@ -47,5 +42,4 @@ public class Menu {
     //Case 3 method
 
     //Case 4 method
-
 }
