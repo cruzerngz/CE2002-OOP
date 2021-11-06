@@ -62,30 +62,44 @@ public class Data {
     }
 
     /**
-     * Prints an array list to console 
-     * with proper formatting
-     * @param printArr ArrayList to be printed
+     * Format the arrayList so all elements have an equal number of characters
+     * @param arr ArrayList to be formatted
      */
-    public static void printArrayList(ArrayList<String[]> printArr) {
-        int[] lengthArr = new int[printArr.get(0).length];  //array for determining max length of each col
+    private static ArrayList<String[]> formatArrayList(ArrayList<String[]> arr) {
+        int[] lengthArr = new int[arr.get(0).length];  //array for determining max length of each col
         Arrays.fill(lengthArr, 0);                          //fill the array with 0s
 
-        int rows = printArr.size();         //no of rows
-        int cols = printArr.get(0).length;  //no of cols
+        int rows = arr.size();         //no of rows
+        int cols = arr.get(0).length;  //no of cols
 
         //build the max lengthArr
         for(int i=0; i<cols; i++) {     //per col
             for(int j=0; j<rows; j++) { //per row
-                lengthArr[i] = Math.max(printArr.get(j)[i].length(), lengthArr[i]);
+                lengthArr[i] = Math.max(arr.get(j)[i].length(), lengthArr[i]);
             }
         }
 
         //pad all elements to max length
         for(int i=0; i<rows; i++) {     //per row
             for(int j=0; j<cols; j++) { //per col
-                printArr.get(i)[j] = String.format("%"+(-lengthArr[j])+"s", printArr.get(i)[j]);
+                arr.get(i)[j] = String.format("%"+(-lengthArr[j])+"s", arr.get(i)[j]);
             }
         }
+
+        return arr;
+    }
+
+    /**
+     * Print an arrayList
+     * @param printArr ArrayList to be printed
+     */
+    public static void printArrayList(ArrayList<String[]> printArr) {
+
+        int rows = printArr.size();
+        int cols = printArr.get(0).length;
+
+        //format the arrayList first
+        printArr = formatArrayList(printArr);
 
         //print the array
         //each element separated by space
