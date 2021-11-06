@@ -11,21 +11,16 @@ public class debugging {
         String path = "./util/testdata.csv";
 
         ArrayList<String[]> data = Data.readCSV(path);
-        for(int i=0; i<data.size(); i++) {
-            for(int j=0; j<data.get(i).length; j++) {
-                System.out.print(data.get(i)[j] + "-");
-            }
-            System.out.println();
-        }
+
+        // for(int i=0; i<data.size(); i++) {
+        //     System.out.println(Arrays.toString(data.get(i)));
+        // }
 
         //Data.writeCSV(data, "bla.csv");
-        HashMap<String, String[]> result;
-        result = Data.parse(data);
 
-        String key;
-
+        Data.printArrayList(data);
         //System.out.println(Arrays.asList(result));
-        key = "header2";
+
         //System.out.println(key + Arrays.toString(result.get(key)));
 
         // HashMap<String,String> thisthing = new HashMap<String, String>();

@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.lang.Math;
 //exceptions
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -58,6 +59,43 @@ public class Data {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
         writer.write(writeStr);
         writer.close();
+    }
+
+    /**
+     * Prints an array list to console 
+     * with proper formatting
+     * @param printArr ArrayList to be printed
+     */
+    public static void printArrayList(ArrayList<String[]> printArr) {
+        int[] lengthArr = new int[printArr.get(0).length];  //array for determining max length of each col
+        Arrays.fill(lengthArr, 0);                          //fill the array with 0s
+
+        int rows = printArr.size();         //no of rows
+        int cols = printArr.get(0).length;  //no of cols
+
+        //build the max lengthArr
+        for(int i=0; i<cols; i++) {     //per col
+            for(int j=0; j<rows; j++) { //per row
+                lengthArr[i] = Math.max(printArr.get(j)[i].length(), lengthArr[i]);
+            }
+        }
+
+        //pad all elements to max length
+        for(int i=0; i<rows; i++) {     //per row
+            for(int j=0; j<cols; j++) { //per col
+                printArr.get(i)[j] = String.format("%"+(-lengthArr[j])+"s", printArr.get(i)[j]);
+            }
+        }
+
+        //print the array
+        //each element separated by space
+        //additional decorative elements add here
+        for(int i=0; i<rows; i++) {
+            for(int j=0; j<cols; j++) {
+                System.out.print(printArr.get(i)[j] + "    ");
+            }
+            System.out.print("\n");
+        }
     }
 
     /**
