@@ -39,6 +39,7 @@ public class Menu {
                 System.out.println("Going back ….");
             }
         } while (choice < 5);
+        sc.close();
     }
 
     //Case 1 method
