@@ -4,12 +4,12 @@ package util;
  * Format strings to display a certain colour in the console
  * @author cruzerngz
  */
-public class StringColour {
+public class StrColour {
     public static final String TEXT_RESET = "\u001B[0m";
-    public static final String TEXT_RED = "\u001B[31m";
-    public static final String TEXT_GREEN = "\u001B[32m";
-    public static final String TEXT_BLUE = "\u001B[34m";
-    public static final String TEXT_CYAN = "\u001B[36m";
+    public static final String TEXT_RED = "\u001B[91m";
+    public static final String TEXT_GREEN = "\u001B[92m";
+    public static final String TEXT_BLUE = "\u001B[94m";
+    public static final String TEXT_CYAN = "\u001B[96m";
 
     /**
      * Colour a string red
