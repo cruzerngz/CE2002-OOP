@@ -1,6 +1,6 @@
 package objects;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 import util.Data;
 import util.DateTime;
@@ -14,7 +14,7 @@ public class Order {
         //staffid could be part of the constructor
     }
 
-    public static int create() {
+    public static String create() {
         //creates a new order
         ArrayList<String[]> temp = Data.readCSV("./Order.txt"); //how to put filepath?
         int i=0;
@@ -30,7 +30,7 @@ public class Order {
         return id;
     }
 
-    public static void printOrder(Integer orderID) {
+    public static void printOrder(String orderID) {
         ArrayList<String[]> temp = Data.readCSV("./Order.csv"); //read into arraylist
         int i=0;
         while(temp[i][1] != orderID.toString() && i<temp.size() ) //no match and never reach end
@@ -45,7 +45,7 @@ public class Order {
 
     }
 
-    public static void addItem(int orderID) {
+    public static void addItem(String orderID, String itemID) {
         ArrayList<String[]> temp = Data.readCSV(./Order.csv);
         int i=0;
         while(temp[i][1] != orderID.toString() && i<temp.size() ) //no match and never reach end
@@ -55,17 +55,14 @@ public class Order {
             System.out.println("No such order found");
             return;
         }
-        System.out.println("What item are you adding?");
-        Scanner sc = new Scanner(System.in);
-        String itemID = sc.next();
-        sc.close();
+        
         //add item to arraylist and WB
         temp[i][4] ;//items column how to append?
 
         Data.writeCSV(temp, "Order.csv");
     }
 
-    public static void removeItem(int orderID) {
+    public static void removeItem(String orderID, String itemID) {
         ArrayList<String[]> temp = Data.readCSV(./Order.csv);
         int i=0;
         while(temp[i][1] != orderID.toString() && i<temp.size() ) //no match and never reach end
@@ -75,9 +72,8 @@ public class Order {
             System.out.println("No such order found");
             return;
         }
-        System.out.println("What item are you removing?");
-        Scanner sc = new Scanner(System.in);
-        String itemID = sc.nextLine();
+        
+        
         //look for item in that index and remove
         //how to access the particular string and search?
 

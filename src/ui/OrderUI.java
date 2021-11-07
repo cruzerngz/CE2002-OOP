@@ -1,10 +1,13 @@
 package ui;
 import java.util.Scanner;
+import objects.Order;
+import ui.CheckoutUI;
 
 public class OrderUI{
 
     public void printOptions(){
-         int choice,orderID;
+         int choice;
+         String orderID, itemID;
          Scanner sc = new Scanner(System.in);
 
          System.out.println("");
@@ -28,29 +31,35 @@ public class OrderUI{
                 break;
             case 2:
                 System.out.println("Enter order ID");
-                orderID = sc.nextInt();
+                orderID = sc.next();
                 Order.printOrder(orderID);
                 break;
             case 3:
                 System.out.println("Enter order ID");
-                orderID = sc.nextInt();
-                Order.addItem(orderID); //how to add goes to order class
+                orderID = sc.next();
+                System.out.println("Enter item ID");
+                itemID = sc.next();
+                Order.addItem(orderID,itemID);
                 break;
             case 4:
                 System.out.println("Enter order ID");
-                orderID = sc.nextInt();
-                Order.removeItem(orderID);
+                orderID = sc.next();
+                System.out.println("Enter item ID");
+                itemID = sc.next();
+                Order.removeItem(orderID,itemID);
                 break;
             case 5:
                 System.out.println("Enter order ID");
-                orderID = sc.nextInt();
-                Checkout(orderID); //how to use constructor ah?
+                orderID = sc.next();
+                Checkout(orderID); 
+                break;
             case 0:
                 System.out.println("Going back ….");
+                break;
             default:
                 System.out.println("Invalid choice");
                 break;
             }
-        } while (choice);
+        } while (choice>0);
     }
 }

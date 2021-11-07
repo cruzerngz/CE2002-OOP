@@ -1,10 +1,10 @@
 package ui;
 import java.util.Scanner;
 
-public class Checkout {
+public class CheckoutUI {
     private int orderID;
     
-    public Checkout(int orderID) {
+    public CheckoutUI(int orderID) {
         this.orderID = orderID; //assigned from outside for use later       
     }
 
@@ -24,16 +24,20 @@ public class Checkout {
             switch (choice) {
             //each of these cases call another method within this class
             case 1:
-
+                //need choose payment method?
                 break;
             case 2:
-
+                
                 break;
-            case 3:
+            case 0:
                 System.out.println("Going back ….");
-            }
+                break;
             
-        } while (choice < 3);
+            default:
+                System.out.println("Invalid choice");
+                break;
+            }
+        } while (choice > 0);
         sc.close();
     }
 
