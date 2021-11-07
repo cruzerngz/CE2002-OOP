@@ -24,7 +24,7 @@ public class OrderUI{
             
             case 1:
                 orderID = Order.create();
-                System.out.println("Order created!");
+                System.out.printf("Order created! ID = %d",orderID);
                 break;
             case 2:
                 System.out.println("Enter order ID");

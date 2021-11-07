@@ -73,6 +73,7 @@ public class menuSetting {
                 System.out.println("Going back ….");
             }
         } while (choice < 5);
+        sc.close();
     }
 
     private void printmenu(int selection) throws FileNotFoundException{
