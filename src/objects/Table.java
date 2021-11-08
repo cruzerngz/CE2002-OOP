@@ -12,6 +12,7 @@ public class Table {
      * The number that is allocated to the table.
      */
     private int tableNo;
+    private String date;
 
     /**
      * Whether the table has been reserved
@@ -47,8 +48,9 @@ public class Table {
 
 
     
-    public Table(int table_No){ 
+    public Table(int table_No, String date){ 
         tableNo = table_No;
+        this.date = date;
     }
 
     /**
@@ -101,8 +103,15 @@ public class Table {
         else{
             //System.out.println("Table "+tableNo+ " has no reservations" );
         }
-        
-        
+    }
+
+    public void checkReservation(int time){ 
+        if (reserved[time/100 - 11] == true){
+            System.out.println("Table " + tableNo 
+            + " reserved by " + customerName[time/100 - 11] 
+            + " (Phone number: " + customerPhone[time/100 - 11]
+            + ")");
+        }
     }
 
     /**
@@ -117,8 +126,8 @@ public class Table {
             + " (Phone number: "
             + customerPhone[time/100 - 11]
             + ") at "
-            + time
-            + "hrs.");
+            + date + " "
+            + time + "hrs.");
         }
         else{
             customerPhone[time/100 - 11] = phoneNumber;
@@ -126,15 +135,24 @@ public class Table {
             reserved[time/100 - 11] = true;
             System.out.println("Table " + tableNo
             + " reserved at "
-            + time
-            + "hrs for "
+            + date + " "
+            + time + "hrs for "
             + customerName[time/100 - 11] 
-            + " (Phone number: "
-            + customerPhone[time/100 - 11]
+            + " (Phone number: " + customerPhone[time/100 - 11]
             + ")."
             );
+        }   
+    }
+
+    public void reserve_csv(int phoneNumber, int time, String cust_name){ 
+        if (reserved[time/100 - 11] == true){
+            System.out.println("Check csv for overlapping");
         }
-        
+        else{
+            customerPhone[time/100 - 11] = phoneNumber;
+            customerName[time/100 - 11] = cust_name;
+            reserved[time/100 - 11] = true;
+        }   
     }
 
      /**
@@ -161,6 +179,10 @@ public class Table {
             );
     }
 
+    public boolean isReserved(int time){ 
+        return (reserved[time/100 - 11]);
+    }
+
      /**
      * A method to unassign the table
      */
@@ -169,5 +191,5 @@ public class Table {
         orderID = -1;
         System.out.println("Table Unassigned.");
     }
-        
+    
 }
