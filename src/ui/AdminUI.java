@@ -8,13 +8,11 @@ public class AdminUI {
         int choice;
         Scanner sc = new Scanner(System.in);
         
-
         do {
             System.out.println(StrColour.Blue("ADMIN"));
-            System.out.println();
-            System.out.println("(1) Staff");
-            System.out.println("(2) Change date and time");
-            System.out.println("(0) Return"); 
+            System.out.println(StrColour.Green("(1) Staff"));
+            System.out.println(StrColour.Green("(2) Change date and time"));
+            System.out.println(StrColour.Green("(0) Return")); 
             System.out.println();
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
@@ -46,10 +44,9 @@ public class AdminUI {
 
         do {
             System.out.println(StrColour.Blue("STAFF"));
-            System.out.println();
-            System.out.println("(1) Show current staff");
-            System.out.println("(2) Change active staff");
-            System.out.println("(0) Return"); 
+            System.out.println(StrColour.Green("(1) Show current staff"));
+            System.out.println(StrColour.Green("(2) Change active staff"));
+            System.out.println(StrColour.Green("(0) Return")); 
             System.out.println();
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
@@ -77,12 +74,11 @@ public class AdminUI {
 
         do {
             System.out.println(StrColour.Blue("TIME"));
-            System.out.println();
-            System.out.println("(1) Show current date and time");
-            System.out.println("(2) Modify hours");
-            System.out.println("(3) Modify days");
-            System.out.println("(4) Reset to current time");
-            System.out.println("(0) Return");
+            System.out.println(StrColour.Green("(1) Show current date and time"));
+            System.out.println(StrColour.Green("(2) Modify hours"));
+            System.out.println(StrColour.Green("(3) Modify days"));
+            System.out.println(StrColour.Green("(4) Reset to current time"));
+            System.out.println(StrColour.Green("(0) Return"));
             System.out.println();
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
@@ -100,6 +96,7 @@ public class AdminUI {
                     System.out.print("New date and time: ");
                     System.out.print(datetime.getDateTime());
                     System.out.println();
+                    System.out.println();
                     choice = 1;
                     break;
 
@@ -110,6 +107,7 @@ public class AdminUI {
                     System.out.print("New date and time: ");
                     System.out.print(datetime.getDateTime());
                     System.out.println();
+                    System.out.println();
                     choice = 2;
                     break;
                 
@@ -117,6 +115,7 @@ public class AdminUI {
                     datetime.reset();
                     System.out.print("Reset! Date and time: ");
                     System.out.print(datetime.getDateTime());
+                    System.out.println();
                     System.out.println();
                     break;
 
