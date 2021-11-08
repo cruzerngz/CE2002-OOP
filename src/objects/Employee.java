@@ -1,5 +1,13 @@
 package objects;
+//imports
+import util.Password;
+//exceptions
+import java.security.NoSuchAlgorithmException;
 
+/**
+ * Object containing employee information
+ * @author cruzerngz
+ */
 public class Employee {
     int id;
     String name;
@@ -41,9 +49,11 @@ public class Employee {
      * Checks if hashed password matches that of the employee
      * @param hashIn Password hash to be checked
      * @return True / False
+     * @throws NoSuchAlgorithmException
      */
-    public Boolean isHash(String hashIn) {
-        if(hashIn == hash) return true;
+    public Boolean isHash(String pwd) throws NoSuchAlgorithmException {
+
+        if(Password.hash(pwd) == hash) return true;
         else return false;
     }
 }

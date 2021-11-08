@@ -1,8 +1,9 @@
 package util;
-
+//imports
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+//exceptions
 import java.security.NoSuchAlgorithmException;
 
 /**

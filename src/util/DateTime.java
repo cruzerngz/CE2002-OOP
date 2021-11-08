@@ -1,10 +1,16 @@
 package util;
+//imports
 import java.text.SimpleDateFormat;
 
+/**
+ * Date-Time object that keeps track of the current date and time,
+ * along with any offsets passed
+ * @author cruzerngz
+ */
 public class DateTime {
     private long deltaH;
     private long deltaD;
-    private long time;
+    private long unixTime;
 
     //formatters
     SimpleDateFormat timeFormat = new SimpleDateFormat("HHmm");
@@ -19,29 +25,29 @@ public class DateTime {
 
     /**
      * Gets the current time with offsets
-     * @return Int time
+     * @return 24H format time
      */
     public int getTime() {
         update();
-        return Integer.parseInt(timeFormat.format(time));
+        return Integer.parseInt(timeFormat.format(unixTime));
     }
 
     /**
      * Gets the current date with offsets
-     * @return String date
+     * @return Date in string form DD/MM/YYYY
      */
     public String getDate() {
         update();
-        return dateFormat.format(time);
+        return dateFormat.format(unixTime);
     }
 
     /**
      * Gets the current date and time with offsets
-     * @return String date-time
+     * @return Date-time in string form
      */
     public String getDateTime() {
         update();
-        return dateTimeFormat.format(time);
+        return dateTimeFormat.format(unixTime);
     }
 
     /**
@@ -61,7 +67,7 @@ public class DateTime {
     }
 
     /**
-     * Remove all offsets
+     * Remove all hour and day offsets
      */
     public void reset() {
         deltaH = 0;
@@ -72,8 +78,8 @@ public class DateTime {
      * Updates the current private variable time
      */
     private void update() {
-        time = System.currentTimeMillis();
-        time += deltaH;
-        time += deltaD;
+        unixTime = System.currentTimeMillis();
+        unixTime += deltaH;
+        unixTime += deltaD;
     }
 }
