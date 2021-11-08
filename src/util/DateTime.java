@@ -1,9 +1,10 @@
 package util;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 //imports
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+//exceptions
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Date-Time object that keeps track of the current date and time,
@@ -11,8 +12,8 @@ import java.util.ArrayList;
  * @author cruzerngz
  */
 public class DateTime {
-    private long deltaH = 0;
-    private long deltaD = 0;
+    private long deltaH;
+    private long deltaD;
     private long unixTime;
     private String savePath;
 
@@ -23,21 +24,26 @@ public class DateTime {
     static SimpleDateFormat dateTimeFormat = new SimpleDateFormat("E dd/MM/yyyy HH:mm");
 
     /**
-     * Constructor
+     * Specify a path to the data directory
      * @param filePath Path to data directory
-     * @throws FileNotFoundException
      */
-    public DateTime(String filePath) throws FileNotFoundException {
+    public DateTime(String filePath) {
         savePath = filePath + "/timeData.csv";
-        update();
+        try {update();}
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Gets the number of days passed since 1 Jan 1970
      * @return Int days elapsed since epoch
      */
-    public int getDaysSinceEpoch() throws IOException {
-        update();
+    public int getDaysSinceEpoch() {
+        try {update();}
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         return (int)(unixTime / 1000 / 86400);
     }
 
@@ -54,20 +60,24 @@ public class DateTime {
     /**
      * Gets the current time with offsets
      * @return 24H format time
-     * @throws IOException
      */
-    public int getTime() throws IOException {
-        update();
+    public int getTime() {
+        try {update();}
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         return Integer.parseInt(timeFormat.format(unixTime));
     }
 
     /**
      * Gets the current time with offsets
      * @return 24H format time as string
-     * @throws IOException
      */
-    public String getTimeString() throws IOException {
-        update();
+    public String getTimeString() {
+        try {update();}
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         return timeStringFormat.format(unixTime);
     }
 
@@ -75,8 +85,11 @@ public class DateTime {
      * Gets the current date with offsets
      * @return Date in string form DD/MM/YYYY
      */
-    public String getDate() throws IOException {
-        update();
+    public String getDate() {
+        try {update();}
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         return dateFormat.format(unixTime);
     }
 
@@ -84,8 +97,11 @@ public class DateTime {
      * Gets the current date and time with offsets
      * @return Date-time in string form
      */
-    public String getDateTime() throws IOException {
-        update();
+    public String getDateTime() {
+        try {update();}
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         return dateTimeFormat.format(unixTime);
     }
 
@@ -93,28 +109,36 @@ public class DateTime {
      * Add or subtract hours to the current time
      * @param delta Hour delta
      */
-    public void deltaHour(long delta) throws IOException {
+    public void deltaHour(long delta) {
         deltaH += delta * 3600 * 1000;
-        save();
+        try {save();}
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Add or subtract days to the current time
      * @param delta Day delta
      */
-    public void deltaDay(long delta) throws IOException {
+    public void deltaDay(long delta) {
         deltaD += delta * 86400 * 1000;
-        save();
+        try {save();}
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Remove all hour and day offsets
-     * @throws IOException
      */
-    public void reset() throws IOException {
+    public void reset() {
         deltaH = 0;
         deltaD = 0;
-        save();
+        try {save();}
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

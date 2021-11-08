@@ -28,9 +28,9 @@ public class debug {
     }
     public static void testTime() throws IOException {
         DateTime datetime = new DateTime("../data");
-        System.out.println(datetime.getTime());
+        System.out.println(datetime.getDateTime());
         datetime.deltaHour(1);
-        datetime.deltaDay(0);
+        datetime.deltaDay(-112);
         datetime.reset();
     }
 }
