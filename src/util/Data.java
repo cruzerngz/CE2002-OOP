@@ -121,32 +121,42 @@ public class Data {
      * Convert an ArrayList into a map.
      * The first array (interpreted as column headers) is converted into HashMap keys.
      * The data entries are String arrays behind each header (key).
+     * @param arrIn ArrayList to be converted
+     * @return Map
      */
     public static LinkedHashMap<String, String[]> parse(ArrayList<String[]> arrIn) {
 
         int rows = arrIn.size();        //number of rows
         int cols = arrIn.get(0).length; //number of cols
         LinkedHashMap<String, String[]> returnMap = new LinkedHashMap<String, String[]>();
+        returnMap.clear();
 
         String[] colArr = arrIn.get(0); //get the col names, top row
-        String[] colData = new String[rows-1];
+        arrIn.remove(0);
+
+        // String[] colData = new String[arrIn.size()];
         //build the hashmap
         for(int i=0; i<colArr.length; i++) {
 
             //build col data first
-            Arrays.fill(colData, ""); //empty array
+            String[] colData = new String[arrIn.size()]; //empty array
             for(int j=0; j<colData.length; j++) {
-                colData[j] = arrIn.get(j+1)[i];
+                colData[j] = arrIn.get(j)[i];
             }
+
             //add to hash map
-            System.out.print(colArr[i] + " ");
-            System.out.print(Arrays.toString(colData) + "\n");
-            returnMap.put(colArr[i], colData);
+            returnMap.putIfAbsent(colArr[i], colData);
         }
 
         return returnMap;
     }
 
+    /**
+     * Convert a map into an ArrayList. 
+     * Map keys are interpreted as column headers when converted into ArrayList. 
+     * @param mapIn Map to be converted
+     * @return ArrayList
+     */
     public static ArrayList<String[]> parse(LinkedHashMap<String, String[]> mapIn) {
 
         ArrayList<String[]> returnArr = new ArrayList<String[]>();
@@ -157,23 +167,23 @@ public class Data {
 
         for(String key: mapIn.keySet()) { //iterating once
             rows = mapIn.get(key).length + 1;
+            break;
         }
         
         rowArr = mapIn.keySet().toArray(rowArr);
+        // System.out.println(Arrays.asList(rowArr));
         returnArr.add(rowArr);
 
-        System.out.println(Integer.toString(rows) + " " + Integer.toString(cols));
-
         for(int i=0; i<rows-1; i++) {
-            //construct rowArr first
+            String[] tempArr = new String[cols];
+            //construct tempArr first
             index = 0; //reset index
-            Arrays.fill(rowArr, ""); //empty array
             for(String key: mapIn.keySet()) {
-                rowArr[index] = mapIn.get(key)[i];
+                tempArr[index] = mapIn.get(key)[i];
                 index++;
             }
             //add to array list
-            returnArr.add(rowArr);
+            returnArr.add(tempArr);
         }
 
         return returnArr;
