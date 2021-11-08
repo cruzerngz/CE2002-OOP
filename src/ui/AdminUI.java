@@ -86,7 +86,8 @@ public class AdminUI {
 
             switch(choice) {
                 case 1:
-                    System.out.println(datetime.getDateTime());
+                    System.out.println(StrColour.Cyan(datetime.getDateTime()));
+                    System.out.println();
                     break;
 
                 case 2:
@@ -94,7 +95,7 @@ public class AdminUI {
                     datetime.deltaHour(sc.nextInt());
                     System.out.println();
                     System.out.print("New date and time: ");
-                    System.out.print(datetime.getDateTime());
+                    System.out.print(StrColour.Cyan(datetime.getDateTime()));
                     System.out.println();
                     System.out.println();
                     choice = 1;
@@ -105,7 +106,7 @@ public class AdminUI {
                     datetime.deltaDay(sc.nextInt());
                     System.out.println();
                     System.out.print("New date and time: ");
-                    System.out.print(datetime.getDateTime());
+                    System.out.print(StrColour.Cyan(datetime.getDateTime()));
                     System.out.println();
                     System.out.println();
                     choice = 2;
@@ -114,7 +115,7 @@ public class AdminUI {
                 case 4:
                     datetime.reset();
                     System.out.print("Reset! Date and time: ");
-                    System.out.print(datetime.getDateTime());
+                    System.out.print(StrColour.Cyan(datetime.getDateTime()));
                     System.out.println();
                     System.out.println();
                     break;
