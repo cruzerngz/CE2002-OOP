@@ -1,6 +1,9 @@
 package ui;
 import java.util.Scanner;
 
+import objects.Discount;
+import objects.Membership;
+
 public class CheckoutUI {
     private int orderID;
     
@@ -24,10 +27,10 @@ public class CheckoutUI {
             switch (choice) {
             //each of these cases call another method within this class
             case 1:
-                //need choose payment method?
+                Checkout();
                 break;
             case 2:
-                
+                PrintInvoice();
                 break;
             case 0:
                 System.out.println("Going back ….");
@@ -42,8 +45,22 @@ public class CheckoutUI {
     }
 
     //Case 1 method
+    private void Checkout(){
+        //need choose payment method?
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Is customer member? Y/N");
+        if(sc.next().charAt(0) == 'Y')
+        {
+            Membership member = new Membership(true); //create simple obj to pass into overridable fn
+            double discount = Discount.getDiscount(member); //callee fn returns discount in ratio 0-1. 0.4 discount means pay 0.6.
+            // get subtotal or total then discount?
 
+        }
+        sc.close();
+    }
     //Case 2 method
+    private void PrintInvoice(){
 
+    }
     //Case 3 method
 }
