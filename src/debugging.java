@@ -44,6 +44,7 @@ public class debugging {
 
 
         // testPrint();
+        testPrintColour();
         // testParse();
         testReadAndPrint();
         
@@ -51,6 +52,14 @@ public class debugging {
     public static void testPrint() {
         ArrayList<String[]> testArr = new ArrayList<String[]>();
         testArr.add(new String[]{"col1","col2"});
+        testArr.add(new String[]{"10","20"});
+        testArr.add(new String[]{"11","21"});
+
+        Data.printArrayList(testArr);
+    }
+    public static void testPrintColour() {
+        ArrayList<String[]> testArr = new ArrayList<String[]>();
+        testArr.add(new String[]{StrColour.Green("col1"),StrColour.Cyan("col2")});
         testArr.add(new String[]{"10","20"});
         testArr.add(new String[]{"11","21"});
 
