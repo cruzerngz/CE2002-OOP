@@ -102,5 +102,9 @@ public class debugging {
         }
         testArr = Data.parse(testMap);
         Data.printArrayList(testArr);
+
+        for(int i=0; i<testArr.size(); i++) {
+            System.out.println(Arrays.asList(testArr.get(i)));
+        }
     }   
 }

@@ -13,10 +13,8 @@ import java.lang.Math;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-///import Json
 /**
  * Collection of data parsing functions 
- * For reading and writing to file
  * @author cruzerngz
  */
 public class Data {
@@ -93,28 +91,64 @@ public class Data {
     }
 
     /**
-     * Print an arrayList
-     * @param printArr ArrayList to be printed
+     * Print an arrayList.
+     * Original arrayList is not modified
+     * @param arrIn ArrayList to be printed
      */
-    public static void printArrayList(ArrayList<String[]> printArr) {
+    public static void printArrayList(ArrayList<String[]> arrIn) {
 
-        int rows = printArr.size();
-        int cols = printArr.get(0).length;
-
-        //System.out.println(Integer.toString(rows)+ " "+Integer.toString(cols));
+        ArrayList<String[]> printedArr = deepCopy(arrIn); //actual array to be printed
+        
+        int rows = printedArr.size();
+        int cols = printedArr.get(0).length;
 
         //format the arrayList first
-        printArr = formatArrayList(printArr);
+        printedArr = formatArrayList(printedArr);
 
         //print the array
         //each element separated by space + pipe
         //additional decorative elements add here
         for(int i=0; i<rows; i++) {
-            for(int j=0; j<cols; j++) {
-                System.out.print(printArr.get(i)[j] + " | ");
+            if(i==0) { //highlight the header row
+                System.out.print(StrColour.contrastBG("|  "));
+                for(int j=0; j<cols; j++) {
+                    System.out.print(StrColour.contrastBG(printedArr.get(i)[j]));
+                    if(j != (cols - 1)) {
+                        System.out.print(StrColour.contrastBG("  |  "));
+                    } else {
+                        System.out.print(StrColour.contrastBG("  |"));
+                    }
+                }
+                System.out.print("\n");
+            } else { //print the rest as-is
+                System.out.print("|  ");
+                for(int j=0; j<cols; j++) {
+                    System.out.print(printedArr.get(i)[j]);
+                    if(j != (cols - 1)) {
+                        System.out.print("  |  ");
+                    } else {
+                        System.out.print("  |");
+                    }
+                }
+                System.out.print("\n");
             }
-            System.out.print("\n");
+
         }
+    }
+
+    /**
+     * Creates a deep copy of all items inside an array list
+     * @param arrIn Array to be copied
+     * @return Copied array
+     */
+    public static ArrayList<String[]> deepCopy(ArrayList<String[]> arrIn) {
+        ArrayList<String[]> returnArr = new ArrayList<String[]>();
+
+        for(int i=0; i<arrIn.size(); i++) {
+            returnArr.add(arrIn.get(i).clone());
+        }
+
+        return returnArr;
     }
 
     /**
@@ -122,20 +156,19 @@ public class Data {
      * The first array (interpreted as column headers) is converted into HashMap keys.
      * The data entries are String arrays behind each header (key).
      * @param arrIn ArrayList to be converted
-     * @return Map
+     * @return Linked HashMap
      */
     public static LinkedHashMap<String, String[]> parse(ArrayList<String[]> arrIn) {
 
-        int rows = arrIn.size();        //number of rows
-        int cols = arrIn.get(0).length; //number of cols
         LinkedHashMap<String, String[]> returnMap = new LinkedHashMap<String, String[]>();
         returnMap.clear();
 
         String[] colArr = arrIn.get(0); //get the col names, top row
         arrIn.remove(0);
 
-        // String[] colData = new String[arrIn.size()];
         //build the hashmap
+        //every loop needs to initialise a new array
+        //or the resulting arrays will all be duplicated
         for(int i=0; i<colArr.length; i++) {
 
             //build col data first
@@ -147,7 +180,6 @@ public class Data {
             //add to hash map
             returnMap.putIfAbsent(colArr[i], colData);
         }
-
         return returnMap;
     }
 
@@ -171,9 +203,10 @@ public class Data {
         }
         
         rowArr = mapIn.keySet().toArray(rowArr);
-        // System.out.println(Arrays.asList(rowArr));
         returnArr.add(rowArr);
 
+        //every loop needs to initialise a new array
+        //or the resulting arrays will all be duplicated
         for(int i=0; i<rows-1; i++) {
             String[] tempArr = new String[cols];
             //construct tempArr first
@@ -185,7 +218,6 @@ public class Data {
             //add to array list
             returnArr.add(tempArr);
         }
-
         return returnArr;
     }
 }
