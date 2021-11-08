@@ -5,20 +5,18 @@ public class Main {
         int choice;
         Scanner sc = new Scanner(System.in);
         
-
-        //please rewrite all the options
-        System.out.println("");
-        System.out.println("(1) Menu Items Management");
-        System.out.println("(2) Promotion Sets Management");
-        System.out.println("(3) Managing Orders");
-        System.out.println("(4) Managing Reservations");
-        System.out.println("(5) Checkout/Print Bill Invoice");
-        System.out.println("(6) Printing sales revenue report per day and for a range period");
-        System.out.println("(7) Managing staff for the program");
-        System.out.println("(0) Exit");
+        System.out.println();
+        System.out.println("(1) Menu Management");          //F.R. 1
+        System.out.println("(2) Promotions Management");    //F.R. 2
+        System.out.println("(3) Order Management");         //F.R. 3,4,5
+        System.out.println("(4) Reservation Management");   //F.R. 6,7,8
+        System.out.println("(5) Order checkout");           //F.R. 9
+        System.out.println("(6) Sales statistics");         //F.R. 10
+        System.out.println("(7) Admin");                    //Staff and
+        System.out.println("(0) Exit");                     //time manupulation
         
         do {
-            System.out.println("");
+            System.out.println();
             System.out.printf("Enter your choice: ");
             choice = sc.nextInt();
             switch (choice) {
@@ -43,10 +41,13 @@ public class Main {
                 case 7:
                     
                     break;
-                case 8:
-                    System.out.println("Program terminating ….");
+                case 0:
+                    System.out.println("Program terminating ...");
+                    break;
+                default:
+                    break;
             }
-        } while (choice < 8);
+        } while (choice != 0);
         sc.close();
     }
 }

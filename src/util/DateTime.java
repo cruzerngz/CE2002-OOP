@@ -35,7 +35,7 @@ public class DateTime {
 
     /**
      * Converts the number of days since 1970 into date
-     * @param DaysSinceEpoch Days elapsed since epoch
+     * @param daysSinceEpoch Days elapsed since epoch
      * @return Date in string form DD/MM/YYYY
      */
     public String daysToDate(int daysSinceEpoch) {
