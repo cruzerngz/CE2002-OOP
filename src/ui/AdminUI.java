@@ -44,8 +44,9 @@ public class AdminUI {
 
         do {
             System.out.println(StrColour.Blue("STAFF"));
-            System.out.println(StrColour.Green("(1) Show current staff"));
-            System.out.println(StrColour.Green("(2) Change active staff"));
+            System.out.println(StrColour.Green("(1) Show number of staff"));
+            System.out.println(StrColour.Green("(2) Show staff list"));
+            System.out.println(StrColour.Green("(3) Change active staff"));
             System.out.println(StrColour.Green("(0) Return")); 
             System.out.println();
             System.out.print("Enter your choice: ");

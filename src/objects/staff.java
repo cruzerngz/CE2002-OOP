@@ -11,6 +11,7 @@ public class staff {
     private String position;
     private String username;
     private String password;
+    private boolean status;
     private static Scanner x;
     
     public staff(){}
