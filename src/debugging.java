@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 
 import java.util.ArrayList;
@@ -17,8 +18,18 @@ public class debugging {
         // testReadAndPrint();
         // testPutMap();
         testAllParse();
+
+        // String[] testArr = new String[3];
+        // String[] testArr2 = new String[2];
+        // testArr2[0] = "-1";
+        // testArr2[1] = "-2";
+        // testArr = testArr2;
+        // testArr = testArr2.clone();
+        // System.out.println(Arrays.asList(testArr));
+        // System.out.println(Arrays.asList(testArr2));
         
     }
+
     public static void testPrint() {
         ArrayList<String[]> testArr = new ArrayList<String[]>();
         testArr.add(new String[]{"col1","col2"});
@@ -27,6 +38,7 @@ public class debugging {
 
         Data.printArrayList(testArr);
     }
+
     public static void testPrintColour() {
         ArrayList<String[]> testArr = new ArrayList<String[]>();
         testArr.add(new String[]{StrColour.Green("col1"),StrColour.Cyan("col2")});
@@ -35,6 +47,7 @@ public class debugging {
 
         Data.printArrayList(testArr);
     }
+
     public static void testParseMap() {
         LinkedHashMap<String, String[]> newMap = new LinkedHashMap<String, String[]>();
         newMap.put("col1", new String[]{"10","11"});
@@ -43,6 +56,7 @@ public class debugging {
         Data.printArrayList(Data.parse(newMap));
         
     }
+
     public static void testParseArr() {
         ArrayList<String[]> newArr = new ArrayList<String[]>();
         newArr.add(new String[]{"col1","col2"});
@@ -56,11 +70,13 @@ public class debugging {
         }
 
     }
+
     public static void testReadAndPrint() throws FileNotFoundException {
         ArrayList<String[]> testArr = Data.readCSV("../data/testdata.csv");
 
         Data.printArrayList(testArr);
     }
+
     public static void testPutMap() {
         LinkedHashMap<String, String[]> newMap = new LinkedHashMap<String, String[]>();
         String[] colArr = {"col1","col2","col3","col4"};
@@ -89,8 +105,10 @@ public class debugging {
         }
         // Data.printArrayList(Data.parse(newMap));
     }
+
     public static void testAllParse() throws FileNotFoundException {
-        ArrayList<String[]> testArr = Data.readCSV("../data/testdata.csv");
+
+        ArrayList<String[]> testArr = Data.readCSV("../data/newtest.csv");
         
         LinkedHashMap<String, String[]> testMap = new LinkedHashMap<String, String[]>();
         Data.printArrayList(testArr);

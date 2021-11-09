@@ -39,7 +39,7 @@ public class Data {
         }
 
         while(sc.hasNextLine()) {
-            returnArr.add(sc.nextLine().split(","));
+            returnArr.add(sc.nextLine().split(",", -1));
         }
         
         sc.close();
