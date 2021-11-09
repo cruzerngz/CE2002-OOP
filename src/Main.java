@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import ui.OrderUI;
+
 public class Main {
     public static void main(String[] args) {
         int choice;
@@ -27,7 +29,7 @@ public class Main {
                     
                     break;
                 case 3: 
-                    
+                    OrderUI.printOptions(); //pass to orderui
                     break;
                 case 4: 
                     

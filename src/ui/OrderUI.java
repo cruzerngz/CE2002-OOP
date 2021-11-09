@@ -4,7 +4,7 @@ import objects.Order;
 
 public class OrderUI{
 
-    public void printOptions(){
+    public static void printOptions(){
          int choice;
          String orderID, itemID;
          String staffID, staffName;
@@ -26,6 +26,7 @@ public class OrderUI{
             switch (choice) {
             
             case 1:
+                //debug
                 System.out.println("Enter Staff ID:"); //temporarily use this method first
                 staffID = sc.next();
                 System.out.println("Enter Staff name:"); //temporarily use this method first
@@ -56,7 +57,7 @@ public class OrderUI{
             case 5:
                 System.out.println("Enter order ID");
                 orderID = sc.next();
-                CheckoutUI checkout = new CheckoutUI(orderID); 
+                CheckoutUI checkout = new CheckoutUI(orderID); //may change to static method later
                 checkout.printOptions(); //pass to checkout ui
                 break;
             case 0:

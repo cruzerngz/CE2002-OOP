@@ -20,7 +20,7 @@ public class Order {
         //creates a new order
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
         try {
-            tempArrayList = Data.readCSV("./Order.csv");
+            tempArrayList = Data.readCSV("../data/Order.csv");
         } catch (FileNotFoundException e) {
             
             e.printStackTrace();
@@ -51,7 +51,7 @@ public class Order {
 
         tempArrayList = Data.parse(tempMap);
         try {
-            Data.writeCSV(tempArrayList, "./Order.csv");
+            Data.writeCSV(tempArrayList, "../data/Order.csv");
         } catch (IOException e) {
             
             e.printStackTrace();
@@ -63,7 +63,7 @@ public class Order {
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
 
         try {
-            tempArrayList = Data.readCSV("./Order.csv");
+            tempArrayList = Data.readCSV("../data/Order.csv");
         } catch (FileNotFoundException e) {
             
             e.printStackTrace();
@@ -92,7 +92,7 @@ public class Order {
     public static void addItem(String orderID, String itemID) {
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
         try {
-            tempArrayList = Data.readCSV("./Order.csv");
+            tempArrayList = Data.readCSV("../data/Order.csv");
         } catch (FileNotFoundException e) {
             
             e.printStackTrace();
@@ -119,7 +119,7 @@ public class Order {
 
         tempArrayList = Data.parse(tempMap);
         try {
-            Data.writeCSV(tempArrayList, "./Order.csv");
+            Data.writeCSV(tempArrayList, "../data/Order.csv");
         } catch (IOException e) {
             
             e.printStackTrace();
@@ -129,7 +129,7 @@ public class Order {
     public static void removeItem(String orderID, String itemID) {
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
         try {
-            tempArrayList = Data.readCSV("./Order.csv");
+            tempArrayList = Data.readCSV("../data/Order.csv");
         } catch (FileNotFoundException e1) {
             
             e1.printStackTrace();
@@ -156,7 +156,7 @@ public class Order {
         //WB to csv
         tempArrayList = Data.parse(tempMap);
         try {
-            Data.writeCSV(tempArrayList, "./Order.csv");
+            Data.writeCSV(tempArrayList, "../data/Order.csv");
         } catch (IOException e) {
             
             e.printStackTrace();
