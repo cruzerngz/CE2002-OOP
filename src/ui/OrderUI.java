@@ -1,13 +1,13 @@
 package ui;
 import java.util.Scanner;
 import objects.Order;
-import ui.CheckoutUI;
 
 public class OrderUI{
 
     public void printOptions(){
          int choice;
          String orderID, itemID;
+         String staffID, staffName;
          Scanner sc = new Scanner(System.in);
 
          System.out.println("");
@@ -26,7 +26,12 @@ public class OrderUI{
             switch (choice) {
             
             case 1:
-                orderID = Order.create();
+                System.out.println("Enter Staff ID:"); //temporarily use this method first
+                staffID = sc.next();
+                System.out.println("Enter Staff name:"); //temporarily use this method first
+                staffName = sc.next();
+
+                orderID = Order.create(staffID,staffName);
                 System.out.printf("Order created! ID = %d",orderID);
                 break;
             case 2:
@@ -51,7 +56,8 @@ public class OrderUI{
             case 5:
                 System.out.println("Enter order ID");
                 orderID = sc.next();
-                Checkout(orderID); 
+                CheckoutUI checkout = new CheckoutUI(orderID); 
+                checkout.printOptions(); //pass to checkout ui
                 break;
             case 0:
                 System.out.println("Going back ….");

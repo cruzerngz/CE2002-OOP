@@ -5,9 +5,9 @@ import objects.Discount;
 import objects.Membership;
 
 public class CheckoutUI {
-    private int orderID;
+    private String orderID;
     
-    public CheckoutUI(int orderID) {
+    public CheckoutUI(String orderID) {
         this.orderID = orderID; //assigned from outside for use later       
     }
 
@@ -46,7 +46,7 @@ public class CheckoutUI {
 
     //Case 1 method
     private void Checkout(){
-        //need choose payment method?
+        //need choose payment method? no assume cash
         Scanner sc = new Scanner(System.in);
         System.out.println("Is customer member? Y/N");
         if(sc.next().charAt(0) == 'Y')
