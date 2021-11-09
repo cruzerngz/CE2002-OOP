@@ -35,7 +35,7 @@ public class AdminUI {
     }
 
     /**
-     * UI for handling staff related stuff
+     * UI for handling staff related stuff hello
      */
     public static void staffUI() {
         int choice;
