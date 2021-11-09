@@ -30,7 +30,13 @@ public class Data {
         //write each line as an array to the return arraylists
         ArrayList<String[]> returnArr = new ArrayList<String[]>();
 
-        Scanner sc = new Scanner(new File(filePath));
+        Scanner sc = null;
+        try {
+            sc = new Scanner(new File(filePath));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
 
         while(sc.hasNextLine()) {
             returnArr.add(sc.nextLine().split(","));
@@ -54,7 +60,14 @@ public class Data {
             writeStr += "\n";
         }
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+        BufferedWriter writer = null;
+        try { 
+            writer = new BufferedWriter(new FileWriter(filePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
         writer.write(writeStr);
         writer.close();
     }
