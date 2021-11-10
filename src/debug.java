@@ -3,34 +3,15 @@ import java.security.NoSuchAlgorithmException;
 
 import ui.*;
 import util.*;
+import objects.*;
+
 
 public class debug {
     public static void main(String args[]) throws IOException {
-        // DateTime datetime = new DateTime();
 
-        // System.out.println(datetime.getDaysSinceEpoch());
-        // System.out.println(datetime.daysToDate(18900));
-        // System.out.println(datetime.getTime());
-        // System.out.println(datetime.getTimeString());
-
-        // String z = "\u001B[0m";
-        // String x = "this is coloured";
-
-        // x = StrColour.Green(x);
-        // System.out.println(x);
-
-        // //my precious regex
-        // //filters out the unicode special characters
-        // String regex = "\\e\\[[0-9]+m";
-        // x = x.replaceAll(regex, "");
-        // System.out.println(x);
-        // System.out.println(Password.hash("inpuu"));
         // testTime();
-        char esc = 27;
-        char thing = 34;
-        //System.out.println(esc + "[" + thing + "asdasd");
-        //System.out.println("\033[31;1;4m asd \033[0m");
-        AdminUI.main(args);
+        testStats();
+
     }
     public static void testTime() throws IOException {
         DateTime datetime = new DateTime("../data");
@@ -38,5 +19,21 @@ public class debug {
         datetime.deltaHour(1);
         datetime.deltaDay(-112);
         datetime.reset();
+    }
+    public static void testStats() {
+        saleStats stats = new saleStats();
+        stats.reset();
+        System.out.println("Adding 50 days of data");
+        for(int i=18938; i>18888; i--) {
+            stats.addRevenue(i,10f);
+        }
+        Data.printArrayList(stats.getMatrix());
+        System.out.print("Showing month data: ");
+        Float x = stats.monthRevenue(18936);
+        System.out.println(x);
+
+        System.out.print("Showing day data if any: ");
+        x = stats.dayRevenue(18937);
+        System.out.println(x);
     }
 }

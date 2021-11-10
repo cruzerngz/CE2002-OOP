@@ -25,7 +25,7 @@ public class Data {
      * @return ArrayList containing CSV data
      * @throws FileNotFoundException
      */
-    public static ArrayList<String[]> readCSV(String filePath) throws FileNotFoundException {
+    public static ArrayList<String[]> readCSV(String filePath) {
         //read the first line of the csv file
         //write each line as an array to the return arraylists
         ArrayList<String[]> returnArr = new ArrayList<String[]>();
@@ -52,7 +52,7 @@ public class Data {
      * @param filePath Relative path to file
      * @throws IOException
      */
-    public static void writeCSV(ArrayList<String[]> writeArr, String filePath) throws IOException {
+    public static void writeCSV(ArrayList<String[]> writeArr, String filePath) {
         String writeStr = "";
 
         for(int i=0; i<writeArr.size(); i++) {
@@ -68,8 +68,14 @@ public class Data {
             return;
         }
 
-        writer.write(writeStr);
-        writer.close();
+        try {
+            writer.write(writeStr);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
     }
 
     /**
