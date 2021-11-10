@@ -10,7 +10,7 @@ public class debug {
     public static void main(String args[]) throws IOException {
 
         // testTime();
-        // testStats();
+        testStats();
         testColour();
 
     }
@@ -21,9 +21,10 @@ public class debug {
         datetime.deltaDay(-112);
         datetime.reset();
     }
+
     public static void testStats() {
         saleStats stats = new saleStats();
-        stats.reset();
+        stats.reset(); //clear all data
         System.out.println("Adding 50 days of data");
         for(int i=18938; i>18888; i--) {
             stats.addRevenue(i,10f);
