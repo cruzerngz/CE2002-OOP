@@ -1,15 +1,15 @@
 package objects;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 
 import util.*;
 
 public class saleStats {
-    ArrayList<String[]> revMatrix;
-    String filePath;
+    private ArrayList<String[]> revMatrix;
+    private String filePath;
+    private DecimalFormat dF = new DecimalFormat("0.00");
     
     /**
      * Loads sale information from data
@@ -35,7 +35,6 @@ public class saleStats {
                 break;
             }
         }
-
         return result;
     }
 
@@ -50,11 +49,10 @@ public class saleStats {
         for(int i=0; i<revMatrix.size(); i++) {
             if(i==0) continue; //skip col headers
             if(epochDay - Integer.parseInt(revMatrix.get(i)[0]) >= 0 && 
-               epochDay - Integer.parseInt(revMatrix.get(i)[0]) <= 30) {
+               epochDay - Integer.parseInt(revMatrix.get(i)[0]) < 30) {
                 result += Float.parseFloat(revMatrix.get(i)[1]);
             }
         }
-
         return result;
     }
 
@@ -62,7 +60,7 @@ public class saleStats {
      * Add the revenue for a selected day
      * @param epochDay Target day
      * @param amount Revenue for that day
-     * @return
+     * @return true if successful
      */
     public boolean addRevenue(int epochDay, float amount) {
         int i;
@@ -90,10 +88,52 @@ public class saleStats {
     }
 
     /**
-     * Returns a formatted matrix for printing
-     * @return
+     * Subtract the revenue for a selected day
+     * @param epochDay Target day
+     * @param amount Revenue to subtract
+     * @return true if successful
      */
-    public ArrayList<String[]> getMatrix() {
+    public boolean subRevenue(int epochDay, float amount) {
+        int i;
+        for(i=0; i<revMatrix.size(); i++) { 
+            if(i==0) continue; //ignoring col header
+
+            //if match, write
+            if(epochDay == Integer.parseInt(revMatrix.get(i)[0])) {
+                amount = Float.parseFloat(revMatrix.get(i)[1]) - amount;
+                revMatrix.get(i)[1] = Float.toString(amount);
+                save();
+                return true;
+            }
+        }
+        return false; //assume that days without any rev cannot have rev subtracted
+    }
+
+    /**
+     * Delete ALL revenue for a selected day
+     * @param epochDay Target day
+     * @return true if successful, false if entry not found
+     */
+    public boolean delRevenue(int epochDay) {
+        int i;
+        for(i=0; i<revMatrix.size(); i++) { 
+            if(i==0) continue; //ignoring col header
+
+            //if match, remove
+            if(epochDay == Integer.parseInt(revMatrix.get(i)[0])) {
+                revMatrix.remove(i);
+                save();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns a formatted array list for printing
+     * @return printable array
+     */
+    public ArrayList<String[]> getPrintMatrix() {
         ArrayList<String[]> returnArr = new ArrayList<String[]>();
         DateTime dt = new DateTime("../data");
         //build the return array
@@ -102,12 +142,14 @@ public class saleStats {
                 returnArr.add(revMatrix.get(0).clone());
             } else {
                 returnArr.add(new String[]{
-                    dt.daysToDate(Integer.parseInt(revMatrix.get(i).clone()[0])),
-                    "$" + revMatrix.get(i).clone()[1]
+                    dt.daysToDayDate(Integer.parseInt(revMatrix.get(i).clone()[0])),
+                    "$" + dF.format(
+                        Float.parseFloat(revMatrix.get(i).clone()[1])
+                    )
                 });
             }
-
         }
+        returnArr.get(0)[0] = "date"; //change header from "day" to "date"
 
         return returnArr;
     }
@@ -128,16 +170,6 @@ public class saleStats {
      * Sorts the entries by day, then writes to file
      */
     private void sort() {
-        // Data.printArrayList(revMatrix);
-        // ArrayList<Float[]> tempArr = new ArrayList<Float[]>();
-        // //build the sorting array
-        // for(int i=0; i<revMatrix.size(); i++) {
-        //     if(i==0) continue; //skip col headers
-        //     tempArr.add(new Float[]{
-        //         Float.parseFloat(revMatrix.get(i)[0]),
-        //         Float.parseFloat(revMatrix.get(i)[1])
-        //     });
-        // }
 
         if(revMatrix.size() <= 2) return; //no need to sort
 

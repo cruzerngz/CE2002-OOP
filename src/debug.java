@@ -10,7 +10,8 @@ public class debug {
     public static void main(String args[]) throws IOException {
 
         // testTime();
-        testStats();
+        // testStats();
+        testColour();
 
     }
     public static void testTime() throws IOException {
@@ -27,13 +28,25 @@ public class debug {
         for(int i=18938; i>18888; i--) {
             stats.addRevenue(i,10f);
         }
-        Data.printArrayList(stats.getMatrix());
+        System.out.print("removing one day of data: ");
+        System.out.println(stats.delRevenue(18900));
+
+        System.out.print("subtracting revenue from one day: ");
+        System.out.println(stats.subRevenue(18901, 5f));
+
+        Data.printArrayList(stats.getPrintMatrix());
+
         System.out.print("Showing month data: ");
         Float x = stats.monthRevenue(18936);
         System.out.println(x);
 
         System.out.print("Showing day data if any: ");
-        x = stats.dayRevenue(18937);
+        x = stats.dayRevenue(18950);
         System.out.println(x);
+    }
+
+    public static void testColour() {
+        Colour.print(Colour.TEXT_BLUE, "testing... printing single line. ");
+        Colour.println(Colour.TEXT_YELLOW, "new colour haha");
     }
 }

@@ -22,6 +22,7 @@ public class DateTime {
     static SimpleDateFormat timeStringFormat = new SimpleDateFormat("HH:mm");
     static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     static SimpleDateFormat dateTimeFormat = new SimpleDateFormat("E dd/MM/yyyy HH:mm");
+    static SimpleDateFormat dayDateFormat = new SimpleDateFormat("E dd/MM/yyyy");
 
     /**
      * Specify a path to the data directory
@@ -58,6 +59,16 @@ public class DateTime {
     }
 
     /**
+     * Converts the number of days since 1970 to day and date
+     * @param daysSinceEpoch Days elapsed since epoch
+     * @return Date in string form DAY DD/MM/YYYY
+     */
+    public String daysToDayDate(int daysSinceEpoch) {
+        long time = (long)(daysSinceEpoch) * 86400 * 1000;
+        return dayDateFormat.format(time);
+    }
+
+    /**
      * Gets the current time with offsets
      * @return 24H format time
      */
@@ -91,6 +102,18 @@ public class DateTime {
             e.printStackTrace();
         }
         return dateFormat.format(unixTime);
+    }
+
+    /**
+     * Gets the current day and date with offsets
+     * @return Date in string form DAY DD/MM/YYYY
+     */
+    public String getDayDate() {
+        try {update();}
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return  dayDateFormat.format(unixTime);
     }
 
     /**

@@ -4,7 +4,7 @@ package util;
  * Format strings to display a certain colour in the console
  * @author cruzerngz
  */
-public class StrColour {
+public class Colour {
 
     public static final String TEXT_RESET = "\u001B[0m";
     //text col
@@ -26,6 +26,25 @@ public class StrColour {
     public static final String BG_CYAN   = "\u001B[46m";
     public static final String BG_PURPLE = "\u001B[45m";
     public static final String BG_YELLOW = "\u001B[43m";
+
+
+    /**
+     * Prints coloured text directly
+     * @param col Colour to use. Text first, then background
+     * @param str String to print
+     */
+    public static void println(String col, String str) {
+        System.out.println(col + str + TEXT_RESET);
+    }
+
+    /**
+     * Prints coloured text directly, without printing newline
+     * @param col Colour to use. Text first, then background
+     * @param str String to print
+     */
+    public static void print(String col, String str) {
+        System.out.print(col + str + TEXT_RESET);
+    }
 
     /**
      * Colour a string red
