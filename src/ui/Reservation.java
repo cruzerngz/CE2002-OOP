@@ -5,11 +5,8 @@ import java.util.Scanner;
 import objects.Restaurant;
 
 public class Reservation {
-    public Reservation() {
 
-    }
-
-    public void printOptions() throws FileNotFoundException {
+    public static void printOptions() throws FileNotFoundException{
         int choice;
         Scanner sc = new Scanner(System.in);
         Restaurant res = new Restaurant();

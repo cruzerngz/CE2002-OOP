@@ -1,9 +1,11 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import ui.OrderUI;
+import ui.Reservation;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         int choice;
         Scanner sc = new Scanner(System.in);
         
@@ -32,7 +34,7 @@ public class Main {
                     OrderUI.printOptions(); //pass to orderui
                     break;
                 case 4: 
-                    
+                    Reservation.printOptions();
                     break;
                 case 5:
                     
