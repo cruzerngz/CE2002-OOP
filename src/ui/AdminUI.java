@@ -1,10 +1,14 @@
 package ui;
 
 import util.*;
+
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import objects.StaffRoster;
+
 public class AdminUI {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         int choice;
         Scanner sc = new Scanner(System.in);
         
@@ -36,8 +40,9 @@ public class AdminUI {
 
     /**
      * UI for handling staff related stuff hello
+     * @throws FileNotFoundException
      */
-    public static void staffUI() {
+    public static void staffUI() throws FileNotFoundException {
         int choice;
         Scanner sc = new Scanner(System.in);
         
@@ -46,8 +51,11 @@ public class AdminUI {
             Colour.println(Colour.TEXT_BLUE,"STAFF");
             Colour.println(Colour.TEXT_GREEN,"(1) Show number of staff");
             Colour.println(Colour.TEXT_GREEN,"(2) Show staff list");
-            Colour.println(Colour.TEXT_GREEN,"(3) Change active staff");
-            Colour.println(Colour.TEXT_GREEN,"(0) Return"); 
+            Colour.println(Colour.TEXT_GREEN,"(3) Hiring Staff");
+            Colour.println(Colour.TEXT_GREEN,"(4) Firing Staff");
+            Colour.println(Colour.TEXT_GREEN,"(5) Login");
+            Colour.println(Colour.TEXT_GREEN,"(6) Logout");
+            Colour.println(Colour.TEXT_GREEN,"(0) Return");
             System.out.println();
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
@@ -55,14 +63,45 @@ public class AdminUI {
 
             switch(choice) {
                 case 1:
-                    break;
-                case 0:
-                    break;
+                    StaffRoster.ShownumStaff();
+                    
+                case 2:
+                    StaffRoster.Showhired();
+                    
+                case 3:
+                    System.out.println("Please enter the ID given: ");
+                    int ID = sc.nextInt();
+                    System.out.println("Please enter the Name: ");
+                    String name = sc.next();
+                    System.out.println("Please enter the position: ");
+                    String position = sc.next();
+                    System.out.println("Please enter the username: ");
+                    String username = sc.next();
+                    System.out.println("Please enter the password: ");
+                    String password = sc.next();
+                    StaffRoster.hiring(ID,name,position,username,password);
+                    
+                case 4:
+                    System.out.println("Please enter the name of staff to be fired: ");
+                    String namef = sc.next();
+                    StaffRoster.firing(namef);
+                
+                case 5:
+                    System.out.println("Please enter your username: ");
+                    String Lusername = sc.next();
+                    System.out.println("please enter your password: ");
+                    String Lpassword = sc.next();
+                    String Sname =StaffRoster.login(Lusername,Lpassword);
+                    System.out.println(Sname+" has log in!");
+                case 6: 
+                    StaffRoster.logout();
+                    System.out.println("logged out");
                 default:
                     break;
             }
         } while(choice != 0);
     }
+
 
     /**
      * UI for handling date-time related stuff
