@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-import ui.OrderUI;
+import ui.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -38,7 +38,7 @@ public class Main {
                     
                     break;
                 case 6: 
-                    
+                    SaleStatsUI.main(args);
                     break;
                 case 7:
                     

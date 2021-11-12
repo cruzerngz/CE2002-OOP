@@ -19,12 +19,7 @@ public class Order {
     public static String create(String emp_name, String emp_id) {
         //creates a new order
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
-        try {
-            tempArrayList = Data.readCSV("../data/Order.csv");
-        } catch (FileNotFoundException e) {
-            
-            e.printStackTrace();
-        } 
+        tempArrayList = Data.readCSV("../data/Order.csv");
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
         int i=0;
         String[] orderRows = tempMap.get("orderNO"); //get this column values as one array
@@ -50,24 +45,16 @@ public class Order {
         tempMap.put("emp_id", empRow);
 
         tempArrayList = Data.parse(tempMap);
-        try {
-            Data.writeCSV(tempArrayList, "../data/Order.csv");
-        } catch (IOException e) {
-            
-            e.printStackTrace();
-        }
+
+        Data.writeCSV(tempArrayList, "../data/Order.csv");
         return id;
     }
 
     public static void printOrder(String orderID) {
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
 
-        try {
-            tempArrayList = Data.readCSV("../data/Order.csv");
-        } catch (FileNotFoundException e) {
-            
-            e.printStackTrace();
-        } //read into arraylist
+        tempArrayList = Data.readCSV("../data/Order.csv");
+        //read into arraylist
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
         int i=0;
         String[] orderRows = tempMap.get("orderNO");
@@ -91,12 +78,8 @@ public class Order {
 
     public static void addItem(String orderID, String itemID) {
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
-        try {
-            tempArrayList = Data.readCSV("../data/Order.csv");
-        } catch (FileNotFoundException e) {
-            
-            e.printStackTrace();
-        }
+        tempArrayList = Data.readCSV("../data/Order.csv");
+
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
         int i=0;
         String[] orderRows = tempMap.get("orderNO");
@@ -118,22 +101,15 @@ public class Order {
         tempMap.put("items", itemRows);
 
         tempArrayList = Data.parse(tempMap);
-        try {
-            Data.writeCSV(tempArrayList, "../data/Order.csv");
-        } catch (IOException e) {
-            
-            e.printStackTrace();
-        }
+
+        Data.writeCSV(tempArrayList, "../data/Order.csv");
     }
 
     public static void removeItem(String orderID, String itemID) {
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
-        try {
-            tempArrayList = Data.readCSV("../data/Order.csv");
-        } catch (FileNotFoundException e1) {
-            
-            e1.printStackTrace();
-        }
+
+        tempArrayList = Data.readCSV("../data/Order.csv");
+
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
         int i=0;
         String[] orderRows = tempMap.get("orderNO");
@@ -155,12 +131,9 @@ public class Order {
         
         //WB to csv
         tempArrayList = Data.parse(tempMap);
-        try {
-            Data.writeCSV(tempArrayList, "../data/Order.csv");
-        } catch (IOException e) {
-            
-            e.printStackTrace();
-        }
+
+        Data.writeCSV(tempArrayList, "../data/Order.csv");
+
     }
 
 }
