@@ -35,7 +35,7 @@ public class Order {
                 break; //get out of loop with i pointing to which row we want to edit
             else ++i;
         }
-        DateTime datetime = new DateTime("../data");
+        DateTime datetime = new DateTime();
         String id = datetime.getDateTime();
         orderRows[i] = id; //write to array
         tempMap.put("orderNO", orderRows); //WB to map
