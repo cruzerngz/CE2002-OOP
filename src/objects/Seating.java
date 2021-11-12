@@ -18,7 +18,7 @@ public class Seating {
     private Table[] table = new Table[20];
     private int numEmptyTable = 20;
 
-    DateTime dt = new DateTime("../../data");
+    DateTime dt = new DateTime();
     private int time = dt.getTime();
 
     /**

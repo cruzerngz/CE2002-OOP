@@ -109,7 +109,7 @@ public class AdminUI {
     public static void dateTimeUI() {
         int choice;
         Scanner sc = new Scanner(System.in);
-        DateTime datetime = new DateTime("../data");
+        DateTime datetime = new DateTime();
         
 
         do {

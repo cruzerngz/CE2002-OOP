@@ -101,7 +101,7 @@ public class Table {
             System.out.printf("\n");
         }
         else{
-            //System.out.println("Table "+tableNo+ " has no reservations" );
+            System.out.println("Table "+tableNo+ " has no reservations" );
         }
     }
 

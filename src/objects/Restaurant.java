@@ -9,7 +9,7 @@ public class Restaurant {
 
     // private Seating[] seating = new Seating[7];
     private HashMap<String, Seating> seating = new HashMap<String, Seating>();
-    DateTime dt = new DateTime("../data");
+    DateTime dt = new DateTime();
     String path = "../data/reservations.csv";
     ArrayList<String[]> reserve = Data.readCSV(path);
     
@@ -123,6 +123,9 @@ public class Restaurant {
     }
     
     public void writeToCSV(){ 
+        for (int j = 0; j < reserve.size(); ++j) {
+            reserve.get(j)[0] = String.valueOf(j);
+        }
         Data.writeCSV(reserve, path);
     }
 }

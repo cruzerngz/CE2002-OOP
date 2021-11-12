@@ -155,7 +155,7 @@ public class SaleStats {
      */
     public ArrayList<String[]> getPrintMatrix() {
         ArrayList<String[]> returnArr = new ArrayList<String[]>();
-        DateTime dt = new DateTime("../data");
+        DateTime dt = new DateTime();
         //build the return array
         for(int i=0; i<revMatrix.size(); i++) {
             if(i==0) {
