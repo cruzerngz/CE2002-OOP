@@ -133,6 +133,7 @@ public class Order {
         
         String[] itemRows = tempMap.get("items");
         itemRows[i].replace(itemID, ""); //replace with blank
+        itemRows[i].replaceAll("..",".");
         tempMap.put("items", itemRows);
         
         //WB to csv
