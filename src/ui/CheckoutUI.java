@@ -7,7 +7,7 @@ import objects.Membership;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-
+import util.Colour;
 import util.Data;
 
 public class CheckoutUI {
@@ -23,11 +23,12 @@ public class CheckoutUI {
 
         do {
             System.out.println("");
-            System.out.println("(1) Checkout");
-            System.out.println("(2) Reprint Invoice");
-            System.out.println("(0) Back");
+            Colour.println(Colour.TEXT_BLUE, "Checkout Menu");
+            Colour.println(Colour.TEXT_GREEN, "(1) Checkout");
+            Colour.println(Colour.TEXT_GREEN, "(2) Reprint Invoice");
+            Colour.println(Colour.TEXT_GREEN, "(0) Back");
             System.out.println("");
-            System.out.printf("Enter your choice: ");
+            Colour.println(Colour.TEXT_GREEN, "Enter your choice: ");
             
             choice = sc.nextInt();
             switch (choice) {
@@ -39,11 +40,11 @@ public class CheckoutUI {
                 PrintInvoice();
                 break;
             case 0:
-                System.out.println("Going back ….");
+                Colour.println(Colour.TEXT_GREEN, "Going back ….");
                 break;
             
             default:
-                System.out.println("Invalid choice");
+                Colour.println(Colour.TEXT_GREEN, "Invalid choice");
                 break;
             }
         } while (choice > 0);

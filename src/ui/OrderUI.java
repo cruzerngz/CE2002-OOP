@@ -1,6 +1,7 @@
 package ui;
 import java.util.Scanner;
 import objects.Order;
+import util.Colour;
 
 public class OrderUI{
 
@@ -11,29 +12,30 @@ public class OrderUI{
          Scanner sc = new Scanner(System.in);
 
          System.out.println("");
-         System.out.println("(1) Create order");
-         System.out.println("(2) View Order");
-         System.out.println("(3) Add items to Order");
-         System.out.println("(4) Remove items from Order");
-         System.out.println("(5) Checkout/Print Bill Invoice");
-         System.out.println("(0) Exit");
+         Colour.println(Colour.TEXT_BLUE, "Order Menu");
+         Colour.println(Colour.TEXT_GREEN, "(1) Create order");
+         Colour.println(Colour.TEXT_GREEN, "(2) View Order");
+         Colour.println(Colour.TEXT_GREEN, "(3) Add items to Order");
+         Colour.println(Colour.TEXT_GREEN, "(4) Remove items from Order");
+         Colour.println(Colour.TEXT_GREEN, "(5) Checkout/Print Bill Invoice");
+         Colour.println(Colour.TEXT_GREEN, "(0) Exit");
 
         do {
             System.out.println("");
-            System.out.printf("Enter your choice: ");
+            Colour.println(Colour.TEXT_GREEN, "Enter your choice: ");
             
             choice = sc.nextInt();
             switch (choice) {
             
             case 1:
                 //debug
-                System.out.println("Enter Staff ID:"); //temporarily use this method first
+                Colour.println(Colour.TEXT_YELLOW, "Enter Staff ID:"); //temporarily use this method first
                 staffID = sc.next();
-                System.out.println("Enter Staff name:"); //temporarily use this method first
+                Colour.println(Colour.TEXT_YELLOW, "Enter Staff name:"); //temporarily use this method first
                 staffName = sc.next();
 
                 orderID = Order.create(staffID,staffName);
-                System.out.printf("Order created! ID = %d",orderID);
+                System.out.printf("Order created! ID = %s",orderID);
                 break;
             case 2:
                 System.out.println("Enter order ID");
