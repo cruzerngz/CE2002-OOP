@@ -67,23 +67,36 @@ public class Seating {
     public void assignTable(int tableNo, int orderID) {
         if (table[tableNo - 1].isOccupied()) { // the array position is 1 less than actual seatId
             System.out.println("Table already assigned to a customer.");
-        } else if (table[tableNo - 1].isReserved(time)) {
-            System.out.println("Table reserved to a customer at this time. Assign? (Y/N)");
+        } 
+        //if the person who reserved is here, assign to customer.
+        else if (table[tableNo - 1].isReserved(time)) { //
             Scanner sc = new Scanner(System.in);
-            String assign = sc.nextLine();
-            if (assign.equals("Y")){
-                table[tableNo - 1].assign(orderID);
-                numEmptyTable -= 1;
-                System.out.println("Table Assigned!");
-            }
-            else if (assign.equals("N")){
-                System.out.println("Going back ...");
-            }
+            boolean repeat = true;
+            do {
+                System.out.println("Table reserved to a customer at this time. Assign? (Y/N)");
+                String assign = sc.nextLine();
+                switch(assign){
+                    case "Y":
+                    case "y":
+                        table[tableNo - 1].assign(orderID);
+                        numEmptyTable -= 1;
+                        System.out.println("Table Assigned!");
+                        repeat = false;
+                        break;
+                    case "N":
+                    case "n":
+                        System.out.println("Going back ...");
+                        repeat = false;
+                        break;
+                    default:
+                }
+            } while (repeat);
         } else {
             table[tableNo - 1].assign(orderID);
             numEmptyTable -= 1;
             System.out.println("Table Assigned!");
         }
+
     }
 
     /**
