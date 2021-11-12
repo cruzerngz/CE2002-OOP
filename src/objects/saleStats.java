@@ -6,7 +6,7 @@ import java.util.Collections;
 
 import util.*;
 
-public class saleStats {
+public class SaleStats {
     private ArrayList<String[]> revMatrix;
     private String filePath;
     private DecimalFormat dF = new DecimalFormat("0.00");
@@ -15,7 +15,7 @@ public class saleStats {
      * Loads sale information from data
      * @param path Path to the revenue matrix file
      */
-    public saleStats() {
+    public SaleStats() {
         filePath = "../data" + "/revenueMatrix.csv";
         read();
     }
@@ -50,6 +50,26 @@ public class saleStats {
             if(i==0) continue; //skip col headers
             if(epochDay - Integer.parseInt(revMatrix.get(i)[0]) >= 0 && 
                epochDay - Integer.parseInt(revMatrix.get(i)[0]) < 30) {
+                result += Float.parseFloat(revMatrix.get(i)[1]);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Get the revenue for a given range of days, inclusive
+     * @param epochDayStart Starting day
+     * @param epochDayEnd Ending day
+     * @return Revenue
+     */
+    public float rangeRevenue(int epochDayStart, int epochDayEnd) {
+        float result = 0;
+
+        for(int i=0; i<revMatrix.size(); i++) {
+            if(i==0) continue; //skip col headers
+            //if in range, add
+            if(Integer.parseInt(revMatrix.get(i)[0]) >= epochDayStart && 
+               Integer.parseInt(revMatrix.get(i)[0]) <= epochDayEnd) {
                 result += Float.parseFloat(revMatrix.get(i)[1]);
             }
         }

@@ -9,9 +9,15 @@ import objects.*;
 public class debug {
     public static void main(String args[]) throws IOException {
 
+        SaleStatsUI.main(args);
         // testTime();
-        testStats();
-        testColour();
+        // testStats();
+        // testColour();
+        // DateTime date = new DateTime("../data");
+        // int epochDay = date.ymdToEpochDay(2021, 11, 12);
+        // System.out.println(epochDay);
+        // epochDay = date.getDaysSinceEpoch();
+        // System.out.println(epochDay);
 
     }
     public static void testTime() throws IOException {
@@ -23,7 +29,7 @@ public class debug {
     }
 
     public static void testStats() {
-        saleStats stats = new saleStats();
+        SaleStats stats = new SaleStats();
         stats.reset(); //clear all data
         System.out.println("Adding 50 days of data");
         for(int i=18938; i>18888; i--) {
