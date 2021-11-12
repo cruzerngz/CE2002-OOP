@@ -133,7 +133,9 @@ public class Order {
         
         String[] itemRows = tempMap.get("items");
         itemRows[i].replace(itemID, ""); //replace with blank
-        itemRows[i].replaceAll("..",".");
+
+        //remove outlier dots
+        itemRows[i] = itemRows[i].replaceAll("^\\.|\\.$", "").replaceAll("\\.\\.",".");;         
         tempMap.put("items", itemRows);
         
         //WB to csv
