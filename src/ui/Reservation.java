@@ -6,18 +6,19 @@ import objects.Restaurant;
 
 public class Reservation {
 
-    public static void printOptions() throws FileNotFoundException{
+    public static void printOptions() throws FileNotFoundException {
         int choice;
         Scanner sc = new Scanner(System.in);
         Restaurant res = new Restaurant();
 
-        System.out.println("");
-        System.out.println("(1) Create a new reservation booking");
-        System.out.println("(2) Check for reservation booking");
-        System.out.println("(3) Remove reservation booking");
-        System.out.println("(4) List existing reservations");
-        System.out.println("(0) Back");
         do {
+            System.out.println("");
+            System.out.println("(1) Create a new reservation booking");
+            System.out.println("(2) Check for reservation booking");
+            System.out.println("(3) Remove reservation booking");
+            System.out.println("(4) List existing reservations");
+            System.out.println("(0) Back");
+
             System.out.println("");
             System.out.printf("Enter your choice: ");
 
@@ -66,18 +67,19 @@ public class Reservation {
                     System.out.printf("Enter your choice: ");
                     choice = sc.nextInt();
                     switch (choice) {
-                        case 1:
-                            System.out.println("Enter date:");
-                            String date4 = sc.nextLine();
-                            res.showReservationStatus_Day(date4);
-                            break;
-                        case 2:
-                            res.showReservationStatus_All();
-                            break;
-                        case 0:
-                            System.out.println("Going back ….");
-                        }                    
-                    } while (choice < 3 && choice > 0);
+                    case 1:
+                        System.out.println("Enter date:");
+                        String date4 = sc.nextLine();
+                        res.showReservationStatus_Day(date4);
+                        break;
+                    case 2:
+                        res.showReservationStatus_All();
+                        break;
+                    case 0:
+                        System.out.println("Going back ….");
+                    }
+                } while (choice < 3 && choice > 0);
+                break;
             case 0:
                 System.out.println("Going back ….");
             }
