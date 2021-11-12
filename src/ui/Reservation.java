@@ -23,6 +23,7 @@ public class Reservation {
             System.out.printf("Enter your choice: ");
 
             choice = sc.nextInt();
+            sc.nextLine(); //after nextAnything add a nextLine
             switch (choice) {
             // each of these cases call another method within this class
             case 1:
@@ -42,6 +43,7 @@ public class Reservation {
             case 2:
                 System.out.println("_____Check for reservation booking_____");
                 System.out.println("Enter date:");
+                // while(!sc.hasNextLine()){}
                 String date2 = sc.nextLine();
                 System.out.println("Time:");
                 int time2 = sc.nextInt();

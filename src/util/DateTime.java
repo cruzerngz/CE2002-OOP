@@ -31,10 +31,9 @@ public class DateTime {
 
     /**
      * Specify a path to the data directory
-     * @param filePath Path to data directory
      */
-    public DateTime(String filePath) {
-        savePath = filePath + "/timeData.csv";
+    public DateTime() {
+        savePath = "../data" + "/timeData.csv";
         try {update();}
         catch (FileNotFoundException e) {
             e.printStackTrace();

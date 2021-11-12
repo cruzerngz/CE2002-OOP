@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.lang.Math;
 //exceptions
@@ -158,6 +159,29 @@ public class Data {
             }
 
         }
+    }
+
+    /**
+     * Sorts arraylist by first column index
+     * Assumes that the first column contains integers
+     * @param arrIn Array list to be sorted
+     * @return Sorted array list
+     */
+    public static ArrayList<String[]> sortArrayList(ArrayList<String[]> arrIn) {
+        ArrayList<String[]> returnArr = deepCopy(arrIn);
+
+        //sort by first col
+        //assume that first col is number
+        for(int i=2; i<returnArr.size(); i++) {
+            for(int j=i; j>1; j--) {
+                if(Integer.parseInt(returnArr.get(j)[0]) < 
+                   Integer.parseInt(returnArr.get(j-1)[0])) {
+
+                    Collections.swap(returnArr, j, j-1);
+                }
+            }
+        }
+        return returnArr;
     }
 
     /**

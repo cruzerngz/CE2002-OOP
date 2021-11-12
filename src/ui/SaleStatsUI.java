@@ -47,7 +47,7 @@ public class SaleStatsUI {
 
     public static void statsNow() {
         float amount;
-        DateTime dt = new DateTime("../data");
+        DateTime dt = new DateTime();
         SaleStats stats = new SaleStats();
 
         amount = stats.dayRevenue(dt.getDaysSinceEpoch());
@@ -59,7 +59,7 @@ public class SaleStatsUI {
         int y, m, d;
         String date;
         float amount;
-        DateTime dt = new DateTime("../data");
+        DateTime dt = new DateTime()/;
         SaleStats stats = new SaleStats();
         Scanner sc = new Scanner(System.in);
 
@@ -84,7 +84,7 @@ public class SaleStatsUI {
         int y, m, mStart, mEnd;
         String date;
         float amount;
-        DateTime dt = new DateTime("../data");
+        DateTime dt = new DateTime()/;
         SaleStats stats = new SaleStats();
         Scanner sc = new Scanner(System.in);
 
