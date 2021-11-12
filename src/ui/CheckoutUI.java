@@ -59,7 +59,7 @@ public class CheckoutUI {
         //read raw price before discount
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
 
-        tempArrayList = Data.readCSV("./Order.csv");
+        tempArrayList = Data.readCSV("../data/Order.csv");
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
         int i=0;
         String[] orderRows = tempMap.get("orderNO");
@@ -182,7 +182,7 @@ public class CheckoutUI {
     private boolean isPaid(int index){
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
 
-        tempArrayList = Data.readCSV("./Order.csv");
+        tempArrayList = Data.readCSV("../data/Order.csv");
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
         String[] paid = tempMap.get("paid");
         if(paid[index] == "TRUE")

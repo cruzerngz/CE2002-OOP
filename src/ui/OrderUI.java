@@ -11,20 +11,21 @@ public class OrderUI{
          String staffID, staffName;
          Scanner sc = new Scanner(System.in);
 
-         System.out.println("");
-         Colour.println(Colour.TEXT_BLUE, "Order Menu");
-         Colour.println(Colour.TEXT_GREEN, "(1) Create order");
-         Colour.println(Colour.TEXT_GREEN, "(2) View Order");
-         Colour.println(Colour.TEXT_GREEN, "(3) Add items to Order");
-         Colour.println(Colour.TEXT_GREEN, "(4) Remove items from Order");
-         Colour.println(Colour.TEXT_GREEN, "(5) Checkout/Print Bill Invoice");
-         Colour.println(Colour.TEXT_GREEN, "(0) Exit");
 
         do {
+            System.out.println();
+            Colour.println(Colour.TEXT_BLUE, "Order Menu");
+            Colour.println(Colour.TEXT_GREEN, "(1) Create order");
+            Colour.println(Colour.TEXT_GREEN, "(2) View Order");
+            Colour.println(Colour.TEXT_GREEN, "(3) Add items to Order");
+            Colour.println(Colour.TEXT_GREEN, "(4) Remove items from Order");
+            Colour.println(Colour.TEXT_GREEN, "(5) Checkout/Print Bill Invoice");
+            Colour.println(Colour.TEXT_GREEN, "(0) Exit");
             System.out.println("");
-            Colour.println(Colour.TEXT_GREEN, "Enter your choice: ");
-            
+            System.out.print("Enter your choice: ");
             choice = sc.nextInt();
+            System.out.println();
+            
             switch (choice) {
             
             case 1:
@@ -35,7 +36,7 @@ public class OrderUI{
                 staffName = sc.next();
 
                 orderID = Order.create(staffID,staffName);
-                System.out.printf("Order created! ID = %s",orderID);
+                System.out.printf("Order created! ID = %s\n",orderID);
                 break;
             case 2:
                 System.out.println("Enter order ID");

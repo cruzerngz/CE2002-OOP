@@ -1,6 +1,7 @@
 package objects;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 import util.Data;
@@ -14,6 +15,7 @@ public class Order {
     public Order() {
         //staffid could be part of the constructor
     }
+    
 /**
  * 
  * @param emp_name
@@ -24,14 +26,16 @@ public class Order {
         //creates a new order
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
         tempArrayList = Data.readCSV("../data/Order.csv");
-        tempArrayList.add(new String[tempArrayList.get(0).length]); //add empty row
+        String[] temp = new String[tempArrayList.get(0).length];
+        Arrays.fill(temp, "");
+        tempArrayList.add(temp); //add empty row
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
 
         String[] orderRows = tempMap.get("orderNO"); //get this column values as one array
         int index = orderRows.length - 1;
         
         DateTime datetime = new DateTime();
-        String id = datetime.getDateTime();
+        String id = String.format("%1$4s",datetime.getTime()).replace(" ", "0");
         orderRows[index] = id; //write to array
         tempMap.put("orderNO", orderRows); //WB to map
 
@@ -61,7 +65,7 @@ public class Order {
         String[] orderRows = tempMap.get("orderNO");
         while(i<orderRows.length) //no match and never reach end
             {
-                if(orderRows[i] == orderID)
+                if(orderRows[i].equals(orderID))
                     break;
                 else ++i;
             }
@@ -74,7 +78,7 @@ public class Order {
         System.out.printf("%s: ", orderID);
         System.out.printf("%s ", tempMap.get("emp_name")[i] ); 
         System.out.printf("%s ", tempMap.get("emp_id")[i] ); 
-        System.out.printf("%s ", tempMap.get("items")[i] ); 
+        System.out.printf("%s \n", tempMap.get("items")[i] ); 
     }
 
     public static void addItem(String orderID, String itemID) {
@@ -86,7 +90,7 @@ public class Order {
         String[] orderRows = tempMap.get("orderNO");
         while(i<orderRows.length) //no match and never reach end
             {
-                if(orderRows[i] == orderID)
+                if(orderRows[i].equals(orderID))
                     break;
                 else ++i;
             }
@@ -116,7 +120,7 @@ public class Order {
         String[] orderRows = tempMap.get("orderNO");
         while(i<orderRows.length) //no match and never reach end
             {
-                if(orderRows[i] == orderID)
+                if(orderRows[i].equals(orderID))
                     break;
                 else ++i;
             }

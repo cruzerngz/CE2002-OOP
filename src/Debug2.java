@@ -1,29 +1,27 @@
 import util.*;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import ui.*;
+import objects.*;
+import util.*;
 
 
 public class Debug2 {
     public static void main(String[] args) {
+        // Scanner sc = new Scanner(System.in);
 
-        // String target;
-        // String[] targetArr;
-        // targetArr = target.split(".");
-        // for(String i: targetArr) {
-        //     //do stuff
-        //     int temp = Integer.parseInt(i);
-        //     //["1","2","3"....]
-        // }
-        // for(int i=0; i>targetArr.length; i++) {
-            
-        // }
-        ArrayList<String[]> arr = Data.readCSV("../data/menu.csv");
-        arr = Data.sortArrayList(arr);
-        Data.printArrayList(arr);
-        
+        String orderID = "sat 21/10/2021";
+        byte[] temp = orderID;
+
+
+        float money = 100f;
+        SaleStats stats = new SaleStats();
+        DateTime dt = new DateTime();
+        stats.addRevenue(dt.getDaysSinceEpoch(), money);
     }
+
 }
 
 //for i in array:

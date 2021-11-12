@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         int choice;
         Scanner sc = new Scanner(System.in);
-        
+
         do {
             System.out.println();
             Colour.println(Colour.TEXT_BLUE, "MAIN MENU");
@@ -43,7 +43,7 @@ public class Main {
                     SaleStatsUI.main(args);
                     break;
                 case 7:
-                    // AdminUI.main(args);
+                    AdminUI.main(args);
                     break;
                 case 0:
                     System.out.println("Program terminating ...");
