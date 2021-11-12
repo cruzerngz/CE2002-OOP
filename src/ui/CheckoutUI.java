@@ -1,6 +1,8 @@
 package ui;
 import java.util.Scanner;
 
+import javax.management.remote.SubjectDelegationPermission;
+
 import objects.Discount;
 import objects.Membership;
 import java.util.ArrayList;
@@ -20,11 +22,11 @@ public class CheckoutUI {
         int choice;
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("");
-        System.out.println("(1) Checkout");
-        System.out.println("(2) Reprint Invoice");
-        System.out.println("(0) Back");
         do {
+            System.out.println("");
+            System.out.println("(1) Checkout");
+            System.out.println("(2) Reprint Invoice");
+            System.out.println("(0) Back");
             System.out.println("");
             System.out.printf("Enter your choice: ");
             
@@ -51,7 +53,7 @@ public class CheckoutUI {
 
     //Case 1 method
     private void Checkout(String orderID){
-        //need choose payment method? no assume cash
+        //Assume cash
         Scanner sc = new Scanner(System.in);
         
         //read raw price before discount
@@ -73,24 +75,44 @@ public class CheckoutUI {
             return;
         }
         
-        int tempsaleprice = Integer.parseInt(tempMap.get("saleprice")[i]);
+        //sanity check, is already paid?
+        if(isPaid(i)) 
+        {
+            System.out.println("Already paid!");
+            return;
+        }
+
+        String[] salepriceRows = tempMap.get("saleprice");
+        float tempsaleprice = Float.parseFloat(salepriceRows[i]);
 
         System.out.println("Is customer member? Y/N");
         if(sc.next().charAt(0) == 'Y')
         {
             Membership member = new Membership(true); //create simple obj to pass into overridable fn
-            double discount = Discount.getDiscount(member); //callee fn returns discount in ratio 0-1. 0.4 discount means pay 0.6.
+            float discount = Discount.getDiscount(member); //callee fn returns discount in ratio 0-1. 0.4 discount means pay 0.6.
             discount = 1-discount; //get actual multiplier
             // get subtotal or total then discount?
-            tempsaleprice = (int) ((float)tempsaleprice * discount); //round of to nearest int cents
-
+            tempsaleprice = tempsaleprice * discount; //round off to nearest int cents
+            tempMap.put("saleprice", salepriceRows); //tempsaleprice is final now, WB to order.csv
+            //discount tax separately for ease
+            salepriceRows[i] = String.valueOf(tempsaleprice);
+            String[] salesTaxRows = tempMap.get("salesTax");
+            float tempsalesTax = Float.parseFloat(salesTaxRows[i]);
+            tempsalesTax = tempsalesTax * discount;
+            //WB new tax value
+            salesTaxRows[i] = String.valueOf(tempsalesTax);
+            tempMap.put("salesTax", salesTaxRows);
+            
+            tempArrayList = Data.parse(tempMap);
+            Data.writeCSV(tempArrayList, "../data/Order.csv");
         }
-        //else no discount applied
-        //tempsaleprice is final now
-        System.out.printf("Total payment to receive: $%.2f", (float)tempsaleprice/100);
+        //else no discount applied, no need edit csv
+
+       
+        System.out.printf("Total payment to receive: $%.2f", tempsaleprice);
         //temporary test
         
-        //sc.close();
+        
     }
     //Case 2 method
     public void PrintInvoice(){ //receipt format
@@ -113,21 +135,40 @@ public class CheckoutUI {
                 System.out.println("No such order found");
                 return;
             } 
+        
+        //sanity check
+        if(!isPaid(i))
+        {
+            System.out.println("Please pay before invoice");
+        }
         //timestamp is orderid
         //convert or just print?
         System.out.println(orderID);
 
-        //item list with price at side
+        //TODO item list with price at side
         String[] itemRows = tempMap.get("items");
         int j;
-        for(j=0;j) //how to stop at commas? item1,item2
+        for(j=0;j<;) //how to stop at commas? item1,item2
         {
 
         }
         
         //subtotal followed by discount then tax amt then total
-        String subtotal = 
-        System.out.println("Subtotal         ",); 
+        String subtotal = tempMap.get("Saleprice")[i]; //saleprice at row i
+        System.out.printf("Subtotal         $%s",subtotal); 
+        System.out.printf("Tax        $%s",tax);
+    }
+
+    private boolean isPaid(int index){
+        ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
+
+        tempArrayList = Data.readCSV("./Order.csv");
+        LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
+        String[] paid = tempMap.get("paid");
+        if(paid[index] == "TRUE")
+            return true;
+        else
+            return false;
     }
     
 }
