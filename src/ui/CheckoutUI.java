@@ -5,7 +5,7 @@ import objects.Discount;
 import objects.Membership;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.io.FileNotFoundException;
+
 
 import util.Data;
 
@@ -57,12 +57,7 @@ public class CheckoutUI {
         //read raw price before discount
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
 
-        try {
-            tempArrayList = Data.readCSV("./Order.csv");
-        } catch (FileNotFoundException e) {
-            
-            e.printStackTrace();
-        } //read into arraylist
+        tempArrayList = Data.readCSV("./Order.csv");
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
         int i=0;
         String[] orderRows = tempMap.get("orderNO");
@@ -95,11 +90,44 @@ public class CheckoutUI {
         System.out.printf("Total payment to receive: $%.2f", (float)tempsaleprice/100);
         //temporary test
         
-        sc.close();
+        //sc.close();
     }
     //Case 2 method
-    private void PrintInvoice(){
+    public void PrintInvoice(){ //receipt format
+        //TODO printinvoice
+        //table number from Yu Ze or maybe store in order csv as well
+        //server
+        ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
+        tempArrayList = Data.readCSV("../data/Order.csv");
+        LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
+        int i=0;
+        String[] orderRows = tempMap.get("orderNO");
+        while(i<orderRows.length) //no match and never reach end
+            {
+                if(orderRows[i] == orderID)
+                    break;
+                else ++i;
+            }
+        if(i == orderRows.length)
+            {
+                System.out.println("No such order found");
+                return;
+            } 
+        //timestamp is orderid
+        //convert or just print?
+        System.out.println(orderID);
 
+        //item list with price at side
+        String[] itemRows = tempMap.get("items");
+        int j;
+        for(j=0;j) //how to stop at commas? item1,item2
+        {
+
+        }
+        
+        //subtotal followed by discount then tax amt then total
+        String subtotal = 
+        System.out.println("Subtotal         ",); 
     }
-    //Case 3 method
+    
 }
