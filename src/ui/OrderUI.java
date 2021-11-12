@@ -25,7 +25,7 @@ public class OrderUI{
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
             System.out.println();
-            
+
             switch (choice) {
             
             case 1:

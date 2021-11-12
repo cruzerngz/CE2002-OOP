@@ -1,6 +1,6 @@
 package objects;
 
-import util.StrColour;
+import util.Colour;
 
 public class Item {
 

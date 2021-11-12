@@ -20,6 +20,7 @@ public class Debug2 {
         SaleStats stats = new SaleStats();
         DateTime dt = new DateTime();
         stats.addRevenue(dt.getDaysSinceEpoch(), money);
+
     }
 
 }
