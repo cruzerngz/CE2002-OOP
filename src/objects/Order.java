@@ -1,6 +1,5 @@
 package objects;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -15,7 +14,12 @@ public class Order {
     public Order() {
         //staffid could be part of the constructor
     }
-
+/**
+ * 
+ * @param emp_name
+ * @param emp_id
+ * @return orderid to caller
+ */
     public static String create(String emp_name, String emp_id) {
         //creates a new order
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
@@ -43,6 +47,8 @@ public class Order {
         empRow = tempMap.get("emp_id"); //setting emp_id
         empRow[i] = emp_id; //write to array
         tempMap.put("emp_id", empRow);
+
+        //TODO assign table
 
         tempArrayList = Data.parse(tempMap);
 
