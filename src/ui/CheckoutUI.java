@@ -65,7 +65,7 @@ public class CheckoutUI {
         String[] orderRows = tempMap.get("orderNO");
         while(i<orderRows.length) //no match and never reach end
             {
-                if(orderRows[i] == orderID)
+                if(orderRows[i].equals(orderID))
                     break;
                 else ++i;
             }
@@ -116,7 +116,7 @@ public class CheckoutUI {
     }
     //Case 2 method
     public void PrintInvoice(){ //receipt format
-        //TODO printinvoice
+        
         //table number from Yu Ze or maybe store in order csv as well
         //server
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
@@ -126,7 +126,7 @@ public class CheckoutUI {
         String[] orderRows = tempMap.get("orderNO");
         while(i<orderRows.length) //no match and never reach end
             {
-                if(orderRows[i] == orderID)
+                if(orderRows[i].equals(orderID))
                     break;
                 else ++i;
             }
