@@ -3,6 +3,7 @@ package ui;
 import java.util.Scanner;
 import objects.SaleStats;
 import util.DateTime;
+import util.Colour;
 import util.Data;
 
 public class SaleStatsUI {
@@ -12,11 +13,12 @@ public class SaleStatsUI {
         
         do {
             System.out.println();
-            System.out.println("(1) Sales statistics today");
-            System.out.println("(2) Sales statistics by day");
-            System.out.println("(3) Sales statistics by month");
-            System.out.println("(4) View all records");
-            System.out.println("(0) Return");
+            Colour.println(Colour.TEXT_BLUE, "SALE STATISTICS");
+            Colour.println(Colour.TEXT_GREEN, "(1) Sales statistics today");
+            Colour.println(Colour.TEXT_GREEN, "(2) Sales statistics by day");
+            Colour.println(Colour.TEXT_GREEN, "(3) Sales statistics by month");
+            Colour.println(Colour.TEXT_GREEN, "(4) View all records");
+            Colour.println(Colour.TEXT_GREEN, "(0) Return");
             System.out.println();
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
@@ -49,7 +51,8 @@ public class SaleStatsUI {
         SaleStats stats = new SaleStats();
 
         amount = stats.dayRevenue(dt.getDaysSinceEpoch());
-        System.out.printf("Sales for %s is $%.2f\n", dt.getDayDate(), amount);
+        System.out.printf("Sales for %s is ", dt.getDayDate());
+        Colour.println(Colour.TEXT_CYAN, String.format("$%.2f", amount));
     }
 
     public static void statsDay() {
@@ -73,7 +76,8 @@ public class SaleStatsUI {
         amount = stats.dayRevenue(
             dt.ymdToEpochDay(y, m, d)
         );
-        System.out.printf("Sales for %s is $%.2f\n", date, amount);
+        System.out.printf("Sales for %s is ", date);
+        Colour.println(Colour.TEXT_CYAN, String.format("$%.2f", amount));
     }
 
     public static void statsMth() {
@@ -98,7 +102,8 @@ public class SaleStatsUI {
         amount = stats.rangeRevenue(mStart, mEnd);
         date = dt.daysToMonthYear(mEnd);
 
-        System.out.printf("Sales for %s is $%.2f\n", date, amount);
+        System.out.printf("Sales for %s is ", date);
+        Colour.println(Colour.TEXT_CYAN, String.format("$%.2f", amount));
 
     }
 
@@ -106,6 +111,4 @@ public class SaleStatsUI {
         SaleStats stats = new SaleStats();
         Data.printArrayList(stats.getPrintMatrix());
     }
-
-
 }
