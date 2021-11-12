@@ -28,7 +28,7 @@ public class Order {
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
 
         String[] orderRows = tempMap.get("orderNO"); //get this column values as one array
-        int index = orderRows.length;
+        int index = orderRows.length - 1;
         
         DateTime datetime = new DateTime();
         String id = datetime.getDateTime();
