@@ -41,7 +41,7 @@ public class debugging {
 
     public static void testPrintColour() {
         ArrayList<String[]> testArr = new ArrayList<String[]>();
-        testArr.add(new String[]{StrColour.Green("col1"),StrColour.Cyan("col2")});
+        testArr.add(new String[]{Colour.Green("col1"),Colour.Cyan("col2")});
         testArr.add(new String[]{"10","20"});
         testArr.add(new String[]{"11","21"});
 
