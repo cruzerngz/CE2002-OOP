@@ -123,6 +123,9 @@ public class Restaurant {
     }
     
     public void writeToCSV(){ 
+        for (int j = 0; j < reserve.size(); ++j) {
+            reserve.get(j)[0] = String.valueOf(j);
+        }
         Data.writeCSV(reserve, path);
     }
 }
