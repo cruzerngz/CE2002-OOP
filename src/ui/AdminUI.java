@@ -3,6 +3,8 @@ package ui;
 import util.*;
 import java.util.Scanner;
 
+import staff.StaffRoster;
+
 public class AdminUI {
     public static void main(String[] args) {
         int choice;
@@ -46,7 +48,10 @@ public class AdminUI {
             System.out.println(StrColour.Blue("STAFF"));
             System.out.println(StrColour.Green("(1) Show number of staff"));
             System.out.println(StrColour.Green("(2) Show staff list"));
-            System.out.println(StrColour.Green("(3) Change active staff"));
+            System.out.println(StrColour.Green("(3) Hiring staff"));
+            System.out.println(StrColour.Green("(4) Fire staff"));
+            System.out.println(StrColour.Green("(5) Login"));
+            System.out.println(StrColour.Green("(6) Logout"));
             System.out.println(StrColour.Green("(0) Return")); 
             System.out.println();
             System.out.print("Enter your choice: ");
@@ -55,9 +60,39 @@ public class AdminUI {
 
             switch(choice) {
                 case 1:
-                    break;
-                case 0:
-                    break;
+                    StaffRoster.ShownumStaff();
+                    
+                case 2:
+                    StaffRoster.Showhired();
+                    
+                case 3:
+                    System.out.println("Please enter the ID given: ");
+                    int ID = sc.nextInt();
+                    System.out.println("Please enter the Name: ");
+                    String name = sc.next();
+                    System.out.println("Please enter the position: ");
+                    String position = sc.next();
+                    System.out.println("Please enter the username: ");
+                    String username = sc.next();
+                    System.out.println("Please enter the password: ");
+                    String password = sc.next();
+                    StaffRoster.hiring(ID,name,position,username,password);
+                    
+                case 4:
+                    System.out.println("Please enter the name of staff to be fired: ");
+                    String namef = sc.next();
+                    StaffRoster.firing(namef);
+                
+                case 5:
+                    System.out.println("Please enter your username: ");
+                    String Lusername = sc.next();
+                    System.out.println("please enter your password: ");
+                    String Lpassword = sc.next();
+                    String Sname =StaffRoster.login(Lusername,Lpassword);
+                    System.out.println(Sname+" has log in!");
+                case 6: 
+                    StaffRoster.logout();
+                    System.out.println("logged out");
                 default:
                     break;
             }
