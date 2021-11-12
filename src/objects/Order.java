@@ -24,28 +24,23 @@ public class Order {
         //creates a new order
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
         tempArrayList = Data.readCSV("../data/Order.csv");
+        tempArrayList.add(new String[tempArrayList.get(0).length]); //add empty row
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
-        int i=0;
+
         String[] orderRows = tempMap.get("orderNO"); //get this column values as one array
+        int index = orderRows.length - 1;
         
-        while( i<orderRows.length ) //for every row
-        {
-            
-            if(orderRows[i] == null ) //index 1 is orderid field and is null
-                break; //get out of loop with i pointing to which row we want to edit
-            else ++i;
-        }
         DateTime datetime = new DateTime();
         String id = datetime.getDateTime();
-        orderRows[i] = id; //write to array
+        orderRows[index] = id; //write to array
         tempMap.put("orderNO", orderRows); //WB to map
 
         String[] empRow = tempMap.get("emp_name"); //setting emp_name
-        empRow[i] = emp_name; //write to array
+        empRow[index] = emp_name; //write to array
         tempMap.put("emp_name", empRow);
 
         empRow = tempMap.get("emp_id"); //setting emp_id
-        empRow[i] = emp_id; //write to array
+        empRow[index] = emp_id; //write to array
         tempMap.put("emp_id", empRow);
 
         //TODO assign table
