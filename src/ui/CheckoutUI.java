@@ -1,7 +1,6 @@
 package ui;
 import java.util.Scanner;
 
-import javax.management.remote.SubjectDelegationPermission;
 
 import objects.Discount;
 import objects.Membership;
@@ -145,18 +144,38 @@ public class CheckoutUI {
         //convert or just print?
         System.out.println(orderID);
 
-        //TODO item list with price at side
+        //item list with price at side
         String[] itemRows = tempMap.get("items");
-        int j;
-        for(j=0;j<;) //how to stop at commas? item1,item2
-        {
+        String[] itemlist = itemRows[i].split("."); //each element is id
+        
+        ArrayList<String[]> menuArrayList = Data.readCSV("../data/menu.csv"); //read menu csv before enter loop
+        tempMap = Data.parse(menuArrayList);
 
+        String[] idRows = tempMap.get("id");
+        String[] nameRows = tempMap.get("name");
+        String[] priceRows = tempMap.get("price");
+
+        int index;
+        for(String item:itemlist) 
+        {
+            //look for id match
+            for(index=0;index<idRows.length;++index)
+            {
+                if(item == idRows[index]) //string match
+                    break;
+            }
+            
+            System.out.printf("%s              $%s\n",nameRows[index],priceRows[index]);
         }
         
         //subtotal followed by discount then tax amt then total
         String subtotal = tempMap.get("Saleprice")[i]; //saleprice at row i
-        System.out.printf("Subtotal         $%s",subtotal); 
-        System.out.printf("Tax        $%s",tax);
+        String tax = tempMap.get("salesTax")[i];
+        System.out.printf("Subtotal         $%s\n",subtotal); 
+        System.out.printf("Tax          $%s\n",tax);
+        float total = Float.parseFloat(subtotal) + Float.parseFloat(tax);
+        System.out.printf("Total          %.2f",total);
+
     }
 
     private boolean isPaid(int index){

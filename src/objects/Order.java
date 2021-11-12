@@ -103,7 +103,7 @@ public class Order {
         
         //add item to arraylist and WB
         String[] itemRows = tempMap.get("items");
-        itemRows[i] += itemID; 
+        itemRows[i] += (itemID + '.'); 
         tempMap.put("items", itemRows);
 
         tempArrayList = Data.parse(tempMap);
