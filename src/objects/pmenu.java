@@ -34,30 +34,30 @@ public class pmenu {
                 break;
             case 2:
                 System.out.println("Please enter item Id: ");
-                int Id = sc.nextInt();
+                String Id = sc.next();
                 System.out.println("Please enter item name: ");
                 String name= sc.nextLine();
                 System.out.println("Please enter item price: ");
-                int price= sc.nextInt();
+                String price= sc.next();
 
                 this.additem(Id , name,  price);
                 break;
             case 3:
                 System.out.println("Please enter what type the item is(main,side,dessert or drink): ");
                 System.out.println("Please enter item Id of item to be edited: ");
-                int Idedit = sc.nextInt();
+                String Idedit = sc.next();
                 System.out.println("Please enter item new Id: ");
-                int newId = sc.nextInt();
+                String newId = sc.next();
                 System.out.println("Please enter item new name: ");
                 String newname= sc.nextLine();
                 System.out.println("Please enter item new price: ");
-                int newprice= sc.nextInt();
+                String newprice= sc.next();
                 this.editmenu(Idedit,newId,  newname,  newprice);
                 break;
             case 4:
                 System.out.println("Please enter what type the item is(main,side,dessert or drink): ");
                 System.out.println("Please enter item Id of item to be deleted: ");
-                int Iddelete = sc.nextInt();
+                String Iddelete = sc.next();
                 this.deleteitem(Iddelete);
                 break;
             case 5:
@@ -79,7 +79,7 @@ public class pmenu {
     }
 
     //Case 2 method
-    public void additem(int Id ,String name, int price){
+    public void additem(String Id ,String name, String price){
         try{
             FileWriter fw = new FileWriter ("promomenu.csv", true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -96,11 +96,11 @@ public class pmenu {
     }
 
     //Case 3 method
-    public void editmenu(int Idedit, int newId, String newname, int newprice){
+    public void editmenu(String Idedit, String newId, String newname, String newprice){
         String tempfile = "tempfile.txt";
         File oldfile = new File("promomenu.csv");
         File newFile = new File(tempfile);
-        int Id3 = 0; String name3 = "";int price3 = 0; 
+        String Id3 = ""; String name3 = "";String price3 = ""; 
 
         try {
             FileWriter fw = new FileWriter(tempfile,true);
@@ -110,9 +110,9 @@ public class pmenu {
             x.useDelimiter("[,\n]");
 
             while (x.hasNext()){
-                Id3 = x.nextInt();
+                Id3 = x.next();
                 name3 = x.next();
-                price3 = x.nextInt();
+                price3 = x.next();
                 if(Id3 == Idedit){
                     pw.println(newId+","+newname+","+newprice);
                 }
@@ -131,11 +131,11 @@ public class pmenu {
         }
     } 
     //Case 4 method
-    public void deleteitem(int Iddelete){
+    public void deleteitem(String Iddelete){
         String tempFile = "temp.txt";
         File oldFile = new File("promomenu.csv");
         File newFile = new File(tempFile);
-        int Id = 0; String name = ""; int price = 0;
+        String Id = ""; String name = ""; String price = "";
         try{
             FileWriter fw = new FileWriter(tempFile, true );
             BufferedWriter bw = new BufferedWriter(fw);
@@ -144,9 +144,9 @@ public class pmenu {
             x.useDelimiter("[,\n]");
 
             while(x.hasNext()){
-                Id = x.nextInt();
+                Id = x.next();
                 name = x.next();
-                price = x.nextInt();
+                price = x.next();
                 if (Id != Iddelete){
                     pw.println(Id+","+name+","+price);
                 }
