@@ -87,11 +87,18 @@ public class Restaurant {
         }
         else{
             seating.get(date).reserveTable(tableNo, time, cust_name, phoneNo);
+            String[] newReservation ={"0", date, String.valueOf(time), String.valueOf(tableNo), cust_name, String.valueOf(phoneNo)};
+            reserve.add(newReservation);
         }
     }
 
     public void unreserveTable(String date, int tableNo, int time) {
         seating.get(date).unreserveTable(tableNo, time);
+        for (int j = 1; j < reserve.size(); ++j) {
+            if (date == reserve.get(j)[1] && String.valueOf(time) == reserve.get(j)[2] && String.valueOf(tableNo)== reserve.get(j)[3]){
+                reserve.remove(j);                
+            }
+        }
     }
 
     public void showReservationStatus_Day(String date) {
@@ -113,5 +120,9 @@ public class Restaurant {
     public void checkReservation(String date, int time){ 
         System.out.println("At " + date + " " + time + "hrs:");
         seating.get(date).checkReservation(time);
+    }
+    
+    public void writeToCSV(){ 
+        Data.writeCSV(reserve, path);
     }
 }
