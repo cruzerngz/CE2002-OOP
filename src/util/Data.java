@@ -23,9 +23,8 @@ public class Data {
      * Reads csv to an arrayList of String arrays
      * @param filePath Relative path to file
      * @return ArrayList containing CSV data
-     * @throws FileNotFoundException
      */
-    public static ArrayList<String[]> readCSV(String filePath) throws FileNotFoundException {
+    public static ArrayList<String[]> readCSV(String filePath) {
         //read the first line of the csv file
         //write each line as an array to the return arraylists
         ArrayList<String[]> returnArr = new ArrayList<String[]>();
@@ -50,9 +49,8 @@ public class Data {
      * Writes arrayList to a CSV file
      * @param writeArr Data to be written
      * @param filePath Relative path to file
-     * @throws IOException
      */
-    public static void writeCSV(ArrayList<String[]> writeArr, String filePath) throws IOException {
+    public static void writeCSV(ArrayList<String[]> writeArr, String filePath) {
         String writeStr = "";
 
         for(int i=0; i<writeArr.size(); i++) {
@@ -68,8 +66,14 @@ public class Data {
             return;
         }
 
-        writer.write(writeStr);
-        writer.close();
+        try {
+            writer.write(writeStr);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
     }
 
     /**
@@ -123,13 +127,13 @@ public class Data {
         //additional decorative elements add here
         for(int i=0; i<rows; i++) {
             if(i==0) { //highlight the header row
-                System.out.print(StrColour.contrastBG("|  "));
+                Colour.print(Colour.TEXT_BLACK + Colour.BG_GREEN, "|  ");
                 for(int j=0; j<cols; j++) {
-                    System.out.print(StrColour.contrastBG(printedArr.get(i)[j]));
+                    Colour.print(Colour.TEXT_BLACK + Colour.BG_GREEN, printedArr.get(i)[j]);
                     if(j != (cols - 1)) {
-                        System.out.print(StrColour.contrastBG("  |  "));
+                        Colour.print(Colour.TEXT_BLACK + Colour.BG_GREEN,"  |  ");
                     } else {
-                        System.out.print(StrColour.contrastBG("  |"));
+                        Colour.print(Colour.TEXT_BLACK + Colour.BG_GREEN,"  |");
                     }
                 }
                 System.out.print("\n");
