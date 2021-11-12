@@ -15,7 +15,7 @@ public class SaleStatsUI {
             System.out.println("(1) Sales statistics today");
             System.out.println("(2) Sales statistics by day");
             System.out.println("(3) Sales statistics by month");
-            System.out.println("(4) View all statistics");
+            System.out.println("(4) View all records");
             System.out.println("(0) Return");
             System.out.println();
             System.out.print("Enter your choice: ");

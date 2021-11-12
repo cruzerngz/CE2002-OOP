@@ -9,10 +9,10 @@ public class AdminUI {
         Scanner sc = new Scanner(System.in);
         
         do {
-            System.out.println(Colour.Blue("ADMIN"));
-            System.out.println(Colour.Green("(1) Staff"));
-            System.out.println(Colour.Green("(2) Change date and time"));
-            System.out.println(Colour.Green("(0) Return")); 
+            Colour.println(Colour.TEXT_BLUE, "ADMIN");
+            Colour.println(Colour.TEXT_GREEN, "(1) Staff");
+            Colour.println(Colour.TEXT_GREEN,"(2) Change date and time");
+            Colour.println(Colour.TEXT_GREEN,"(0) Return"); 
             System.out.println();
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
@@ -43,11 +43,11 @@ public class AdminUI {
         
 
         do {
-            System.out.println(Colour.Blue("STAFF"));
-            System.out.println(Colour.Green("(1) Show number of staff"));
-            System.out.println(Colour.Green("(2) Show staff list"));
-            System.out.println(Colour.Green("(3) Change active staff"));
-            System.out.println(Colour.Green("(0) Return")); 
+            Colour.println(Colour.TEXT_BLUE,"STAFF");
+            Colour.println(Colour.TEXT_GREEN,"(1) Show number of staff");
+            Colour.println(Colour.TEXT_GREEN,"(2) Show staff list");
+            Colour.println(Colour.TEXT_GREEN,"(3) Change active staff");
+            Colour.println(Colour.TEXT_GREEN,"(0) Return"); 
             System.out.println();
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
@@ -74,12 +74,12 @@ public class AdminUI {
         
 
         do {
-            System.out.println(Colour.Blue("TIME"));
-            System.out.println(Colour.Green("(1) Show current date and time"));
-            System.out.println(Colour.Green("(2) Modify hours"));
-            System.out.println(Colour.Green("(3) Modify days"));
-            System.out.println(Colour.Green("(4) Reset to current time"));
-            System.out.println(Colour.Green("(0) Return"));
+            Colour.println(Colour.TEXT_BLUE,"TIME");
+            Colour.println(Colour.TEXT_GREEN,"(1) Show current date and time");
+            Colour.println(Colour.TEXT_GREEN,"(2) Modify hours");
+            Colour.println(Colour.TEXT_GREEN,"(3) Modify days");
+            Colour.println(Colour.TEXT_GREEN,"(4) Reset to current time");
+            Colour.println(Colour.TEXT_GREEN,"(0) Return");
             System.out.println();
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
@@ -87,7 +87,7 @@ public class AdminUI {
 
             switch(choice) {
                 case 1:
-                    System.out.println(Colour.Cyan(datetime.getDateTime()));
+                    Colour.println(Colour.TEXT_CYAN, datetime.getDateTime());
                     System.out.println();
                     break;
 
@@ -96,7 +96,7 @@ public class AdminUI {
                     datetime.deltaHour(sc.nextInt());
                     System.out.println();
                     System.out.print("New date and time: ");
-                    System.out.print(Colour.Cyan(datetime.getDateTime()));
+                    Colour.print(Colour.TEXT_CYAN, datetime.getDateTime());
                     System.out.println();
                     System.out.println();
                     choice = 1;
@@ -107,7 +107,7 @@ public class AdminUI {
                     datetime.deltaDay(sc.nextInt());
                     System.out.println();
                     System.out.print("New date and time: ");
-                    System.out.print(Colour.Cyan(datetime.getDateTime()));
+                    Colour.print(Colour.TEXT_CYAN, datetime.getDateTime());
                     System.out.println();
                     System.out.println();
                     choice = 2;
@@ -116,7 +116,7 @@ public class AdminUI {
                 case 4:
                     datetime.reset();
                     System.out.print("Reset! Date and time: ");
-                    System.out.print(Colour.Cyan(datetime.getDateTime()));
+                    Colour.print(Colour.TEXT_CYAN, datetime.getDateTime());
                     System.out.println();
                     System.out.println();
                     break;

@@ -171,6 +171,15 @@ public class SaleStats {
         }
         returnArr.get(0)[0] = "date"; //change header from "day" to "date"
 
+        //sum up all
+        float total = 0;
+        for(int i=0; i<revMatrix.size(); i++) {
+            if(i==0){continue;}
+            total += Float.parseFloat(revMatrix.get(i)[1]);
+        }
+        returnArr.add(new String[]{
+            Colour.Green("total"), Colour.Green(String.format("$%.2f", total))
+        });
         return returnArr;
     }
 

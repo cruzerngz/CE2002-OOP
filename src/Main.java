@@ -42,7 +42,7 @@ public class Main {
                     SaleStatsUI.main(args);
                     break;
                 case 7:
-                    
+                    AdminUI.main(args);
                     break;
                 case 0:
                     System.out.println("Program terminating ...");

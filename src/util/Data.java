@@ -87,12 +87,11 @@ public class Data {
         int rows = arr.size();         //no of rows
         int cols = arr.get(0).length;  //no of cols
         String regex = "\\e\\[[0-9]+m";
-        String temp;
 
         //build the max lengthArr
         for(int i=0; i<cols; i++) {     //per col
             for(int j=0; j<rows; j++) { //per row
-                temp = arr.get(j)[i].replaceAll(regex, ""); //remove special chars when counting
+                String temp = arr.get(j)[i].replaceAll(regex, ""); //remove special chars when counting
                 lengthArr[i] = Math.max(temp.length(), lengthArr[i]);
             }
         }
@@ -100,6 +99,14 @@ public class Data {
         //pad all elements to max length
         for(int i=0; i<rows; i++) {     //per row
             for(int j=0; j<cols; j++) { //per col
+                String temp = arr.get(i)[j].replaceAll(regex, "");
+                
+                //padding for coloured text
+                int padding = lengthArr[j] - temp.length();
+                for(int k=0; k<padding; k++) {
+                    arr.get(i)[j] = arr.get(i)[j] + " ";
+                }
+
                 arr.get(i)[j] = String.format("%"+(-lengthArr[j])+"s", arr.get(i)[j]);
             }
         }
