@@ -9,10 +9,10 @@ public class AdminUI {
         Scanner sc = new Scanner(System.in);
         
         do {
-            System.out.println(StrColour.Blue("ADMIN"));
-            System.out.println(StrColour.Green("(1) Staff"));
-            System.out.println(StrColour.Green("(2) Change date and time"));
-            System.out.println(StrColour.Green("(0) Return")); 
+            System.out.println(Colour.Blue("ADMIN"));
+            System.out.println(Colour.Green("(1) Staff"));
+            System.out.println(Colour.Green("(2) Change date and time"));
+            System.out.println(Colour.Green("(0) Return")); 
             System.out.println();
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
@@ -35,7 +35,7 @@ public class AdminUI {
     }
 
     /**
-     * UI for handling staff related stuff
+     * UI for handling staff related stuff hello
      */
     public static void staffUI() {
         int choice;
@@ -43,10 +43,11 @@ public class AdminUI {
         
 
         do {
-            System.out.println(StrColour.Blue("STAFF"));
-            System.out.println(StrColour.Green("(1) Show current staff"));
-            System.out.println(StrColour.Green("(2) Change active staff"));
-            System.out.println(StrColour.Green("(0) Return")); 
+            System.out.println(Colour.Blue("STAFF"));
+            System.out.println(Colour.Green("(1) Show number of staff"));
+            System.out.println(Colour.Green("(2) Show staff list"));
+            System.out.println(Colour.Green("(3) Change active staff"));
+            System.out.println(Colour.Green("(0) Return")); 
             System.out.println();
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
@@ -73,12 +74,12 @@ public class AdminUI {
         
 
         do {
-            System.out.println(StrColour.Blue("TIME"));
-            System.out.println(StrColour.Green("(1) Show current date and time"));
-            System.out.println(StrColour.Green("(2) Modify hours"));
-            System.out.println(StrColour.Green("(3) Modify days"));
-            System.out.println(StrColour.Green("(4) Reset to current time"));
-            System.out.println(StrColour.Green("(0) Return"));
+            System.out.println(Colour.Blue("TIME"));
+            System.out.println(Colour.Green("(1) Show current date and time"));
+            System.out.println(Colour.Green("(2) Modify hours"));
+            System.out.println(Colour.Green("(3) Modify days"));
+            System.out.println(Colour.Green("(4) Reset to current time"));
+            System.out.println(Colour.Green("(0) Return"));
             System.out.println();
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
@@ -86,7 +87,7 @@ public class AdminUI {
 
             switch(choice) {
                 case 1:
-                    System.out.println(StrColour.Cyan(datetime.getDateTime()));
+                    System.out.println(Colour.Cyan(datetime.getDateTime()));
                     System.out.println();
                     break;
 
@@ -95,7 +96,7 @@ public class AdminUI {
                     datetime.deltaHour(sc.nextInt());
                     System.out.println();
                     System.out.print("New date and time: ");
-                    System.out.print(StrColour.Cyan(datetime.getDateTime()));
+                    System.out.print(Colour.Cyan(datetime.getDateTime()));
                     System.out.println();
                     System.out.println();
                     choice = 1;
@@ -106,7 +107,7 @@ public class AdminUI {
                     datetime.deltaDay(sc.nextInt());
                     System.out.println();
                     System.out.print("New date and time: ");
-                    System.out.print(StrColour.Cyan(datetime.getDateTime()));
+                    System.out.print(Colour.Cyan(datetime.getDateTime()));
                     System.out.println();
                     System.out.println();
                     choice = 2;
@@ -115,7 +116,7 @@ public class AdminUI {
                 case 4:
                     datetime.reset();
                     System.out.print("Reset! Date and time: ");
-                    System.out.print(StrColour.Cyan(datetime.getDateTime()));
+                    System.out.print(Colour.Cyan(datetime.getDateTime()));
                     System.out.println();
                     System.out.println();
                     break;
