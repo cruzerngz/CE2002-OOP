@@ -23,10 +23,10 @@ public class OrderUI{
     private String staffID, staffName;
     private Restaurant res;
 
-    public OrderUI(Restaurant res, String staffName, String staffID){
+    public OrderUI(Restaurant res, String staffID, String staffName){
         this.res = res;
-        this.staffName = staffName;
         this.staffID = staffID;
+        this.staffName = staffName;
     }
 
     public void printOptions(){
@@ -54,7 +54,8 @@ public class OrderUI{
             switch (choice) {
             
             case 1:
-                //debug
+                
+                
                 orderID = null; //initialize to null as invalid id now, for compiler.
                 tempOrder = new Order(staffName, staffID, orderID); //pass in dummy orderID
                 orderID = tempOrder.create(staffID,staffName); //get actual orderID
