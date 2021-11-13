@@ -10,14 +10,14 @@ public class Menu {
         int choice;
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("");
-        System.out.println("(1) Print existing menu");
-        System.out.println("(2) Create a new menu item");
-        System.out.println("(3) Edit an existing menu item’s details");
-        System.out.println("(4) Delete a menu item");
-        System.out.println("(0) Back");
+        
         do {
             System.out.println("");
+            System.out.println("(1) Print existing menu");
+            System.out.println("(2) Create a new menu item");
+            System.out.println("(3) Edit an existing menu item’s details");
+            System.out.println("(4) Delete a menu item");
+            System.out.println("(0) Back");
             System.out.printf("Enter your choice: ");
             
             choice = sc.nextInt();

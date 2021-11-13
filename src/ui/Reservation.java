@@ -59,12 +59,13 @@ public class Reservation {
                 int tableNo3 = sc.nextInt();
                 res.unreserveTable(date3, tableNo3, time3);
                 break;
+
             case 4:
-                System.out.println("_____List existing reservations_____");
-                System.out.println("(1) List specific day");
-                System.out.println("(2) List all");
-                System.out.println("(0) Back");
                 do {
+                    System.out.println("_____List existing reservations_____");
+                    System.out.println("(1) List specific day");
+                    System.out.println("(2) List all");
+                    System.out.println("(0) Back");
                     System.out.println("");
                     System.out.printf("Enter your choice: ");
                     choice = sc.nextInt();
@@ -78,15 +79,20 @@ public class Reservation {
                         res.showReservationStatus_All();
                         break;
                     case 0:
-                        System.out.println("Going back ….");
+                        System.out.println("Going back ...");
                     }
                 } while (choice < 3 && choice > 0);
+                choice = 4;
                 break;
+
             case 0:
-                System.out.println("Going back ….");
+                System.out.println("Going back ...");
+                break;
+            default:
+                break;
+
             }
-        } while (choice < 5 && choice >= 0);
-        sc.close();
+        } while (choice != 0);
     }
 
     // Case 1 method

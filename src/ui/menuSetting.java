@@ -27,47 +27,56 @@ public class menuSetting {
             System.out.printf("Enter your choice: ");
             
             choice = sc.nextInt();
+            String filepath = "menu.csv";
             switch (choice) {
             //each of these cases call another method within this class
             case 1:
-                System.out.println("Please select what you would like to print out(1 - main, 2 - sides, 3 - dessert, 4 - drinks, 5 - All): ");
+                System.out.println("Please select what you would like to print out(1 - main, 2 - drinks, 3 - dessert 4 - All): ");
                 int selection = 0;
                 selection = sc.nextInt();
                 this.printmenu(selection);
                 break;
             case 2:
-                System.out.println("Please enter what type the item is(main,side,dessert or drink): ");
+                System.out.println("Please enter what type the item is(main,dessert or drink): ");
                 String type = sc.nextLine();
                 System.out.println("Please enter item Id: ");
-                int Id = sc.nextInt();
+                String Id = sc.nextLine();
                 System.out.println("Please enter item name: ");
                 String name= sc.nextLine();
                 System.out.println("Please enter item price: ");
-                int price= sc.nextInt();
-                String filepath = type+".txt";
-                this.additem(type, Id , name,  price,  filepath);
+                String price= sc.nextLine();
+                System.out.println("Are there any allergen in dish (TRUE/FALSE): ");
+                String allergen= sc.nextLine();
+                System.out.println("Does the chef reccomend the dish (TRUE/FALSE): ");
+                String chefr= sc.nextLine();
+    
+                this.additem(type, Id , name,  price,allergen,chefr,  filepath);
                 break;
             case 3:
                 System.out.println("Please enter what type the item is(main,side,dessert or drink): ");
                 String type3 = sc.nextLine();
                 System.out.println("Please enter item Id of item to be edited: ");
-                int Idedit = sc.nextInt();
+                String Idedit = sc.nextLine();
                 System.out.println("Please enter item new Id: ");
-                int newId = sc.nextInt();
+                String newId = sc.nextLine();
                 System.out.println("Please enter item new name: ");
                 String newname= sc.nextLine();
                 System.out.println("Please enter item new price: ");
-                int newprice= sc.nextInt();
-                String filepath3 = type3+".txt";
-                this.editmenu(Idedit,newId,  newname,  newprice,  filepath3);
+                String newprice= sc.nextLine();
+                System.out.println("Update type(main/dessert/drinks): ");
+                String newType= sc.nextLine();
+                System.out.println("Update allergen(TRUE/FALSE): ");
+                String newAllergen= sc.nextLine();
+                System.out.println("Update chef reccomendation(TRUE/FALSE): ");
+                String newChefr= sc.nextLine();
+                
+                this.editmenu(Idedit,newId,  newname,  newprice, newType,newAllergen,newChefr,  filepath);
                 break;
             case 4:
-                System.out.println("Please enter what type the item is(main,side,dessert or drink): ");
-                String type4 = sc.nextLine();
                 System.out.println("Please enter item Id of item to be deleted: ");
-                int Iddelete = sc.nextInt();
-                String filepath4 = type4+".txt";
-                this.deleteitem(filepath4, Iddelete);
+                String Iddelete = sc.nextLine();
+                
+                this.deleteitem(filepath, Iddelete);
                 break;
             case 5:
                 System.out.println("Going back ….");
@@ -79,70 +88,78 @@ public class menuSetting {
     private void printmenu(int selection) throws FileNotFoundException{
         switch(selection){
             case 1:
-            x = new Scanner(new File("main.txt"));
+            x = new Scanner(new File("menu.csv "));
             x.useDelimiter(",");
+            String id = ""; String name ="";String price ="";String type ="";String allergen =""; String chefr = "";
             while(x.hasNext()){
-                System.out.print(x.next());
+                id = x.next();
+                name = x.next();
+                price = x.next();
+                type = x.next();
+                allergen = x.next();
+                chefr = x.next();
+                if(id.compareTo("200")<0){
+                    System.out.println(id+" "+name+" "+price+" "+type+" "+allergen+" "+chefr);
+                }
+                else{
+                    break;
+                }
+                
             }
             x.close();
             case 2:
-            x = new Scanner(new File("sides.txt"));
+            x = new Scanner(new File("menu.csv "));
             x.useDelimiter(",");
+            id = ""; name =""; price =""; type =""; allergen =""; chefr = "";
             while(x.hasNext()){
-                System.out.print(x.next());
+                id = x.next();
+                name = x.next();
+                price = x.next();
+                type = x.next();
+                allergen = x.next();
+                chefr = x.next();
+                if(id.compareTo("200")>=0 && id.compareTo("300")<0){
+                    System.out.println(id+" "+name+" "+price+" "+type+" "+allergen+" "+chefr);
+                }
+                else{
+                    break;
+                }
+                
             }
             x.close();
-            case 3:
-            x = new Scanner(new File("dessert.txt"));
-            x.useDelimiter(",");
-            while(x.hasNext()){
-                System.out.print(x.next());
-            }
-            x.close();
-            case 4:
-            x = new Scanner(new File("drinks.txt"));
-            x.useDelimiter(",");
-            while(x.hasNext()){
-                System.out.print(x.next());
-            }
-            x.close();
-            case 5:
-            x = new Scanner(new File("main.txt"));
-            x.useDelimiter(",");
-            while(x.hasNext()){
-                System.out.print(x.next());
-            }
-            x = new Scanner(new File("sides.txt"));
-            x.useDelimiter(",");
-            while(x.hasNext()){
-                System.out.print(x.next());
-            }
-            x = new Scanner(new File("dessert.txt"));
-            x.useDelimiter(",");
-            while(x.hasNext()){
-                System.out.print(x.next());
-            }
-            x = new Scanner(new File("drinks.txt"));
-            x.useDelimiter(",");
-            while(x.hasNext()){
-                System.out.print(x.next());
-            }
-            x.close();
-
             
-
+            case 3:
+            x = new Scanner(new File("menu.csv "));
+            x.useDelimiter(",");
+            id = ""; name =""; price =""; type =""; allergen =""; chefr = "";
+            while(x.hasNext()){
+                id = x.next();
+                name = x.next();
+                price = x.next();
+                type = x.next();
+                allergen = x.next();
+                chefr = x.next();
+                if(id.compareTo("300")>=0){
+                    System.out.println(id+" "+name+" "+price+" "+type+" "+allergen+" "+chefr);
+                }
+                else{
+                    break;
+                }
+                
+            }
+            x.close();
         }
         
     }
 
     //Case 2 method
-    public void additem(String type,int Id ,String name, int price, String filepath){
+    public void additem(String type,String Id ,String name, String price,String allergen,String chefr, String filepath){
         try{
             FileWriter fw = new FileWriter (filepath, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
 
-            pw.println (Id+","+name+","+price);
+            pw.println (Id+","+name+","+price+","+type+","+allergen+","+chefr);
             pw.flush();
             pw.close();
             System.out.println("done!");
@@ -153,11 +170,11 @@ public class menuSetting {
     }
 
     //Case 3 method
-    public void editmenu(int Idedit, int newId, String newname, int newprice, String filepath){
-        String tempfile = "tempfile.txt";
+    public void editmenu(String Idedit, String newId, String newname, String newprice,String newType,String newAllergen,String newChefr, String filepath){
+        String tempfile = "tempfile.csv";
         File oldfile = new File(filepath);
         File newFile = new File(tempfile);
-        int Id3 = 0; String name3 = "";int price3 = 0; 
+        String Id3 = ""; String name3 = "";String price3 = "";String type3 ="";String allergen3 =""; String chefr3 ="";
 
         try {
             FileWriter fw = new FileWriter(tempfile,true);
@@ -167,14 +184,17 @@ public class menuSetting {
             x.useDelimiter("[,\n]");
 
             while (x.hasNext()){
-                Id3 = x.nextInt();
+                Id3 = x.next();
                 name3 = x.next();
-                price3 = x.nextInt();
+                price3 = x.next();
+                type3 = x.next();
+                allergen3 = x.next();
+                chefr3 = x.next();
                 if(Id3 == Idedit){
-                    pw.println(newId+","+newname+","+newprice);
+                    pw.println(newId+","+newname+","+newprice+","+newType+","+newAllergen+","+newChefr);
                 }
                 else{
-                    pw.println(Id3+","+name3+","+price3);
+                    pw.println(Id3+","+name3+","+price3+","+type3+","+allergen3+","+chefr3);
                 }
                 x.close();
                 pw.flush();
@@ -188,11 +208,11 @@ public class menuSetting {
         }
     } 
     //Case 4 method
-    public void deleteitem(String filepath, int Iddelete){
-        String tempFile = "temp.txt";
+    public void deleteitem(String filepath, String Iddelete){
+        String tempFile = "temp.csv";
         File oldFile = new File(filepath);
         File newFile = new File(tempFile);
-        int Id = 0; String name = ""; int price = 0;
+        String Id = ""; String name = ""; String price = "";String allergen =""; String chefr =""; String type = "";
         try{
             FileWriter fw = new FileWriter(tempFile, true );
             BufferedWriter bw = new BufferedWriter(fw);
@@ -201,11 +221,14 @@ public class menuSetting {
             x.useDelimiter("[,\n]");
 
             while(x.hasNext()){
-                Id = x.nextInt();
+                Id = x.next();
                 name = x.next();
-                price = x.nextInt();
+                price = x.next();
+                type= x.next();
+                allergen = x.next();
+                chefr= x.next();
                 if (Id != Iddelete){
-                    pw.println(Id+","+name+","+price);
+                    pw.println(Id+","+name+","+price+","+type+","+allergen+","+chefr);
                 }
             }
            x.close();

@@ -18,8 +18,7 @@ public class Restaurant {
         String date = new String();
         // loop creates a series of "Seatings" one week into the future
         for (int i = 0; i < 7; ++i) {
-            dt.reset();
-            dt.deltaDay(i);
+            // dt.reset();
             date = dt.getDate().toString();
             seating.put(date, new Seating(date));
 
@@ -37,8 +36,10 @@ public class Restaurant {
                     seating.get(date).reserve_csv(tableNo, time, cust_name, phoneNo);
                 }
             }
+            dt.deltaDay(1);
         }
-        dt.reset();//resets the datetime cos in the loop we changed it
+        dt.deltaDay(-7);
+        // dt.reset();//resets the datetime cos in the loop we changed it
     }
 
 
@@ -61,7 +62,7 @@ public class Restaurant {
     public void reserve(String date, int tableNo, int time, String cust_name, int phoneNo) {
         //this whole chunk simply checks whether the date given falls within the next 7 days
         // System.out.print(date);
-        dt.reset();
+        // dt.reset();
         String today = dt.getDate().toString();
         //System.out.print(today);
         dt.deltaDay(1);
@@ -90,6 +91,7 @@ public class Restaurant {
             String[] newReservation ={"0", date, String.valueOf(time), String.valueOf(tableNo), cust_name, String.valueOf(phoneNo)};
             reserve.add(newReservation);
         }
+        dt.deltaDay(-7);
     }
 
     public void unreserveTable(String date, int tableNo, int time) {
@@ -107,14 +109,15 @@ public class Restaurant {
 
     public void showReservationStatus_All() {
         for (int j = 0; j < 7; ++j) {
-            dt.reset();
-            dt.deltaDay(j);
+            // dt.reset();
             String date = dt.getDate().toString();
             
             System.out.println("On " + date + ":");
             seating.get(date).showReservationStatus();
             System.out.println("-------------------");
+            dt.deltaDay(1);
         }
+        dt.deltaDay(-7);
     }
 
     public void checkReservation(String date, int time){ 

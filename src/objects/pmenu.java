@@ -39,8 +39,12 @@ public class pmenu {
                 String name= sc.nextLine();
                 System.out.println("Please enter item price: ");
                 String price= sc.next();
+                System.out.println("Are there any allergen(TRUE/False): ");
+                String  allergen = sc.nextLine();
+                System.out.println("Does the chef recommend it(TRUE/FALSE): ");
+                String chefr= sc.nextLine();
 
-                this.additem(Id , name,  price);
+                this.additem(Id , name,  price,allergen,chefr);
                 break;
             case 3:
                 System.out.println("Please enter what type the item is(main,side,dessert or drink): ");
@@ -52,7 +56,11 @@ public class pmenu {
                 String newname= sc.nextLine();
                 System.out.println("Please enter item new price: ");
                 String newprice= sc.next();
-                this.editmenu(Idedit,newId,  newname,  newprice);
+                System.out.println("Update allergen(TRUE/FALSE): ");
+                String newAllergen= sc.nextLine();
+                System.out.println("Update chef reccomendation(TRUE/FALSE): ");
+                String newChefr= sc.nextLine();
+                this.editmenu(Idedit,newId,  newname,  newprice,newAllergen,newChefr);
                 break;
             case 4:
                 System.out.println("Please enter what type the item is(main,side,dessert or drink): ");
@@ -79,13 +87,13 @@ public class pmenu {
     }
 
     //Case 2 method
-    public void additem(String Id ,String name, String price){
+    public void additem(String Id ,String name, String price,String allergen,String chefr){
         try{
             FileWriter fw = new FileWriter ("promomenu.csv", true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
 
-            pw.println (Id+","+name+","+price);
+            pw.println (Id+","+name+","+price+","+allergen+","+chefr);
             pw.flush();
             pw.close();
             System.out.println("done!");
@@ -96,11 +104,11 @@ public class pmenu {
     }
 
     //Case 3 method
-    public void editmenu(String Idedit, String newId, String newname, String newprice){
+    public void editmenu(String Idedit, String newId, String newname, String newprice,String newAllergen,String newChefr){
         String tempfile = "tempfile.txt";
         File oldfile = new File("promomenu.csv");
         File newFile = new File(tempfile);
-        String Id3 = ""; String name3 = "";String price3 = ""; 
+        String Id3 = ""; String name3 = "";String price3 = ""; String allergen3 =""; String chefr3 ="";
 
         try {
             FileWriter fw = new FileWriter(tempfile,true);
@@ -114,10 +122,10 @@ public class pmenu {
                 name3 = x.next();
                 price3 = x.next();
                 if(Id3 == Idedit){
-                    pw.println(newId+","+newname+","+newprice);
+                    pw.println(newId+","+newname+","+newprice+","+newAllergen+","+newChefr);
                 }
                 else{
-                    pw.println(Id3+","+name3+","+price3);
+                    pw.println(Id3+","+name3+","+price3+","+allergen3+","+chefr3);
                 }
                 x.close();
                 pw.flush();
@@ -135,7 +143,7 @@ public class pmenu {
         String tempFile = "temp.txt";
         File oldFile = new File("promomenu.csv");
         File newFile = new File(tempFile);
-        String Id = ""; String name = ""; String price = "";
+        String Id = ""; String name = ""; String price = "";String allergen =""; String chefr ="";
         try{
             FileWriter fw = new FileWriter(tempFile, true );
             BufferedWriter bw = new BufferedWriter(fw);
@@ -148,7 +156,7 @@ public class pmenu {
                 name = x.next();
                 price = x.next();
                 if (Id != Iddelete){
-                    pw.println(Id+","+name+","+price);
+                    pw.println(Id+","+name+","+price+","+allergen+","+chefr);
                 }
             }
            x.close();

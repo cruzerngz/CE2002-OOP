@@ -108,7 +108,7 @@ public class debugging {
 
     public static void testAllParse() throws FileNotFoundException {
 
-        ArrayList<String[]> testArr = Data.readCSV("../data/newtest.csv");
+        ArrayList<String[]> testArr = Data.readCSV("../data/Order.csv");
         
         LinkedHashMap<String, String[]> testMap = new LinkedHashMap<String, String[]>();
         Data.printArrayList(testArr);

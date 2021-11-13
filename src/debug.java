@@ -13,7 +13,7 @@ public class debug {
         // testTime();
         // testStats();
         // testColour();
-        // DateTime date = new DateTime("../data");
+        // DateTime date = new DateTime();
         // int epochDay = date.ymdToEpochDay(2021, 11, 12);
         // System.out.println(epochDay);
         // epochDay = date.getDaysSinceEpoch();
@@ -21,7 +21,7 @@ public class debug {
 
     }
     public static void testTime() throws IOException {
-        DateTime datetime = new DateTime("../data");
+        DateTime datetime = new DateTime();
         System.out.println(datetime.getDateTime());
         datetime.deltaHour(1);
         datetime.deltaDay(-112);

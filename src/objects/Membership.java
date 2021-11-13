@@ -13,6 +13,10 @@ public class Membership {
         this.isMember = isMember;
     }
 
+    /**
+     * Getter method for membership variable
+     * @return True means customer falls under class benefit 
+     */
     public boolean getMember(){ //for any callee receiving object to retrieve
         return isMember;
     }
