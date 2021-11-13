@@ -6,9 +6,9 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class pmenu {
+public class Pmenu {
     private static Scanner x;
-    public pmenu() {
+    public Pmenu() {
     }
 
     public void printOptions() throws FileNotFoundException {

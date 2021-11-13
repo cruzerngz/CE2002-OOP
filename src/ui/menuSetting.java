@@ -7,9 +7,9 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class menuSetting {
+public class MenuSetting {
     private static Scanner x;
-    public menuSetting() {
+    public MenuSetting() {
     }
 
     public void printOptions() throws FileNotFoundException {

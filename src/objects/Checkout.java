@@ -95,7 +95,7 @@ public class Checkout {
      * Will check if order has been successfully checked out before proceeding.
      * @param orderID String to search order csv
      */
-    public static void PrintInvoice(String orderID){ //receipt format
+    public static void printInvoice(String orderID){ //receipt format
         
         //table number from Yu Ze or maybe store in order csv as well
         //server

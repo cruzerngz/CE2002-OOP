@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 
 public class StaffRoster {
-    static staff Staff = new staff();
+    static Staff Staff = new Staff();
     private static Scanner x;
     private static int numStaff = 0;
 
@@ -33,7 +33,7 @@ public class StaffRoster {
         
     }
     public static void firing(String Name){
-        staff.fire(Name);
+        Staff.fire(Name);
         System.out.println("Staff has been fired");
         numStaff --;
     }

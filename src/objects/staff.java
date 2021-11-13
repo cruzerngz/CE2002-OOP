@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class staff {
+public class Staff {
     private int staffid;
     private String name;
     private String position;
@@ -15,7 +15,7 @@ public class staff {
     private boolean status;
     private static Scanner x;
     
-    public staff(){}
+    public Staff(){}
    
    
 

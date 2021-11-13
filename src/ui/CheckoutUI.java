@@ -41,7 +41,7 @@ public class CheckoutUI {
                 Checkout.checkout(orderID);
                 break;
             case 2:
-                Checkout.PrintInvoice(orderID);
+                Checkout.printInvoice(orderID);
                 break;
             case 0:
                 Colour.println(Colour.TEXT_GREEN, "Going back ….");
