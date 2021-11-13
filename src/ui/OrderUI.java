@@ -1,7 +1,7 @@
 package ui;
 import java.util.Scanner;
-import objects.Order;
-import util.Colour;
+import objects.*;
+import util.*;
 
 /**
  * Interface / Menu for managing orders
@@ -12,7 +12,20 @@ public class OrderUI{
      * It passes in dummy variables to Order objects when it is not needed
      * In the event it becomes needed due to change in Order methods, the variable can be passed from here
      */
-    public static void printOptions(){
+    Restaurant res;
+
+    /**
+     * time is the current time and date
+     */
+    DateTime dt = new DateTime();
+    private int time = dt.getTime();
+    private String date = dt.getDate().toString();
+
+    public OrderUI(Restaurant res){
+        this.res = res;
+    }
+
+    public void printOptions(){
          int choice;
          String orderID, itemID;
          String staffID, staffName;
@@ -41,12 +54,17 @@ public class OrderUI{
                 Colour.println(Colour.TEXT_YELLOW, "Enter Staff ID:"); //temporarily use this method first
                 staffID = sc.next();
                 Colour.println(Colour.TEXT_YELLOW, "Enter Staff name:"); //temporarily use this method first
-                staffName = sc.next();
-                
+                staffName = sc.next(); 
                 orderID = null; //initialize to null as invalid id now, for compiler.
-                
                 tempOrder = new Order(staffName, staffID, orderID); //pass in dummy orderID
                 orderID = tempOrder.create(staffID,staffName); //get actual orderID
+
+                res.checkReservation(date, time); //prints reserved tables
+                res.showEmptyTable(date); //prints empty tables (including reserved but empty tables)
+                System.out.println("Assign a table:");
+                int tableNo = sc.nextInt();
+                res.assignTable(date, tableNo, Integer.parseInt(orderID));
+
                 System.out.printf("Order created! ID = %s\n",orderID);
                 break;
             case 2:

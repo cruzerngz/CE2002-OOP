@@ -53,6 +53,17 @@ public class Seating {
     }
 
     /**
+     * Prints empty tables
+     */
+    public void showEmptyTable() {
+        for (int i = 0; i < table.length; ++i) {
+            if (!table[i].isOccupied()) {
+                System.out.println("Table " + table[i].getTableNo());
+            }
+        }
+    }
+
+    /**
      * Prints the assigned tables
      */
     public void showAssignedTable() {
@@ -70,9 +81,10 @@ public class Seating {
      * @param tableNo
      * @param orderID
      */
-    public void assignTable(int tableNo, int orderID) {
+    public boolean assignTable(int tableNo, int orderID) {
         if (table[tableNo - 1].isOccupied()) { // the array position is 1 less than actual seatId
             System.out.println("Table already assigned to a customer.");
+            return (true);
         } 
         //if the person who reserved is here, assign to customer.
         else if (table[tableNo - 1].isReserved(time)) { //
@@ -89,12 +101,12 @@ public class Seating {
                         numEmptyTable -= 1;
                         System.out.println("Table Assigned!");
                         repeat = false;
-                        break;
+                        return (false);
                     case "N":
                     case "n":
                         System.out.println("Going back ...");
                         repeat = false;
-                        break;
+                        return (true);
                     default:
                 }
             } while (repeat);
@@ -102,8 +114,9 @@ public class Seating {
             table[tableNo - 1].assign(orderID);
             numEmptyTable -= 1;
             System.out.println("Table Assigned!");
+            return (false);
         }
-
+        return (false);
     }
 
     /**

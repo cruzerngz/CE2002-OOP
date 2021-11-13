@@ -13,7 +13,7 @@ public class Debug2 {
         // Scanner sc = new Scanner(System.in);
 
         String orderID = "sat 21/10/2021";
-        byte[] temp = orderID;
+        //byte[] temp = orderID;
 
 
         float money = 100f;

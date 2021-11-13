@@ -3,7 +3,6 @@ import util.*;
 import java.util.HashMap;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Restaurant {
 
@@ -13,8 +12,8 @@ public class Restaurant {
      * 
      */
     private HashMap<String, Seating> seating = new HashMap<String, Seating>();
-    DateTime dt = new DateTime();
-    String path = "../data/reservations.csv";
+    DateTime dt = new DateTime();   
+    String path ="../data/reservations.csv";//"C:/Users/kohyu/Documents/GitHub/CE2002-OOP/data/reservations.csv"; 
     ArrayList<String[]> reserve = Data.readCSV(path);
     
 
@@ -46,6 +45,11 @@ public class Restaurant {
      * Prints out the number of empty tables currently.
      * @param date
      */
+    public void showEmptyTable(String date) {
+        System.out.println("Unoccupied Tables:");
+        seating.get(date).showEmptyTable();
+    }
+
     public void showNumEmptyTable(String date) {
         seating.get(date).showNumEmptyTable();
     }
@@ -64,7 +68,11 @@ public class Restaurant {
      * @param orderID
      */
     public void assignTable(String date, int tableNo, int orderID) {
-        seating.get(date).assignTable(tableNo,orderID);
+        boolean x = true;
+        while (x){
+            System.out.printf("Table Number:");
+            seating.get(date).assignTable(tableNo,orderID);
+        }
     }
 
     /**

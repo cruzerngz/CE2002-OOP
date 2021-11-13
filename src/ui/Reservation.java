@@ -6,10 +6,16 @@ import objects.Restaurant;
 
 public class Reservation {
 
-    public static void printOptions() throws FileNotFoundException {
+    Restaurant res;
+
+    public Reservation(Restaurant res){
+        this.res = res;
+    }
+
+    public void printOptions() throws FileNotFoundException {
         int choice;
         Scanner sc = new Scanner(System.in);
-        Restaurant res = new Restaurant();
+        //Restaurant res = new Restaurant();
 
         do {
             System.out.println("");
@@ -94,12 +100,4 @@ public class Reservation {
             }
         } while (choice != 0);
     }
-
-    // Case 1 method
-
-    // Case 2 method
-
-    // Case 3 method
-
-    // Case 4 method
 }

@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import objects.*;
 
 import ui.*;
 import util.Colour;
@@ -8,6 +9,8 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         int choice;
         Scanner sc = new Scanner(System.in);
+
+        Restaurant res = new Restaurant();
 
         do {
             System.out.println();
@@ -31,10 +34,12 @@ public class Main {
                     
                     break;
                 case 3: 
-                    OrderUI.printOptions(); //pass to orderui
+                    OrderUI orderUI = new OrderUI(res);
+                    orderUI.printOptions(); //pass to orderui
                     break;
                 case 4: 
-                    Reservation.printOptions();
+                    Reservation reservation = new Reservation(res);
+                    reservation.printOptions();
                     break;
                 case 5:
                     
