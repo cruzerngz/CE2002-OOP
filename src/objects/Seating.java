@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Seating {
     /**
-     * Restaurant is made up of many tables
+     * Seating is made up of many tables
      * 
      * @author Koh Yu Ze
      * 
@@ -19,6 +19,9 @@ public class Seating {
     private Table[] table = new Table[20];
     private int numEmptyTable = 20;
 
+    /**
+     * time is the current time
+     */
     DateTime dt = new DateTime();
     private int time = dt.getTime();
 
@@ -62,7 +65,10 @@ public class Seating {
     }
 
     /**
-     * Method to assign table. Provide table number and order number.
+     * Checks whether table is already occupied, or reserved for someone at this time.
+     * Then it assigns to the customer.
+     * @param tableNo
+     * @param orderID
      */
     public void assignTable(int tableNo, int orderID) {
         if (table[tableNo - 1].isOccupied()) { // the array position is 1 less than actual seatId
@@ -73,7 +79,8 @@ public class Seating {
             Scanner sc = new Scanner(System.in);
             boolean repeat = true;
             do {
-                System.out.println("Table reserved to a customer at this time. Assign? (Y/N)");
+                table[tableNo - 1].checkReservation(time);
+                System.out.println("Assign? (Y/N)");
                 String assign = sc.nextLine();
                 switch(assign){
                     case "Y":
@@ -101,25 +108,40 @@ public class Seating {
 
     /**
      * Method to unassign table
+     * @param tableNo
      */
     public void unassignTable(int tableNo) {
         table[tableNo - 1].unassign();
         numEmptyTable += 1;
     }
 
+
     /**
-     * Method to reserve table. Provide table number, phone and time
+     * Reserves the table
+     * @param tableNo
+     * @param time
+     * @param cust_name
+     * @param phoneNo
      */
     public void reserveTable(int tableNo, int time, String cust_name, int phoneNo) {
         table[tableNo - 1].reserve(phoneNo, time, cust_name);
     }
-
+    
+    /**
+     * This separate reserve method is used for initializing, when the data from the CSV is read.
+     * @param tableNo
+     * @param time
+     * @param cust_name
+     * @param phoneNo
+     */
     public void reserve_csv(int tableNo, int time, String cust_name, int phoneNo) {
         table[tableNo - 1].reserve_csv(phoneNo, time, cust_name);
     }
 
     /**
      * Method to unassign table
+     * @param tableNo
+     * @param time
      */
     public void unreserveTable(int tableNo, int time) {
         table[tableNo - 1].unreserve(time);
@@ -134,6 +156,10 @@ public class Seating {
         }
     }
 
+    /**
+     * Prints out all the tables that are reserved at the given time. So the staff can assign an unreserved table for a walk-in customer.
+     * @param time
+     */
     public void checkReservation(int time) {
         for (int i = 0; i < 20; ++i) {
             table[i].checkReservation(time);

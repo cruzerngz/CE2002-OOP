@@ -7,7 +7,11 @@ import java.util.Arrays;
 
 public class Restaurant {
 
-    // private Seating[] seating = new Seating[7];
+    /**
+     * Restaurant is made up of 7 instances of Seating. Every Seating represents one day of restaurant operation and
+     * customers can book for a table up to 1 week in advance.
+     * 
+     */
     private HashMap<String, Seating> seating = new HashMap<String, Seating>();
     DateTime dt = new DateTime();
     String path = "../data/reservations.csv";
@@ -18,59 +22,75 @@ public class Restaurant {
         String date = new String();
         // loop creates a series of "Seatings" one week into the future
         for (int i = 0; i < 7; ++i) {
-            // dt.reset();
             date = dt.getDate().toString();
             seating.put(date, new Seating(date));
 
             //this for loops checks if there is any reservation for this date in the csv file, then assigns if there are.
             for (int j = 1; j < reserve.size(); ++j) {
                 String temp = reserve.get(j)[1];
-                //System.out.println("j=" + j + ", temp = " + temp +", date = " + date);
                 if (temp.equals(date)){
                     int time = Integer.parseInt(reserve.get(j)[2]);
                     int tableNo = Integer.parseInt(reserve.get(j)[3]);
                     String cust_name = reserve.get(j)[4];
                     int phoneNo = Integer.parseInt(reserve.get(j)[5]);
 
-                    // this.reserve(date, tableNo, time, cust_name, phoneNo);
                     seating.get(date).reserve_csv(tableNo, time, cust_name, phoneNo);
                 }
             }
             dt.deltaDay(1);
         }
         dt.deltaDay(-7);
-        // dt.reset();//resets the datetime cos in the loop we changed it
     }
 
-
+    /**
+     * Prints out the number of empty tables currently.
+     * @param date
+     */
     public void showNumEmptyTable(String date) {
         seating.get(date).showNumEmptyTable();
     }
 
+    /**
+     * Prints the assigned tables and the order number that is associated with that table.
+     * @param date
+     */
     public void showAssignedTable(String date) {
         seating.get(date).showAssignedTable();
     }
-
+    /**
+     * Assigns a table
+     * @param date
+     * @param tableNo
+     * @param orderID
+     */
     public void assignTable(String date, int tableNo, int orderID) {
         seating.get(date).assignTable(tableNo,orderID);
     }
 
+    /**
+     * Unassigns a table
+     * @param date
+     * @param tableNo
+     */
     public void unassignTable(String date, int tableNo) {
         seating.get(date).unassignTable(tableNo);
     }
 
+    /**
+     * Reserves a table. Tables can be reserved up to 1 week in advance.
+     * @param date
+     * @param tableNo
+     * @param time
+     * @param cust_name
+     * @param phoneNo
+     */
     public void reserve(String date, int tableNo, int time, String cust_name, int phoneNo) {
         //this whole chunk simply checks whether the date given falls within the next 7 days
-        // System.out.print(date);
-        // dt.reset();
         String today = dt.getDate().toString();
-        //System.out.print(today);
         dt.deltaDay(1);
         String tmr = dt.getDate().toString();
-        //System.out.print(tmr);
         dt.deltaDay(1);
         String tmr2 = dt.getDate().toString();
-        //System.out.print(tmr2);
         dt.deltaDay(1);
         String tmr3 = dt.getDate().toString();
         dt.deltaDay(1);
@@ -94,6 +114,12 @@ public class Restaurant {
         dt.deltaDay(-7);
     }
 
+    /**
+     * Unreserves a table
+     * @param date
+     * @param tableNo
+     * @param time
+     */
     public void unreserveTable(String date, int tableNo, int time) {
         seating.get(date).unreserveTable(tableNo, time);
         for (int j = 1; j < reserve.size(); ++j) {
@@ -103,10 +129,17 @@ public class Restaurant {
         }
     }
 
+    /**
+     * Shows reservations for one day
+     * @param date
+     */
     public void showReservationStatus_Day(String date) {
         seating.get(date).showReservationStatus();
     }
 
+    /**
+     * shows all reservations for next 7 days
+     */
     public void showReservationStatus_All() {
         for (int j = 0; j < 7; ++j) {
             // dt.reset();
@@ -120,11 +153,19 @@ public class Restaurant {
         dt.deltaDay(-7);
     }
 
+    /**
+     * Check what tabels are reserves at a given date and time
+     * @param date
+     * @param time
+     */
     public void checkReservation(String date, int time){ 
         System.out.println("At " + date + " " + time + "hrs:");
         seating.get(date).checkReservation(time);
     }
     
+    /**
+     * Writes the new reservations into the CSV file to store the data.
+     */
     public void writeToCSV(){ 
         for (int j = 0; j < reserve.size(); ++j) {
             reserve.get(j)[0] = String.valueOf(j);

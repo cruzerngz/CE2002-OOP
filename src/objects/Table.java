@@ -3,7 +3,7 @@ public class Table {
 
     /** Table class. 
      * This is the individual tables.
-     * I'm assuming all tables have the same number of seats. We can change that later
+     * I'm assuming all tables have the same number of seats.
      * Restaurant is open from 1100 to 2000hrs. Last reservation at 2000hrs.
      * @author Koh Yu Ze
     */
@@ -105,6 +105,10 @@ public class Table {
         }
     }
 
+    /**
+     * Prints out who is reserving this table at the given time.
+     * @param time
+     */
     public void checkReservation(int time){ 
         if (reserved[time/100 - 11] == true){
             System.out.println("Table " + tableNo 
@@ -114,10 +118,12 @@ public class Table {
         }
     }
 
+    
     /**
-     * A method to check if a table has already been reserved
-     *
-     * @return a boolean value determining whether table has been reserved.
+     * A method to reserve this table object
+     * @param phoneNumber
+     * @param time
+     * @param cust_name
      */
     public void reserve(int phoneNumber, int time, String cust_name){ 
         if (reserved[time/100 - 11] == true){
@@ -144,6 +150,12 @@ public class Table {
         }   
     }
 
+    /**
+     * This separate reserve method is used for initializing, when the data from the CSV is read.
+     * @param phoneNumber
+     * @param time
+     * @param cust_name
+     */
     public void reserve_csv(int phoneNumber, int time, String cust_name){ 
         if (reserved[time/100 - 11] == true){
             System.out.println("Check csv for overlapping");
@@ -155,9 +167,11 @@ public class Table {
         }   
     }
 
-     /**
+
+    /**
      * A method to assign the table to a customer
      * Customers have no IDs, so when table is assigned, we associate the table with the orderID
+     * @param order
      */
     public void assign(int order){ 
         occupied = true;
@@ -178,7 +192,12 @@ public class Table {
             + "hrs"
             );
     }
-
+    
+    /**
+     * A method to check whether this table is reserved
+     * @param time
+     * @return a boolean value whether this table is reserved at this time.
+     */
     public boolean isReserved(int time){ 
         return (reserved[time/100 - 11]);
     }
