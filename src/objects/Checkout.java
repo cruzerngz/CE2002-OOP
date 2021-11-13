@@ -1,8 +1,8 @@
 package objects;
 
-import Discount;
-import Membership;
-import SaleStats;
+import objects.Discount;
+import objects.Membership;
+import objects.SaleStats;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -11,8 +11,17 @@ import java.util.Scanner;
 import util.Data;
 import util.DateTime;
 
+/**
+ * Contains static methods to act on orderID.
+ * Checkout contains 2 functions 
+ */
 public class Checkout {
-       //Case 1 method
+       
+        /**
+         * Calculate sum total to be paid by customer, assumes staff will definitely collect money.
+         * Immediately sets paid status to true upon executing
+         * @param orderID which is used in order.csv to identify a customer
+         */
        public static void checkout(String orderID){
         //Assume cash
         Scanner sc = new Scanner(System.in);
@@ -37,7 +46,7 @@ public class Checkout {
         }
         
         //sanity check, is already paid?
-        if(isPaid(i)) 
+        if(Paid.isPaid(i)) 
         {
             System.out.println("Already paid!");
             return;
@@ -77,9 +86,15 @@ public class Checkout {
         System.out.printf("Total payment to receive: $%.2f", tempsaleprice);
         //temporary test
         
-        setPaid(i);
+        Paid.setPaid(i);
     }
-    //Case 2 method
+    
+
+    /**
+     * Method to print invoice/receipt for customer. 
+     * Will check if order has been successfully checked out before proceeding.
+     * @param orderID String to search order csv
+     */
     public static void PrintInvoice(String orderID){ //receipt format
         
         //table number from Yu Ze or maybe store in order csv as well
@@ -102,7 +117,7 @@ public class Checkout {
             } 
         
         //sanity check
-        if(!isPaid(i))
+        if(!Paid.isPaid(i))
         {
             System.out.println("Please pay before invoice");
         }
@@ -144,24 +159,5 @@ public class Checkout {
 
     }
 
-    private static boolean isPaid(int index){
-        ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
-        tempArrayList = Data.readCSV("../data/Order.csv");
-        LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
 
-        String[] paid = tempMap.get("paid");
-        if(paid[index] == "TRUE")
-            return true;
-        else
-            return false;
-    }
-
-    private static void setPaid(int index){
-        ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
-        tempArrayList = Data.readCSV("../data/Order.csv");
-        LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
-
-        String[] paid = tempMap.get("paid");
-        paid[index] = "TRUE";
-    }
 }

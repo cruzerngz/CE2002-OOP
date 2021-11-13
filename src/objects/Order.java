@@ -8,21 +8,38 @@ import util.Data;
 import util.DateTime;
 
 public class Order {
-    //construct staff object
-    //private Staff staff; //create staff class later
-    //private int OrderID; //id to pass around
     
-    public Order() {
-        //staffid could be part of the constructor
+    private String emp_name, emp_id; //staff info
+    private String orderID; //id to pass around
+    
+    /**
+     * Constructor stores employee name, id and order number tied to the order.
+     * @param emp_name
+     * @param emp_id
+     * @param orderID
+     */
+    public Order(String emp_name, String emp_id, String orderID) {
+        this.emp_name = emp_name;
+        this.emp_id = emp_id;
+        this.orderID = orderID;
+    }
+    /**
+     * Constructor overload for situations where staff info not needed
+     * @param orderID
+     */
+    public Order(String orderID){
+        emp_name = "";
+        emp_id = "";
+        this.orderID = orderID;
     }
     
 /**
  * 
- * @param emp_name
- * @param emp_id
+ * @param emp_name Staff name as required by order details
+ * @param emp_id Staff id as required by order details
  * @return orderid to caller
  */
-    public static String create(String emp_name, String emp_id) {
+    public String create(String emp_name, String emp_id) {
         //creates a new order
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
         tempArrayList = Data.readCSV("../data/Order.csv");
@@ -52,10 +69,15 @@ public class Order {
         tempArrayList = Data.parse(tempMap);
 
         Data.writeCSV(tempArrayList, "../data/Order.csv");
+        this.orderID = id; //store in object variable to initialize
         return id;
     }
 
-    public static void printOrder(String orderID) {
+    /**
+     * Retrieves order details and prints just the list of items, staff name and id
+     * @param orderID
+     */
+    public void printOrder(String orderID) {
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
 
         tempArrayList = Data.readCSV("../data/Order.csv");
@@ -81,7 +103,12 @@ public class Order {
         System.out.printf("%s \n", tempMap.get("items")[i] ); 
     }
 
-    public static void addItem(String orderID, String itemID) {
+    /**
+     * Adds item to order.csv
+     * @param orderID string to find row and appropriate order to add to
+     * @param itemID actual item number code to be input into field
+     */
+    public void addItem(String orderID, String itemID) {
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
         tempArrayList = Data.readCSV("../data/Order.csv");
 
@@ -110,7 +137,13 @@ public class Order {
         Data.writeCSV(tempArrayList, "../data/Order.csv");
     }
 
-    public static void removeItem(String orderID, String itemID) {
+
+    /**
+     * Removes item from order.csv
+     * @param orderID string to find row and appropriate order to add to
+     * @param itemID actual item number code to be input into field. returns error if mismatch
+     */
+    public void removeItem(String orderID, String itemID) {
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
 
         tempArrayList = Data.readCSV("../data/Order.csv");

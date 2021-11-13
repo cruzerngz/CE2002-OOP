@@ -3,14 +3,24 @@ import java.util.Scanner;
 
 import util.Colour;
 import objects.Checkout;
-
+/**
+ * Interface or Menu for checkout functions, checkout and print invoice
+ * 
+ */
 public class CheckoutUI {
     private String orderID;
     
+    /**
+     * Constructor: Simple object created so it can store orderID until the end of use, passing it to other linked classes.
+     * @param orderID
+     */
     public CheckoutUI(String orderID) {
         this.orderID = orderID; //assigned from outside for use later       
     }
 
+    /**
+     * Actual menu function that is invoked to 'execute' the class
+     */
     public void printOptions() {
         int choice;
         Scanner sc = new Scanner(System.in);
