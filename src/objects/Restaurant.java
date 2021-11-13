@@ -13,7 +13,7 @@ public class Restaurant {
      */
     private HashMap<String, Seating> seating = new HashMap<String, Seating>();
     DateTime dt = new DateTime();   
-    String path ="../data/reservations.csv";//"C:/Users/kohyu/Documents/GitHub/CE2002-OOP/data/reservations.csv"; 
+    String path = "../data/reservations.csv";
     ArrayList<String[]> reserve = Data.readCSV(path);
     
 

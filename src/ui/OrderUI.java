@@ -12,7 +12,7 @@ public class OrderUI{
      * It passes in dummy variables to Order objects when it is not needed
      * In the event it becomes needed due to change in Order methods, the variable can be passed from here
      */
-    Restaurant res;
+    
 
     /**
      * time is the current time and date
@@ -20,15 +20,19 @@ public class OrderUI{
     DateTime dt = new DateTime();
     private int time = dt.getTime();
     private String date = dt.getDate().toString();
+    private String staffID, staffName;
+    private Restaurant res;
 
-    public OrderUI(Restaurant res){
+    public OrderUI(Restaurant res, String staffName, String staffID){
         this.res = res;
+        this.staffName = staffName;
+        this.staffID = staffID;
     }
 
     public void printOptions(){
          int choice;
          String orderID, itemID;
-         String staffID, staffName;
+         
          Order tempOrder;
          
          Scanner sc = new Scanner(System.in);
@@ -51,10 +55,6 @@ public class OrderUI{
             
             case 1:
                 //debug
-                Colour.println(Colour.TEXT_YELLOW, "Enter Staff ID:"); //temporarily use this method first
-                staffID = sc.next();
-                Colour.println(Colour.TEXT_YELLOW, "Enter Staff name:"); //temporarily use this method first
-                staffName = sc.next(); 
                 orderID = null; //initialize to null as invalid id now, for compiler.
                 tempOrder = new Order(staffName, staffID, orderID); //pass in dummy orderID
                 orderID = tempOrder.create(staffID,staffName); //get actual orderID

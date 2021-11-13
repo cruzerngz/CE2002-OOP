@@ -9,8 +9,12 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         int choice;
         Scanner sc = new Scanner(System.in);
-
         Restaurant res = new Restaurant();
+
+        Colour.println(Colour.TEXT_YELLOW, "Enter Staff ID:");
+        String staffID = sc.next();
+        Colour.println(Colour.TEXT_YELLOW, "Enter Staff name:");
+        String staffName = sc.next(); 
 
         do {
             System.out.println();
@@ -34,7 +38,7 @@ public class Main {
                     
                     break;
                 case 3: 
-                    OrderUI orderUI = new OrderUI(res);
+                    OrderUI orderUI = new OrderUI(res, staffName, staffID);
                     orderUI.printOptions(); //pass to orderui
                     break;
                 case 4: 
