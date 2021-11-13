@@ -38,7 +38,7 @@ public class Item {
         returnStr[4] = allergy;
 
         if(recommend) { //Mark in bright green
-            returnStr[1] = StrColour.Green(returnStr[1]);
+            returnStr[1] = Colour.Green(returnStr[1]);
         }
 
         return returnStr;
