@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class MenuSetting {
+public class MenuSetting implements BaseUI{
     private static Scanner x;
     public MenuSetting() {
     }

@@ -6,7 +6,9 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class Pmenu {
+import ui.BaseUI;
+
+public class Pmenu implements BaseUI{
     private static Scanner x;
     public Pmenu() {
     }
@@ -30,7 +32,7 @@ public class Pmenu {
             //each of these cases call another method within this class
             case 1:
                 System.out.println("The following is the promotional menu: ");
-                this.printmenu();
+                this.printMenu();
                 break;
             case 2:
                 System.out.println("Please enter item Id: ");
@@ -44,7 +46,7 @@ public class Pmenu {
                 System.out.println("Does the chef recommend it(TRUE/FALSE): ");
                 String chefr= sc.nextLine();
 
-                this.additem(Id , name,  price,allergen,chefr);
+                this.addItem(Id , name,  price,allergen,chefr);
                 break;
             case 3:
                 System.out.println("Please enter what type the item is(main,side,dessert or drink): ");
@@ -60,13 +62,13 @@ public class Pmenu {
                 String newAllergen= sc.nextLine();
                 System.out.println("Update chef reccomendation(TRUE/FALSE): ");
                 String newChefr= sc.nextLine();
-                this.editmenu(Idedit,newId,  newname,  newprice,newAllergen,newChefr);
+                this.editMenu(Idedit,newId,  newname,  newprice,newAllergen,newChefr);
                 break;
             case 4:
                 System.out.println("Please enter what type the item is(main,side,dessert or drink): ");
                 System.out.println("Please enter item Id of item to be deleted: ");
                 String Iddelete = sc.next();
-                this.deleteitem(Iddelete);
+                this.deleteItem(Iddelete);
                 break;
             case 5:
                 System.out.println("Going back ….");
@@ -74,7 +76,7 @@ public class Pmenu {
         } while (choice < 5);
     }
 
-    private void printmenu() throws FileNotFoundException{
+    private void printMenu() throws FileNotFoundException{
     
         x = new Scanner(new File("promomenu.csv"));
         x.useDelimiter(",");
@@ -87,7 +89,7 @@ public class Pmenu {
     }
 
     //Case 2 method
-    public void additem(String Id ,String name, String price,String allergen,String chefr){
+    public void addItem(String Id ,String name, String price,String allergen,String chefr){
         try{
             FileWriter fw = new FileWriter ("promomenu.csv", true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -104,7 +106,7 @@ public class Pmenu {
     }
 
     //Case 3 method
-    public void editmenu(String Idedit, String newId, String newname, String newprice,String newAllergen,String newChefr){
+    public void editMenu(String Idedit, String newId, String newname, String newprice,String newAllergen,String newChefr){
         String tempfile = "tempfile.txt";
         File oldfile = new File("promomenu.csv");
         File newFile = new File(tempfile);
@@ -139,7 +141,7 @@ public class Pmenu {
         }
     } 
     //Case 4 method
-    public void deleteitem(String Iddelete){
+    public void deleteItem(String Iddelete){
         String tempFile = "temp.txt";
         File oldFile = new File("promomenu.csv");
         File newFile = new File(tempFile);

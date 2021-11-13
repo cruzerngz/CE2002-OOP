@@ -6,8 +6,8 @@ import util.DateTime;
 import util.Colour;
 import util.Data;
 
-public class SaleStatsUI {
-    public static void main(String[] args) {
+public class SaleStatsUI implements BaseUI{
+    public void printOptions() {
         int choice;
         Scanner sc = new Scanner(System.in);
         

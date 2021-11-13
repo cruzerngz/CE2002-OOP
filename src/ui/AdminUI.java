@@ -7,8 +7,9 @@ import java.util.Scanner;
 
 import objects.StaffRoster;
 
-public class AdminUI {
-    public static void main(String[] args) throws FileNotFoundException {
+public class AdminUI implements BaseUI{
+    //TODO fix implements
+    public void printOptions(String[] args) throws FileNotFoundException {
         int choice;
         Scanner sc = new Scanner(System.in);
         
@@ -63,10 +64,10 @@ public class AdminUI {
 
             switch(choice) {
                 case 1:
-                    StaffRoster.ShownumStaff();
+                    StaffRoster.showNumStaff();
                     
                 case 2:
-                    StaffRoster.Showhired();
+                    StaffRoster.showHired();
                     
                 case 3:
                     System.out.println("Please enter the ID given: ");

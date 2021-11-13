@@ -7,7 +7,7 @@ import objects.Checkout;
  * Interface or Menu for checkout functions, checkout and print invoice
  * 
  */
-public class CheckoutUI {
+public class CheckoutUI implements BaseUI{
     private String orderID;
     
     /**

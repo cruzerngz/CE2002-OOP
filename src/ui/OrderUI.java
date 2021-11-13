@@ -6,7 +6,7 @@ import util.*;
 /**
  * Interface / Menu for managing orders
  */
-public class OrderUI{
+public class OrderUI implements BaseUI{
     /**
      * Actual menu function to 'execute' class and access functions
      * It passes in dummy variables to Order objects when it is not needed

@@ -12,11 +12,11 @@ public class StaffRoster {
     private static int numStaff = 0;
 
 
-    public static void ShownumStaff(){
+    public static void showNumStaff(){
         System.out.println("There are "+ numStaff + " hired.");
     }
 
-    public static void Showhired() throws FileNotFoundException{
+    public static void showHired() throws FileNotFoundException{
         System.out.println("This is list of the Staff in the restaurant: ");
         x = new Scanner(new File("staffroster.csv"));
             x.useDelimiter(",");

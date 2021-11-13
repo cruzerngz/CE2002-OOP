@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import objects.Restaurant;
 
-public class Reservation {
+public class Reservation implements BaseUI{
 
     Restaurant res;
 
