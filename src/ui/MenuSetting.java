@@ -12,7 +12,7 @@ import util.*;
 public class MenuSetting implements BaseUI{
     private static Scanner x;
     
-    private String path = "../data/menu.csv";
+    private String path = "data/menu.csv";
 
     public MenuSetting() {
     }
@@ -33,7 +33,7 @@ public class MenuSetting implements BaseUI{
             System.out.printf("Enter your choice: ");
             
             choice = sc.nextInt();
-            String filepath = "menu.csv";
+            String filepath = "data/menu.csv";
             switch (choice) {
             //each of these cases call another method within this class
             case 1:
@@ -41,7 +41,7 @@ public class MenuSetting implements BaseUI{
                 int selection = 0;
                 selection = sc.nextInt();
                 try {
-                    this.printMenu(selection);
+                    this.printMenu(selection, filepath);
                 } catch (FileNotFoundException e) {
                     
                     e.printStackTrace();
@@ -64,8 +64,6 @@ public class MenuSetting implements BaseUI{
                 this.addItem(type, Id , name,  price,allergen,chefr,  filepath);
                 break;
             case 3:
-                System.out.println("Please enter what type the item is(main,side,dessert or drink): ");
-                String type3 = sc.nextLine();
                 System.out.println("Please enter item Id of item to be edited: ");
                 String Idedit = sc.nextLine();
                 System.out.println("Please enter item new Id: ");
@@ -97,11 +95,11 @@ public class MenuSetting implements BaseUI{
         } while (choice != 0);
     }
 
-    private void printMenu(int selection) throws FileNotFoundException{
+    private void printMenu(int selection,String filepath) throws FileNotFoundException{
         switch(selection){
             case 1:
             // ArrayList<String[]> x = Data.readCSV(path);
-            x = new Scanner(new File("menu.csv "));
+            x = new Scanner(new File(filepath));
             x.useDelimiter(",");
             String id = ""; String name ="";String price ="";String type ="";String allergen =""; String chefr = "";
             while(x.hasNext()){
@@ -121,7 +119,7 @@ public class MenuSetting implements BaseUI{
             }
             x.close();
             case 2:
-            x = new Scanner(new File("menu.csv "));
+            x = new Scanner(new File("menu.csv"));
             x.useDelimiter(",");
             id = ""; name =""; price =""; type =""; allergen =""; chefr = "";
             while(x.hasNext()){
