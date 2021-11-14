@@ -1,6 +1,6 @@
 package ui;
 
-import java.io.FileNotFoundException;
+//import java.io.FileNotFoundException;
 import java.util.Scanner;
 import objects.Restaurant;
 
@@ -12,7 +12,7 @@ public class Reservation implements BaseUI{
         this.res = res;
     }
 
-    public void printOptions() throws FileNotFoundException {
+    public void printOptions() {
         int choice;
         Scanner sc = new Scanner(System.in);
         //Restaurant res = new Restaurant();

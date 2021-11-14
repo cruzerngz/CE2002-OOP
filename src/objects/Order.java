@@ -69,7 +69,6 @@ public class Order {
         empRow[index] = emp_id; //write to array
         tempMap.put("emp_id", empRow);
 
-        //TODO assign table
         
 
         tempArrayList = Data.parse(tempMap);

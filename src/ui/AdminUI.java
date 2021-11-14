@@ -8,8 +8,8 @@ import java.util.Scanner;
 import objects.StaffRoster;
 
 public class AdminUI implements BaseUI{
-    //TODO fix implements
-    public void printOptions() throws FileNotFoundException {
+    
+    public void printOptions() {
         int choice;
         Scanner sc = new Scanner(System.in);
         
@@ -43,7 +43,7 @@ public class AdminUI implements BaseUI{
      * UI for handling staff related stuff hello
      * @throws FileNotFoundException
      */
-    public static void staffUI() throws FileNotFoundException {
+    public static void staffUI() {
         int choice;
         Scanner sc = new Scanner(System.in);
         
