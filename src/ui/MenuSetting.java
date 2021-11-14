@@ -12,7 +12,7 @@ import util.*;
 public class MenuSetting implements BaseUI{
     private static Scanner x;
     
-    private String path = "data/menu.csv";
+    
 
     public MenuSetting() {
     }
@@ -33,7 +33,7 @@ public class MenuSetting implements BaseUI{
             System.out.printf("Enter your choice: ");
             
             choice = sc.nextInt();
-            String filepath = "data/menu.csv";
+            String filepath = "../data/menu.csv";
             switch (choice) {
             //each of these cases call another method within this class
             case 1:
@@ -119,7 +119,7 @@ public class MenuSetting implements BaseUI{
             }
             x.close();
             case 2:
-            x = new Scanner(new File("menu.csv"));
+            x = new Scanner(new File(filepath));
             x.useDelimiter(",");
             id = ""; name =""; price =""; type =""; allergen =""; chefr = "";
             while(x.hasNext()){
@@ -139,7 +139,7 @@ public class MenuSetting implements BaseUI{
             }
             
             case 3:
-            x = new Scanner(new File("menu.csv "));
+            x = new Scanner(new File(filepath));
             x.useDelimiter(",");
             id = ""; name =""; price =""; type =""; allergen =""; chefr = "";
             while(x.hasNext()){
