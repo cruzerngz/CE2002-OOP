@@ -16,9 +16,14 @@ public class StaffRoster {
         System.out.println("There are "+ numStaff + " hired.");
     }
 
-    public static void showHired() throws FileNotFoundException{
+    public static void showHired() {
         System.out.println("This is list of the Staff in the restaurant: ");
-        x = new Scanner(new File("staffroster.csv"));
+        try {
+            x = new Scanner(new File("staffroster.csv"));
+        } catch (FileNotFoundException e) {
+            
+            e.printStackTrace();
+        }
             x.useDelimiter(",");
             while(x.hasNext()){
                 System.out.print(x.next());

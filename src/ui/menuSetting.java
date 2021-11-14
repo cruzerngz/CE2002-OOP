@@ -12,7 +12,7 @@ public class MenuSetting implements BaseUI{
     public MenuSetting() {
     }
 
-    public void printOptions() throws FileNotFoundException {
+    public void printOptions() {
         int choice;
         Scanner sc = new Scanner(System.in);
 
@@ -34,7 +34,12 @@ public class MenuSetting implements BaseUI{
                 System.out.println("Please select what you would like to print out(1 - main, 2 - drinks, 3 - dessert 4 - All): ");
                 int selection = 0;
                 selection = sc.nextInt();
-                this.printMenu(selection);
+                try {
+                    this.printMenu(selection);
+                } catch (FileNotFoundException e) {
+                    
+                    e.printStackTrace();
+                }
                 break;
             case 2:
                 System.out.println("Please enter what type the item is(main,dessert or drink): ");
@@ -50,7 +55,7 @@ public class MenuSetting implements BaseUI{
                 System.out.println("Does the chef reccomend the dish (TRUE/FALSE): ");
                 String chefr= sc.nextLine();
     
-                this.additem(type, Id , name,  price,allergen,chefr,  filepath);
+                this.addItem(type, Id , name,  price,allergen,chefr,  filepath);
                 break;
             case 3:
                 System.out.println("Please enter what type the item is(main,side,dessert or drink): ");
