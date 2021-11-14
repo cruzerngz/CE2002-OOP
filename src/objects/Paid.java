@@ -41,5 +41,7 @@ public class Paid {
 
         String[] paid = tempMap.get("paid");
         paid[index] = "TRUE";
+        tempMap.put("paid", paid);
+        Data.writeCSV(Data.parse(tempMap), Path.order);
     }
 }
