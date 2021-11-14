@@ -5,55 +5,76 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import util.Password;
 
 public class Staff {
-    private int staffid;
+    private int staffID;
     private String name;
     private String position;
-    private String username;
+    private String userName;
     private String password;
     private boolean status;
     private static Scanner x;
     
-    public Staff(){}
-   
-   
-
-    public void hire(int staff_ID, String Name, String Position, String Username, String Password){
-        staffid = staff_ID;
-        name = Name;
-        position = Position;
-        username = Username;
-        password = Password;
-        
-       
-        try{
-            FileWriter fw = new FileWriter ("loginPassword.csv", true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-
-            pw.println (name+","+username+","+password);
-            pw.flush();
-            pw.close();
-            System.out.println("done!");
-        }
-        catch(Exception e){
-            System.out.println("Try again!");
-        }
-        try{
-            FileWriter fw = new FileWriter ("staffroster.csv", true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-
-            pw.println (staffid+","+name+","+position);
-            pw.flush();
-            pw.close();
-            System.out.println("done!");
-        }
-        catch(Exception e){
-            System.out.println("Try again!");
-        }
+    /**
+     * Create staff with new credentials
+     * @param staff_id
+     * @param name
+     * @param position
+     * @param username
+     * @param password Hashed password
+     */
+    public Staff(int staff_id, String name, String position, String username, String password){
+        this.staffID = staff_id;
+        this.name = name;
+        this.position = position;
+        this.userName = username;
+        this.password = Password.hash(password);
     }
+
+    /**
+     * Retrieve staff using existing credentials
+     */
+    public Staff(String name) {
+
+    }
+
+    /**
+     * Hires the staff object created.
+     * Writes to staffRoster file
+     * @return
+     */
+    public Boolean hire(){
+       
+        // try{
+        //     FileWriter fw = new FileWriter ("loginPassword.csv", true);
+        //     BufferedWriter bw = new BufferedWriter(fw);
+        //     PrintWriter pw = new PrintWriter(bw);
+
+        //     pw.println (name+","+username+","+password);
+        //     pw.flush();
+        //     pw.close();
+        //     System.out.println("done!");
+        // }
+        // catch(Exception e){
+        //     System.out.println("Try again!");
+        // }
+        // try{
+        //     FileWriter fw = new FileWriter ("staffroster.csv", true);
+        //     BufferedWriter bw = new BufferedWriter(fw);
+        //     PrintWriter pw = new PrintWriter(bw);
+
+        //     pw.println (staffid+","+name+","+position);
+        //     pw.flush();
+        //     pw.close();
+        //     System.out.println("done!");
+        // }
+        // catch(Exception e){
+        //     System.out.println("Try again!");
+        // }
+    }
+
+
     public static void fire(String  Name){
         String name_fire = Name;
         

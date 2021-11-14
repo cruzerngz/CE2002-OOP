@@ -1,2 +1,2 @@
-Staff_ID,Name,position
-01,Ali,Cook
+Staff_ID,Name,position,username,password,isLoggedIn
+1,Ali,Cook,ali,,

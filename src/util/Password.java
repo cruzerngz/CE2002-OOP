@@ -17,10 +17,15 @@ public class Password {
      * @return 256-bit result
      * @throws NoSuchAlgorithmException
      */
-    private static byte[] SHA256(String input) throws NoSuchAlgorithmException {
-        MessageDigest msg = MessageDigest.getInstance("SHA-256");
+    private static byte[] SHA256(String input) {
+        MessageDigest msg = null;
+        try {
+            msg = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        
         byte[] hash;
-
         hash = msg.digest(input.getBytes(StandardCharsets.UTF_8));
 
         return hash;
@@ -46,7 +51,7 @@ public class Password {
      * @return 64 char string
      * @throws NoSuchAlgorithmException
      */
-    public static String hash(String input) throws NoSuchAlgorithmException {
+    public static String hash(String input) {
         return toString(SHA256(input));
     }
 }
