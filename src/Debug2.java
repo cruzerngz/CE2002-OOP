@@ -10,17 +10,9 @@ import util.*;
 
 public class Debug2 {
     public static void main(String[] args) {
-        // Scanner sc = new Scanner(System.in);
+        MenuSetting temp = new MenuSetting();
 
-        String orderID = "sat 21/10/2021";
-        //byte[] temp = orderID;
-
-
-        float money = 100f;
-        SaleStats stats = new SaleStats();
-        DateTime dt = new DateTime();
-        stats.addRevenue(dt.getDaysSinceEpoch(), money);
-
+        temp.printOptions();
     }
 
 }

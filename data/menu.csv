@@ -1,6 +1,5 @@
 id,name,price,type,allergen,recommend
 100,Chicken pie,7.50,main,FALSE,FALSE
-100,Chicken pie,7.50,main,FALSE,FALSE
 109,Bak Chor Mee,3.50,main,FALSE,FALSE
 110,Laksa,4.00,main,FALSE,FALSE
 111,Bee Hoon,3.50,main,FALSE,FALSE
@@ -13,3 +12,4 @@ id,name,price,type,allergen,recommend
 200,Coffee,1.50,drinks,FALSE,FALSE
 215,Tea,1.50,drinks,FALSE,FALSE
 216,Water,0.50,drinks,FALSE,FALSE
+115,pizza,10.00,main,false,false
