@@ -58,8 +58,9 @@ public class Checkout {
         System.out.println("Is customer member? Y/N");
         if(sc.next().charAt(0) == 'Y')
         {
-            Membership member = new Membership(true); //create simple obj to pass into overridable fn
-            float discount = Discount.getDiscount(member); //callee fn returns discount in ratio 0-1. 0.4 discount means pay 0.6.
+            Membership member = new Membership(true); 
+            MemberDiscount memberDiscount = new MemberDiscount(); //instantiate object just to call method
+            float discount = memberDiscount.getDiscount(member); //callee fn returns discount in ratio 0-1. 0.4 discount means pay 0.6.
             discount = 1-discount; //get actual multiplier
             // get subtotal or total then discount?
             tempsaleprice = tempsaleprice * discount; //round off to nearest int cents
