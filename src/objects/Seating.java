@@ -116,7 +116,12 @@ public class Seating {
                     default:
                 }
             } while (repeat);
-        } else {
+        } 
+        else if (table[tableNo - 1].checkMaxPax() < pax){
+            System.out.printf("This table can only seat %d people. \n", table[tableNo - 1].checkMaxPax());
+            return (true);
+        }
+        else {
             table[tableNo - 1].assign(orderID, pax);
             numEmptyTable -= 1;
             
