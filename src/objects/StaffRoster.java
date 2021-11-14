@@ -74,16 +74,16 @@ public class StaffRoster {
         for(int i=0; i<tempArr.size(); i++) {
             if(Boolean.parseBoolean(tempArr.get(i)[5]) == true) {
                 member = new Staff(tempArr.get(i)[1]);
+                member.makeInactive();
             }
         }
         //username not found
         if(member == null) {
             System.out.println("Member not found, Please try again!");
             return false;
+        } else {
+            System.out.println("Successful logout");
+            return true;
         }
-        //username found, making inactive
-        member.makeInactive();
-        System.out.println("Successful logout");
-        return true;
     }
 }

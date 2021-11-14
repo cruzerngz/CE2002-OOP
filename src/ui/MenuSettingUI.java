@@ -201,9 +201,20 @@ public class MenuSettingUI implements BaseUI{
 
             case 4:
                 tempArr.clear();
+                printArr.clear();
                 tempArr = Data.readCSV(Path.menu);
-                tempArr = Data.sortArrayList(tempArr);
-                Data.printArrayList(formatMenu(tempArr));
+                printArr = new ArrayList<String[]>();
+                printArr.add(tempArr.get(0));
+                tempArr.remove(0);
+
+                for(String[] row: tempArr) {
+                    if(Integer.parseInt(row[0]) >= 100 &&
+                    Integer.parseInt(row[0]) <400) {
+                        printArr.add(row);
+                    }
+                }
+                printArr = Data.sortArrayList(printArr);
+                Data.printArrayList(formatMenu(printArr));
                 break;
 
             default:

@@ -67,9 +67,22 @@ public class Order {
         empRow[index] = emp_name; //write to array
         tempMap.put("emp_name", empRow);
 
-        empRow = tempMap.get("emp_id"); //setting emp_id
-        empRow[index] = emp_id; //write to array
-        tempMap.put("emp_id", empRow);
+        String[] empIdRow = tempMap.get("emp_id"); //setting emp_id
+        empIdRow[index] = emp_id; //write to array
+        tempMap.put("emp_id", empIdRow);
+
+        String[] paidRow = tempMap.get("paid");
+        paidRow[index] = "false";
+        tempMap.put("paid", paidRow);
+
+        String[] priceRow = tempMap.get("saleprice");
+        priceRow[index] = "0";
+        tempMap.put("saleprice", priceRow);
+
+        String[] taxRow = tempMap.get("salesTax");
+        taxRow[index] = "0";
+        tempMap.put("salesTax", taxRow);
+
 
         
 
@@ -116,8 +129,9 @@ public class Order {
      * @param itemID actual item number code to be input into field
      */
     public void addItem(String orderID, String itemID) {
-        ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
-        tempArrayList = Data.readCSV(filePath);
+        ArrayList<String[]> tempArrayList = Data.readCSV(filePath);
+        ArrayList<String[]> menuArr = Data.readCSV(Path.menu);
+        Float salePrice = 0f;
 
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
         int i=0;
@@ -136,11 +150,24 @@ public class Order {
         
         //add item to arraylist and WB
         String[] itemRows = tempMap.get("items");
-        itemRows[i] += (itemID + '.'); 
+        itemRows[i] += ("."+itemID); 
+        itemRows[i] = itemRows[i].replaceAll("^\\.|\\.$", "").replaceAll("\\.\\.",".");
         tempMap.put("items", itemRows);
 
+        //increment the sale price
+        for(int j=0; j<menuArr.size(); j++) {
+            if(j==0) {continue;} //skip col
+            if(menuArr.get(j)[0].equals(itemID)) {
+                salePrice += Float.parseFloat(menuArr.get(j)[2]);
+            }
+        }
+        //add to order
+        String[] sales = tempMap.get("saleprice");
+        salePrice += Float.parseFloat(sales[i]);
+        sales[i] = Float.toString(salePrice);
+        //write to map
+        tempMap.put("saleprice", sales);
         
-
         tempArrayList = Data.parse(tempMap);
         Data.writeCSV(tempArrayList, filePath);
 
@@ -154,38 +181,58 @@ public class Order {
      * @param itemID actual item number code to be input into field. returns error if mismatch
      */
     public void removeItem(String orderID, String itemID) {
-        ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
-
-        tempArrayList = Data.readCSV(filePath);
-
+        ArrayList<String[]> tempArrayList = Data.readCSV(filePath);
+        ArrayList<String[]> menuArr = Data.readCSV(Path.menu);
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
+        Float salePrice = 0f;
         int i=0;
         String[] orderRows = tempMap.get("orderNO");
+
         while(i<orderRows.length) //no match and never reach end
             {
-                if(orderRows[i].equals(orderID))
+                if(orderRows[i].equals(orderID)) {
+                    System.out.println(orderRows[i]);
                     break;
-                else ++i;
+                }
+                else i++;
             }
         if(i == orderRows.length)
         {
             Colour.println(Colour.TEXT_RED, "No such order found");
             return;
         }
-        
+
         String[] itemRows = tempMap.get("items");
-        itemRows[i].replace(itemID, ""); //replace with blank
+        itemRows[i] = itemRows[i].replace(itemID, ""); //replace with blank
 
         //remove outlier dots
-        itemRows[i] = itemRows[i].replaceAll("^\\.|\\.$", "").replaceAll("\\.\\.",".");;         
+        itemRows[i] = itemRows[i].replaceAll("^\\.|\\.$", "").replaceAll("\\.\\.",".");
         tempMap.put("items", itemRows);
+
+
+        //get the sale price
+        for(int j=0; j<menuArr.size(); j++) {
+            if(j==0) {continue;} //skip col
+            if(menuArr.get(j)[0].equals(itemID)) {
+                salePrice += Float.parseFloat(menuArr.get(j)[2]);
+            }
+        }
+        //subtract from order
+        String[] sales = tempMap.get("saleprice");
+        salePrice = Float.parseFloat(sales[i]) - salePrice;
+        sales[i] = Float.toString(salePrice);
+        //write to map
+        tempMap.put("saleprice", sales);
+        
+            
+        tempArrayList = Data.parse(tempMap);
+        Data.writeCSV(tempArrayList, filePath);
         
         //WB to csv
         tempArrayList = Data.parse(tempMap);
 
         Data.writeCSV(tempArrayList, filePath);
         Colour.println(Colour.TEXT_CYAN, "Item Removed");
-
     }
 
 }

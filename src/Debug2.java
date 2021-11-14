@@ -1,6 +1,7 @@
 import util.*;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 import ui.*;
@@ -15,8 +16,10 @@ public class Debug2 {
         // temp.printOptions();
 
         ArrayList<String[]> menu = Data.readCSV(Path.menu);
-        menu = MenuSetting.formatMenu(menu);
-        Data.printArrayList(menu);
+        LinkedHashMap<String, String[]> map = Data.parse(menu);
+
+        map.get("recommend")[0] = "asd";
+        
     }
 
 }
