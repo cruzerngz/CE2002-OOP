@@ -38,7 +38,7 @@ public class Staff {
 
     /**
      * Retrieve staff using staff name.
-     * Accesses the staffRoster file
+     * Accesses the Staffroster file
      */
     public Staff(String Name) {
         ArrayList<String[]> tempArr = Data.readCSV(savePath);
@@ -52,7 +52,7 @@ public class Staff {
             } else {index++;}
         }
         //build params
-        if(index == tempArr.size()-1) {
+        if(index == tempArr.size()) {
             return;
         } else {
             staffID = Integer.parseInt(tempArr.get(index)[0]);
@@ -129,6 +129,18 @@ public class Staff {
         return registered;
     }
 
+    /**
+     * Checks if the password passed matches the current staff object
+     * @param pass Password to check against
+     * @return
+     */
+    public Boolean verify(String pass) {
+        if(Password.hash(pass).equals(password)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public void makeActive() {
         status = true;
@@ -138,6 +150,10 @@ public class Staff {
     public void makeInactive() {
         status = false;
         write();
+    }
+
+    public String getName() {
+        return name;
     }
 
     /**

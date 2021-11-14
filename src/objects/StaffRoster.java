@@ -1,80 +1,84 @@
 package objects;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-
-import java.util.Scanner;
+import util.Data;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class StaffRoster {
-    static Staff Staff = new Staff();
-    private static Scanner x;
-    private static int numStaff = 0;
-
+    private static String savePath = "../data/Staffroster.csv";
 
     public static void showNumStaff(){
-        System.out.println("There are "+ numStaff + " hired.");
+        ArrayList<String[]> tempArr = Data.readCSV(savePath);
+        System.out.println("There are "+ (tempArr.size()-1) + " staff hired.");
     }
 
     public static void showHired() {
         System.out.println("This is list of the Staff in the restaurant: ");
-        try {
-            x = new Scanner(new File("staffroster.csv"));
-        } catch (FileNotFoundException e) {
-            
-            e.printStackTrace();
-        }
-            x.useDelimiter(",");
-            while(x.hasNext()){
-                System.out.print(x.next());
-            }
-            x.close();
+        Data.printArrayList(Data.readCSV(savePath));
     }
-    public static void hiring(int ID,String name, String position, String username, String password){
 
-        Staff.hire(ID,name,position,username,password);
+    public static void hiring(int ID,String name, String position, String username, String password){
+        System.out.println("password is: " + password);
+        Staff newStaff = new Staff(ID, name, position, username, password);
+        // System.out.println(Arrays.asList(newStaff.toString()));
+        newStaff.write();
+        
         System.out.println(name+ " is hired as " +position);
-        numStaff++;
         
     }
     public static void firing(String Name){
-        Staff.fire(Name);
-        System.out.println("Staff has been fired");
-        numStaff --;
+        Staff removeStaff = new Staff(Name);
+        if(removeStaff.remove()) {
+            System.out.println("Staff has been fired");
+        } else {
+            System.out.println("Staff not found");
+        }
     }
 
+    public static Boolean login(String Username, String Password){
+        ArrayList<String[]> tempArr = Data.readCSV(savePath);
+        Staff member = null;
 
-    public static String login(String Username, String Password){
-        boolean Login = false;
-        String Usern =""; String Pass = "";String name="";
-        try{
-            x = new Scanner(new File("loginPassword.csv"));
-            x.useDelimiter("[,\n]");
-
-            while(x.hasNext()&&!Login){
-                name = x.next();
-                Usern = x.next();
-                Pass = x.next();
-                if(Username == Usern){
-                    if(Password == Pass){
-                        Login = true;
-
-                    }
-                    else{
-                        System.out.println("Password incorrect please try again!");
-                        return null; 
-                    }
-                }
+        //find username in file
+        for(int i=0; i<tempArr.size(); i++) {
+            if(tempArr.get(i)[3].equals(Username)) {
+                member = new Staff(tempArr.get(i)[1]);
             }
-
         }
-        catch(Exception e){
-            System.out.println("user not found!");
-            return null;
+        //username not found
+        if(member == null) {
+            System.out.println("Member not found, Please try again!");
+            return false;
         }
-        return name;
+        //password check
+        if(member.verify(Password)) {
+            member.makeActive();
+            System.out.printf("Successful login for %s\n", member.getName());
+            return true;
+        } else {
+            System.out.println("Incorrect password");
+            return false;
+        }
     }
-    public static String logout(){
-        return null;
+
+    public static Boolean logout() {
+        ArrayList<String[]> tempArr = Data.readCSV(savePath);
+        Staff member = null;
+        //find username in file
+        for(int i=0; i<tempArr.size(); i++) {
+            if(Boolean.parseBoolean(tempArr.get(i)[5]) == true) {
+                member = new Staff(tempArr.get(i)[1]);
+            }
+        }
+        //username not found
+        if(member == null) {
+            System.out.println("Member not found, Please try again!");
+            return false;
+        }
+        //username found, making inactive
+        member.makeInactive();
+        System.out.println("Successful logout");
+        return true;
     }
 }
