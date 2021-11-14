@@ -1,15 +1,15 @@
 id,name,price,type,allergen,recommend
-100,Chicken pie,7.50,main,FALSE,FALSE
-109,Bak Chor Mee,3.50,main,FALSE,FALSE
-110,Laksa,4.00,main,FALSE,FALSE
-111,Bee Hoon,3.50,main,FALSE,FALSE
-112,Lor Mee,4.50,main,FALSE,FALSE
-113,Fishball Noodle,3.00,main,FALSE,FALSE
-300,Banana Split,5.00,dessert,TRUE,TRUE
-317,Ice Kacang,2.00,dessert,FALSE,FALSE
-318,Greenbean soup,1.80,dessert,FALSE,FALSE
-319,Cheesecake,3.50,dessert,FALSE,FALSE
-200,Coffee,1.50,drinks,FALSE,FALSE
-215,Tea,1.50,drinks,FALSE,FALSE
-216,Water,0.50,drinks,FALSE,FALSE
-115,pizza,10.00,main,false,false
+100,Chicken pie,7.50,main,false,false
+109,Bak Chor Mee,3.50,main,false,false
+110,Laksa,4.00,main,false,false
+111,Bee Hoon,3.50,main,false,false
+112,Lor Mee,4.50,main,false,false
+113,Fishball Noodle,3.00,main,false,false
+115,Pizza,10.15,main,false,true
+200,Coffee,2.00,drinks,false,false
+215,Tea,1.50,drinks,false,false
+216,Water,0.50,drinks,false,false
+300,Banana Split,5.00,dessert,true,true
+317,Ice Kacang,2.00,dessert,false,false
+318,Greenbean soup,1.80,dessert,false,false
+319,Cheesecake,3.50,dessert,false,false

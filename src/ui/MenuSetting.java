@@ -1,10 +1,5 @@
 package ui;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,10 +18,11 @@ public class MenuSetting implements BaseUI{
         Scanner sc = new Scanner(System.in);
 
         do {
+            System.out.println();
             Colour.println(Colour.TEXT_BLUE,"Menu Settings");
             Colour.println(Colour.TEXT_GREEN,"(1) Print existing menu");
             Colour.println(Colour.TEXT_GREEN,"(2) Create a new menu item");
-            Colour.println(Colour.TEXT_GREEN,"(3) Edit an existing menu item’s details");
+            Colour.println(Colour.TEXT_GREEN,"(3) Edit an existing menu item'/s details");
             Colour.println(Colour.TEXT_GREEN,"(4) Delete a menu item");
             Colour.println(Colour.TEXT_GREEN,"(0) Back");
 
@@ -34,8 +30,7 @@ public class MenuSetting implements BaseUI{
             Colour.print(Colour.TEXT_GREEN, "Enter your choice: ");
             choice = sc.nextInt();
             System.out.println();
-
-            String filepath = Path.menu;
+            
             switch (choice) {
             //each of these cases call another method within this class
             case 1:
@@ -60,8 +55,8 @@ public class MenuSetting implements BaseUI{
                 System.out.print("Does the chef reccomend the dish (TRUE/FALSE): ");
                 Boolean chefr= Boolean.parseBoolean(sc.next());
                 System.out.println();
-    
-                this.addItem(type, Id , name,  price,Boolean.toString(allergen),Boolean.toString(chefr),  filepath);
+                this.addItem(type, Id , name,  price,Boolean.toString(allergen),Boolean.toString(chefr));
+                Colour.println(Colour.TEXT_CYAN, "Item added");
                 break;
 
             case 3:
@@ -81,19 +76,21 @@ public class MenuSetting implements BaseUI{
                 String newType= sc.next();
                 System.out.println();
                 System.out.print("Update allergen(TRUE/FALSE): ");
-                String newAllergen= sc.next();
+                Boolean newAllergen= Boolean.parseBoolean(sc.next());
                 System.out.println();
-                System.out.println("Update chef reccomendation(TRUE/FALSE): ");
-                String newChefr= sc.next();
+                System.out.print("Update chef reccomendation(TRUE/FALSE): ");
+                Boolean newChefr= Boolean.parseBoolean(sc.next());
                 System.out.println();
-                
-                this.editMenu(Idedit,newId,  newname,  newprice, newType,newAllergen,newChefr,  filepath);
+                this.editMenu(Idedit,newId,  newname,  newprice, newType,Boolean.toString(newAllergen),Boolean.toString(newChefr));
+                Colour.println(Colour.TEXT_CYAN, "Item edited");
                 break;
+
             case 4:
-                System.out.println("Please enter item Id of item to be deleted: ");
-                String Iddelete = sc.nextLine();
-                
-                this.deleteItem(filepath, Iddelete);
+                System.out.print("Please enter item Id of item to be deleted: ");
+                String Iddelete = sc.next();
+                System.out.println();
+                this.deleteItem(Iddelete);
+                Colour.println(Colour.TEXT_CYAN, "Item deleted");
                 break;
             case 0:
                 System.out.println("Going back ….");
@@ -185,94 +182,52 @@ public class MenuSetting implements BaseUI{
     //above works
 
     //Case 2 method
-    public void addItem(String type,String Id ,String name, String price,String allergen,String chefr, String filepath){
-        try{
-            FileWriter fw = new FileWriter (filepath, true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
+    public void addItem(String type,String Id ,String name, String price,String allergen,String chefr){
+        String[] writeStr = new String[6];
+        writeStr[0] = Id;
+        writeStr[1] = name;
+        writeStr[2] = price;
+        writeStr[3] = type;
+        writeStr[4] = allergen;
+        writeStr[5] = chefr;
 
-            pw.println (Id+","+name+","+price+","+type+","+allergen+","+chefr);
-            pw.flush();
-            pw.close();
-            System.out.println("done!");
-        }
-        catch(Exception e){
-            System.out.println("Try again!");
-        }
+        ArrayList<String[]> tempArr = Data.readCSV(Path.menu);
+        tempArr.add(writeStr);
+        Data.writeCSV(Data.sortArrayList(tempArr), Path.menu);
     }
 
     //Case 3 method
-    public void editMenu(String Idedit, String newId, String newname, String newprice,String newType,String newAllergen,String newChefr, String filepath){
-        String tempfile = "tempfile.csv";
-        File oldfile = new File(filepath);
-        File newFile = new File(tempfile);
-        String Id3 = ""; String name3 = "";String price3 = "";String type3 ="";String allergen3 =""; String chefr3 ="";
+    public void editMenu(String Idedit, String newId, String newname, String newprice,String newType,String newAllergen,String newChefr){
+        String[] writeStr = new String[6];
+        writeStr[0] = newId;
+        writeStr[1] = newname;
+        writeStr[2] = newprice;
+        writeStr[3] = newType;
+        writeStr[4] = newAllergen;
+        writeStr[5] = newChefr;
 
-        try {
-            FileWriter fw = new FileWriter(tempfile,true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-            x = new Scanner(new File(filepath));
-            x.useDelimiter("[,\n]");
-
-            while (x.hasNext()){
-                Id3 = x.next();
-                name3 = x.next();
-                price3 = x.next();
-                type3 = x.next();
-                allergen3 = x.next();
-                chefr3 = x.next();
-                if(Id3 == Idedit){
-                    pw.println(newId+","+newname+","+newprice+","+newType+","+newAllergen+","+newChefr);
-                }
-                else{
-                    pw.println(Id3+","+name3+","+price3+","+type3+","+allergen3+","+chefr3);
-                }
-                x.close();
-                pw.flush();
-                pw.close();
-                oldfile.delete();
-                File dump  = new File (filepath);
-                newFile.renameTo(dump);
+        ArrayList<String[]> tempArr = Data.readCSV(Path.menu);
+        for(int i=0; i<tempArr.size(); i++) {
+            if(i==0) {continue;} //skip col headers
+            if(Integer.parseInt(tempArr.get(i)[0]) == Integer.parseInt(newId)) {
+                tempArr.remove(i);
+                tempArr.add(writeStr);
+                tempArr = Data.sortArrayList(tempArr);
+                Data.writeCSV(tempArr, Path.menu);
             }
-        } catch (Exception e) {
-            System.out.println("Please try again!");
         }
+        
     } 
     //Case 4 method
-    public void deleteItem(String filepath, String Iddelete){
-        String tempFile = "temp.csv";
-        File oldFile = new File(filepath);
-        File newFile = new File(tempFile);
-        String Id = ""; String name = ""; String price = "";String allergen =""; String chefr =""; String type = "";
-        try{
-            FileWriter fw = new FileWriter(tempFile, true );
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-            x = new Scanner(new File(filepath));
-            x.useDelimiter("[,\n]");
+    public void deleteItem(String Iddelete){
+        ArrayList<String[]> tempArr = Data.readCSV(Path.menu);
 
-            while(x.hasNext()){
-                Id = x.next();
-                name = x.next();
-                price = x.next();
-                type= x.next();
-                allergen = x.next();
-                chefr= x.next();
-                if (Id != Iddelete){
-                    pw.println(Id+","+name+","+price+","+type+","+allergen+","+chefr);
-                }
+        for(int i=0; i<tempArr.size(); i++) {
+            if(i==0) {continue;} //skip col headers
+            if(Integer.parseInt(tempArr.get(i)[0]) == Integer.parseInt(Iddelete)) {
+                tempArr.remove(i);
+                Data.writeCSV(tempArr, Path.menu);
             }
-           x.close();
-           pw.flush();
-           pw.close();
-           oldFile.delete();
-           File dump = new File(filepath);
-           newFile.renameTo(dump);
-        }
-        catch(Exception e){
-            System.out.println("please try again");
-        }
+        }   
     }
-
 }
