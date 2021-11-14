@@ -179,7 +179,7 @@ public class Table {
      */
     public void assign(int order, int pax){ 
         if (pax >= MAX_PAX){
-            System.out.printf("This table can only seat %d people. \n", pax);
+            System.out.printf("This table can only seat %d people. \n", MAX_PAX);
         }
         else{
             occupied = true;
