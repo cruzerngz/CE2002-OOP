@@ -106,12 +106,13 @@ public class MenuSetting implements BaseUI{
             String id = ""; String name ="";String price ="";String type ="";String allergen =""; String chefr = "";
             while(x.hasNext()){
                 id = x.next();
+                int ID = Integer.parseInt(id);
                 name = x.next();
                 price = x.next();
                 type = x.next();
                 allergen = x.next();
                 chefr = x.next();
-                if(id.compareTo("200")<0){
+                if(ID<200){
                     System.out.println(id+" "+name+" "+price+" "+type+" "+allergen+" "+chefr);
                     System.out.println();
                 }
@@ -125,16 +126,14 @@ public class MenuSetting implements BaseUI{
             id = ""; name =""; price =""; type =""; allergen =""; chefr = "";
             while(x.hasNext()){
                 id = x.next();
+                int ID = Integer.parseInt(id);
                 name = x.next();
                 price = x.next();
                 type = x.next();
                 allergen = x.next();
                 chefr = x.next();
-                if(id.compareTo("200")>=0 && id.compareTo("300")<0){
+                if(ID>=200 && ID<300){
                     System.out.println(id+" "+name+" "+price+" "+type+" "+allergen+" "+chefr);
-                }
-                else{
-                    break;
                 }
                 
             }
@@ -145,17 +144,26 @@ public class MenuSetting implements BaseUI{
             id = ""; name =""; price =""; type =""; allergen =""; chefr = "";
             while(x.hasNext()){
                 id = x.next();
+                int ID = Integer.parseInt(id);
                 name = x.next();
                 price = x.next();
                 type = x.next();
                 allergen = x.next();
                 chefr = x.next();
-                if(id.compareTo("300")>=0){
+                if(ID>= 300){
                     System.out.println(id+" "+name+" "+price+" "+type+" "+allergen+" "+chefr);
                 }
-                else{
-                    break;
-                }
+                
+            }
+            x.close();
+            case 4:
+            x = new Scanner(new File(filepath));
+            x.useDelimiter(",");
+            id = ""; name =""; price =""; type =""; allergen =""; chefr = "";
+            while(x.hasNext()){
+                
+                
+                System.out.println(x.next());
                 
             }
             x.close();
