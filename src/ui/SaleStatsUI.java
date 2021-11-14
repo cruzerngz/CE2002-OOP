@@ -6,7 +6,16 @@ import util.DateTime;
 import util.Colour;
 import util.Data;
 
+/**
+ * UI handling sale statistics. 
+ * Collection of static methods
+ * @author cruzerngz
+ */
 public class SaleStatsUI implements BaseUI{
+
+    /**
+     * Main method when entering UI
+     */
     public void printOptions() {
         int choice;
         Scanner sc = new Scanner(System.in);
@@ -45,6 +54,9 @@ public class SaleStatsUI implements BaseUI{
         } while(choice != 0);
     }
 
+    /**
+     * Show stats on the current day
+     */
     public static void statsNow() {
         float amount;
         DateTime dt = new DateTime();
@@ -55,6 +67,9 @@ public class SaleStatsUI implements BaseUI{
         Colour.println(Colour.TEXT_CYAN, String.format("$%.2f", amount));
     }
 
+    /**
+     * Show stats for a specific day
+     */
     public static void statsDay() {
         int y, m, d;
         String date;
@@ -80,6 +95,9 @@ public class SaleStatsUI implements BaseUI{
         Colour.println(Colour.TEXT_CYAN, String.format("$%.2f", amount));
     }
 
+    /**
+     * Show stats for a specific month
+     */
     public static void statsMth() {
         int y, m, mStart, mEnd;
         String date;
@@ -107,6 +125,9 @@ public class SaleStatsUI implements BaseUI{
 
     }
 
+    /**
+     * Show all stats stored in file
+     */
     public static void statsAll() {
         SaleStats stats = new SaleStats();
         Data.printArrayList(stats.getPrintMatrix());

@@ -6,6 +6,10 @@ import java.util.Collections;
 
 import util.*;
 
+/**
+ * Object that contains sale statistics
+ * @author cruzerngz
+ */
 public class SaleStats {
     private ArrayList<String[]> revMatrix;
     private String filePath;
