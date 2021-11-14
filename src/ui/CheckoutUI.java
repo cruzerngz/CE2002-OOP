@@ -15,7 +15,7 @@ public class CheckoutUI implements BaseUI{
      * @param orderID Order to checkout
      */
     public CheckoutUI(String orderID) {
-        this.orderID = orderID; //assigned from outside for use later       
+        this.orderID = orderID; //assigned from outside for use later
     }
 
     /**

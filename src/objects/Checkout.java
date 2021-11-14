@@ -36,6 +36,7 @@ public class Checkout {
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
         int i=0;
         String[] orderRows = tempMap.get("orderNO");
+        //get the index for order in Order.csv
         while(i<orderRows.length) //no match and never reach end
             {
                 if(orderRows[i].equals(orderID))
@@ -56,36 +57,8 @@ public class Checkout {
         }
         
         String[] salepriceRows = tempMap.get("saleprice");
-        float tempsaleprice = 0;
+        float tempsaleprice = Float.parseFloat(salepriceRows[i]); //calculate saleprice
 
-                //item list with price at side
-                String[] itemRows = tempMap.get("items");
-                String[] itemlist = itemRows[i].split("."); //each element is id
-                
-                ArrayList<String[]> menuArrayList = Data.readCSV(menuPath); //read menu csv before enter loop
-                LinkedHashMap<String, String[]> tempMap2 = Data.parse(menuArrayList);
-        
-                String[] idRows = tempMap2.get("id");
-                String[] nameRows = tempMap2.get("name");
-                String[] priceRows = tempMap2.get("price");
-        
-                int index;
-                for(String item:itemlist) 
-                {
-                    //look for id match
-                    for(index=0;index<idRows.length;++index)
-                    {
-                        if(item == idRows[index]) //string match
-                            break;
-                    }
-                    
-                    float individualPrice = Float.parseFloat(priceRows[index]);
-                    tempsaleprice += individualPrice;
-                }
-
-
-        
-        
 
         System.out.println("Is customer member? Y/N");
         if(sc.next().charAt(0) == 'Y')
@@ -135,8 +108,7 @@ public class Checkout {
         
         
         //server
-        ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
-        tempArrayList = Data.readCSV(orderPath);
+        ArrayList<String[]> tempArrayList = Data.readCSV(orderPath);
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
         int i=0;
         String[] orderRows = tempMap.get("orderNO");

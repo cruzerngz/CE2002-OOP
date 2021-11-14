@@ -26,14 +26,12 @@ public class Main {
         } while(successful == false);
 
         do {
-            // System.out.println("\n" + System.getProperty("user.dir"));
             System.out.println();
             Colour.println(Colour.TEXT_BLUE, "MAIN MENU");
             Colour.println(Colour.TEXT_GREEN, "(1) Menu Management");          //F.R. 1
             Colour.println(Colour.TEXT_GREEN, "(2) Promotions Management");    //F.R. 2
             Colour.println(Colour.TEXT_GREEN, "(3) Order Management");         //F.R. 3,4,5
             Colour.println(Colour.TEXT_GREEN, "(4) Reservation Management");   //F.R. 6,7,8
-            // Colour.println(Colour.TEXT_GREEN, "(5) Order checkout");           //F.R. 9
             Colour.println(Colour.TEXT_GREEN, "(5) Sales statistics");         //F.R. 10
             Colour.println(Colour.TEXT_GREEN, "(6) Admin");                    //Staff and
             Colour.println(Colour.TEXT_GREEN, "(0) Exit");                     //time manupulation
