@@ -84,7 +84,7 @@ public class PmenuUI implements BaseUI{
     //Case 2 method
     public void addItem(String Id ,String name, String price,String allergen,String chefr){
         try{
-            FileWriter fw = new FileWriter ("promomenu.csv", true);
+            FileWriter fw = new FileWriter ("../data/promomenu.csv", true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
 
@@ -101,7 +101,7 @@ public class PmenuUI implements BaseUI{
     //Case 3 method
     public void editMenu(String Idedit, String newId, String newname, String newprice,String newAllergen,String newChefr){
         String tempfile = "tempfile.txt";
-        File oldfile = new File("promomenu.csv");
+        File oldfile = new File("../data/promomenu.csv");
         File newFile = new File(tempfile);
         String Id3 = ""; String name3 = "";String price3 = ""; String allergen3 =""; String chefr3 ="";
 
@@ -109,7 +109,7 @@ public class PmenuUI implements BaseUI{
             FileWriter fw = new FileWriter(tempfile,true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            x = new Scanner(new File("promomenu.csv"));
+            x = new Scanner(new File("../data/promomenu.csv"));
             x.useDelimiter("[,\n]");
 
             while (x.hasNext()){
@@ -126,7 +126,7 @@ public class PmenuUI implements BaseUI{
                 pw.flush();
                 pw.close();
                 oldfile.delete();
-                File dump  = new File ("promomenu.csv");
+                File dump  = new File ("../data/promomenu.csv");
                 newFile.renameTo(dump);
             }
         } catch (Exception e) {
@@ -136,14 +136,14 @@ public class PmenuUI implements BaseUI{
     //Case 4 method
     public void deleteItem(String Iddelete){
         String tempFile = "temp.txt";
-        File oldFile = new File("promomenu.csv");
+        File oldFile = new File("../data/promomenu.csv");
         File newFile = new File(tempFile);
         String Id = ""; String name = ""; String price = "";String allergen =""; String chefr ="";
         try{
             FileWriter fw = new FileWriter(tempFile, true );
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            x = new Scanner(new File("promomenu.csv"));
+            x = new Scanner(new File("../data/promomenu.csv"));
             x.useDelimiter("[,\n]");
 
             while(x.hasNext()){
@@ -158,7 +158,7 @@ public class PmenuUI implements BaseUI{
            pw.flush();
            pw.close();
            oldFile.delete();
-           File dump = new File("promomenu.csv");
+           File dump = new File("../data/promomenu.csv");
            newFile.renameTo(dump);
         }
         catch(Exception e){
