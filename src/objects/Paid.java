@@ -23,7 +23,7 @@ public class Paid {
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
 
         String[] paid = tempMap.get("paid");
-        if(paid[index] == "TRUE")
+        if(paid[index].equals("TRUE"))
             return true;
         else
             return false;

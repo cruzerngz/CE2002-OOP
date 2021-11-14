@@ -138,9 +138,11 @@ public class Order {
         itemRows[i] += (itemID + '.'); 
         tempMap.put("items", itemRows);
 
-        tempArrayList = Data.parse(tempMap);
+        
 
+        tempArrayList = Data.parse(tempMap);
         Data.writeCSV(tempArrayList, filePath);
+
         System.out.println("Item added");
     }
 

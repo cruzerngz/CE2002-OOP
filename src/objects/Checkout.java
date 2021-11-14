@@ -54,9 +54,38 @@ public class Checkout {
             System.out.println("Already paid!");
             return;
         }
-
+        
         String[] salepriceRows = tempMap.get("saleprice");
-        float tempsaleprice = Float.parseFloat(salepriceRows[i]);
+        float tempsaleprice = 0;
+
+                //item list with price at side
+                String[] itemRows = tempMap.get("items");
+                String[] itemlist = itemRows[i].split("."); //each element is id
+                
+                ArrayList<String[]> menuArrayList = Data.readCSV(menuPath); //read menu csv before enter loop
+                LinkedHashMap<String, String[]> tempMap2 = Data.parse(menuArrayList);
+        
+                String[] idRows = tempMap2.get("id");
+                String[] nameRows = tempMap2.get("name");
+                String[] priceRows = tempMap2.get("price");
+        
+                int index;
+                for(String item:itemlist) 
+                {
+                    //look for id match
+                    for(index=0;index<idRows.length;++index)
+                    {
+                        if(item == idRows[index]) //string match
+                            break;
+                    }
+                    
+                    float individualPrice = Float.parseFloat(priceRows[index]);
+                    tempsaleprice += individualPrice;
+                }
+
+
+        
+        
 
         System.out.println("Is customer member? Y/N");
         if(sc.next().charAt(0) == 'Y')
@@ -65,14 +94,17 @@ public class Checkout {
             MemberDiscount memberDiscount = new MemberDiscount(); //instantiate object just to call method
             float discount = memberDiscount.getDiscount(member); //callee fn returns discount in ratio 0-1. 0.4 discount means pay 0.6.
             discount = 1-discount; //get actual multiplier
+            
             // get subtotal or total then discount?
-            tempsaleprice = tempsaleprice * discount; //round off to nearest int cents
+            tempsaleprice = tempsaleprice * discount; 
             tempMap.put("saleprice", salepriceRows); //tempsaleprice is final now, WB to order.csv
+            
             //discount tax separately for ease
             salepriceRows[i] = String.valueOf(tempsaleprice);
             String[] salesTaxRows = tempMap.get("salesTax");
-            float tempsalesTax = Float.parseFloat(salesTaxRows[i]);
+            float tempsalesTax = tempsaleprice * 0.17f;
             tempsalesTax = tempsalesTax * discount;
+            
             //WB new tax value
             salesTaxRows[i] = String.valueOf(tempsalesTax);
             tempMap.put("salesTax", salesTaxRows);
@@ -101,7 +133,7 @@ public class Checkout {
      */
     public static void printInvoice(String orderID){ //receipt format
         
-        //table number from Yu Ze or maybe store in order csv as well
+        
         //server
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
         tempArrayList = Data.readCSV(orderPath);
@@ -128,18 +160,18 @@ public class Checkout {
         }
         //timestamp is orderid
         //convert or just print?
-        System.out.println(orderID);
+        //System.out.println(orderID);
 
         //item list with price at side
         String[] itemRows = tempMap.get("items");
         String[] itemlist = itemRows[i].split("."); //each element is id
         
         ArrayList<String[]> menuArrayList = Data.readCSV(menuPath); //read menu csv before enter loop
-        tempMap = Data.parse(menuArrayList);
+        LinkedHashMap<String, String[]> tempMap2 = Data.parse(menuArrayList);
 
-        String[] idRows = tempMap.get("id");
-        String[] nameRows = tempMap.get("name");
-        String[] priceRows = tempMap.get("price");
+        String[] idRows = tempMap2.get("id");
+        String[] nameRows = tempMap2.get("name");
+        String[] priceRows = tempMap2.get("price");
 
         int index;
         for(String item:itemlist) 
@@ -147,7 +179,7 @@ public class Checkout {
             //look for id match
             for(index=0;index<idRows.length;++index)
             {
-                if(item == idRows[index]) //string match
+                if(item.equals(idRows[index])) //string match
                     break;
             }
             
@@ -155,7 +187,7 @@ public class Checkout {
         }
         
         //subtotal followed by discount then tax amt then total
-        String subtotal = tempMap.get("Saleprice")[i]; //saleprice at row i
+        String subtotal = tempMap.get("Saleprice")[i]; //saleprice at row i error here
         String tax = tempMap.get("salesTax")[i];
         System.out.printf("Subtotal         $%s\n",subtotal); 
         System.out.printf("Tax          $%s\n",tax);
