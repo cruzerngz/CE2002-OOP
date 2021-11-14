@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 
+import util.Colour;
 import util.Data;
 import util.DateTime;
 import util.Path;
@@ -99,7 +100,7 @@ public class Order {
             }
         if(i == orderRows.length)
         {
-            System.out.println("No such order found");
+            Colour.println(Colour.TEXT_RED, "No such order found");
             return;
         }
         // by here i is the row we want to print
@@ -129,7 +130,7 @@ public class Order {
             }
         if(i == orderRows.length)
         {
-            System.out.println("No such order found");
+            Colour.println(Colour.TEXT_RED, "No such order found");
             return;
         }
         
@@ -143,7 +144,7 @@ public class Order {
         tempArrayList = Data.parse(tempMap);
         Data.writeCSV(tempArrayList, filePath);
 
-        System.out.println("Item added");
+        Colour.println(Colour.TEXT_CYAN, "Item added");
     }
 
 
@@ -168,7 +169,7 @@ public class Order {
             }
         if(i == orderRows.length)
         {
-            System.out.println("No such order found");
+            Colour.println(Colour.TEXT_RED, "No such order found");
             return;
         }
         
@@ -183,7 +184,7 @@ public class Order {
         tempArrayList = Data.parse(tempMap);
 
         Data.writeCSV(tempArrayList, filePath);
-        System.out.println("Item Removed");
+        Colour.println(Colour.TEXT_CYAN, "Item Removed");
 
     }
 
