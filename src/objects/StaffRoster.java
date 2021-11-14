@@ -3,6 +3,7 @@ package objects;
 import util.Data;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 
 
 public class StaffRoster {
@@ -15,7 +16,11 @@ public class StaffRoster {
 
     public static void showHired() {
         System.out.println("This is list of the Staff in the restaurant: ");
-        Data.printArrayList(Data.readCSV(savePath));
+        ArrayList<String[]> tempArr = Data.readCSV(savePath);
+        LinkedHashMap<String, String[]> tempMap = Data.parse(tempArr);
+        
+        tempMap.remove("password"); //remove password col from display
+        Data.printArrayList(Data.parse(tempMap));
     }
 
     public static void hiring(int ID,String name, String position, String username, String password){
