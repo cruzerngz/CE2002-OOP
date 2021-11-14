@@ -124,6 +124,7 @@ public class Checkout {
         if(!Paid.isPaid(i))
         {
             System.out.println("Please pay before invoice");
+            return;
         }
         //timestamp is orderid
         //convert or just print?
