@@ -66,11 +66,11 @@ public class Restaurant {
      * @param tableNo
      * @param orderID
      */
-    public void assignTable(String date, int tableNo, int orderID) {
+    public void assignTable(String date, int tableNo, int orderID, int pax) {
         boolean x = true;
         while (x){
             System.out.printf("Table Number:");
-            seating.get(date).assignTable(tableNo,orderID);
+            seating.get(date).assignTable(tableNo,orderID, pax);
         }
     }
 
@@ -91,7 +91,7 @@ public class Restaurant {
      * @param cust_name
      * @param phoneNo
      */
-    public void reserve(String date, int tableNo, int time, String cust_name, int phoneNo) {
+    public void reserve(String date, int tableNo, int time, String cust_name, int phoneNo, int pax) {
         //this whole chunk simply checks whether the date given falls within the next 7 days
         String today = dt.getDate().toString();
         dt.deltaDay(1);
@@ -114,7 +114,7 @@ public class Restaurant {
             System.out.println("The time has passed!");
         }
         else{
-            seating.get(date).reserveTable(tableNo, time, cust_name, phoneNo);
+            seating.get(date).reserveTable(tableNo, time, cust_name, phoneNo, pax);
             String[] newReservation ={"0", date, String.valueOf(time), String.valueOf(tableNo), cust_name, String.valueOf(phoneNo)};
             reserve.add(newReservation);
         }

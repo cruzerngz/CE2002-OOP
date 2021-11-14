@@ -72,9 +72,11 @@ public class OrderUI implements BaseUI{
 
                 res.checkReservation(date, time); //prints reserved tables
                 res.showEmptyTable(date); //prints empty tables (including reserved but empty tables)
+                System.out.println("Pax:");
+                int pax = sc.nextInt();
                 System.out.println("Assign a table:");
                 int tableNo = sc.nextInt();
-                res.assignTable(date, tableNo, Integer.parseInt(orderID));
+                res.assignTable(date, tableNo, Integer.parseInt(orderID), pax);
 
                 System.out.printf("Order created! ID = %s\n",orderID);
                 break;

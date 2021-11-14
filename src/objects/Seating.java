@@ -13,7 +13,7 @@ public class Seating {
      */
 
     /**
-     * There are 20 tables in this restaurant
+     * There are 10 TableFor2, 5 TableFor6, 5 TableFor10 in this restaurant
      */
     private String date = new String();
     private Table[] table = new Table[20];
@@ -31,8 +31,14 @@ public class Seating {
      * @param date
      */
     public Seating(String date) {
-        for (int i = 0; i < 20; ++i) {
-            table[i] = new Table(i + 1, date);
+        for (int i = 1; i < 11; ++i) {
+            table[i] = new Table(i, date, 2);
+        }
+        for (int i = 11; i < 16; ++i) {
+            table[i] = new Table(i, date, 6);
+        }
+        for (int i = 16; i < 21; ++i) {
+            table[i] = new Table(i, date, 10);
         }
         this.date = date; // assigns a date to this Seating
     }
@@ -57,8 +63,8 @@ public class Seating {
      */
     public void showEmptyTable() {
         for (int i = 0; i < table.length; ++i) {
-            if (!table[i].isOccupied()) {
-                System.out.println("Table " + table[i].getTableNo());
+            if (!((Table) table[i]).isOccupied()) {
+                System.out.println("Table " +  table[i].getTableNo());
             }
         }
     }
@@ -68,9 +74,9 @@ public class Seating {
      */
     public void showAssignedTable() {
         for (int i = 0; i < table.length; ++i) {
-            if (table[i].isOccupied()) {
+            if (((Table) table[i]).isOccupied()) {
                 System.out.println(
-                        "Table " + table[i].getTableNo() + " occupied by order " + table[i].getOrderID() + ".");
+                        "Table " +  table[i].getTableNo() + " occupied by order " +  table[i].getOrderID() + ".");
             }
         }
     }
@@ -81,13 +87,13 @@ public class Seating {
      * @param tableNo
      * @param orderID
      */
-    public boolean assignTable(int tableNo, int orderID) {
-        if (table[tableNo - 1].isOccupied()) { // the array position is 1 less than actual seatId
+    public boolean assignTable(int tableNo, int orderID, int pax) {
+        if ( table[tableNo - 1].isOccupied()) { // the array position is 1 less than actual seatId
             System.out.println("Table already assigned to a customer.");
             return (true);
         } 
         //if the person who reserved is here, assign to customer.
-        else if (table[tableNo - 1].isReserved(time)) { //
+        else if ( table[tableNo - 1].isReserved(time)) { //
             Scanner sc = new Scanner(System.in);
             boolean repeat = true;
             do {
@@ -97,7 +103,7 @@ public class Seating {
                 switch(assign){
                     case "Y":
                     case "y":
-                        table[tableNo - 1].assign(orderID);
+                        table[tableNo - 1].assign(orderID, pax);
                         numEmptyTable -= 1;
                         System.out.println("Table Assigned!");
                         repeat = false;
@@ -111,7 +117,7 @@ public class Seating {
                 }
             } while (repeat);
         } else {
-            table[tableNo - 1].assign(orderID);
+            table[tableNo - 1].assign(orderID, pax);
             numEmptyTable -= 1;
             System.out.println("Table Assigned!");
             return (false);
@@ -136,8 +142,8 @@ public class Seating {
      * @param cust_name
      * @param phoneNo
      */
-    public void reserveTable(int tableNo, int time, String cust_name, int phoneNo) {
-        table[tableNo - 1].reserve(phoneNo, time, cust_name);
+    public void reserveTable(int tableNo, int time, String cust_name, int phoneNo, int pax) {
+        table[tableNo - 1].reserve(phoneNo, time, cust_name, pax);
     }
     
     /**

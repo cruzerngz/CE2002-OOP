@@ -44,7 +44,9 @@ public class Reservation implements BaseUI{
                 String custName = sc.nextLine();
                 System.out.println("Phone Number:");
                 int phoneNo = sc.nextInt();
-                res.reserve(date, tableNo, time, custName, phoneNo);
+                System.out.println("Pax:");
+                int pax = sc.nextInt();
+                res.reserve(date, tableNo, time, custName, phoneNo, pax);
                 break;
             case 2:
                 System.out.println("_____Check for reservation booking_____");

@@ -45,12 +45,13 @@ public class Table {
      */
     private int orderID = -1;
 
-
+    private int MAX_PAX;
 
     
-    public Table(int table_No, String date){ 
-        tableNo = table_No;
+    public Table(int table_No, String date, int MAX_PAX){ 
+        this.tableNo = table_No;
         this.date = date;
+        this.MAX_PAX = MAX_PAX;
     }
 
     /**
@@ -125,7 +126,7 @@ public class Table {
      * @param time
      * @param cust_name
      */
-    public void reserve(int phoneNumber, int time, String cust_name){ 
+    public void reserve(int phoneNumber, int time, String cust_name, int pax){ 
         if (reserved[time/100 - 11] == true){
             System.out.println("This table is already reserved by " 
             + customerName[time/100 - 11] 
@@ -134,6 +135,9 @@ public class Table {
             + ") at "
             + date + " "
             + time + "hrs.");
+        }
+        else if (pax <= MAX_PAX){
+            System.out.printf("This table can only seat %d people. \n", pax);
         }
         else{
             customerPhone[time/100 - 11] = phoneNumber;
@@ -173,9 +177,15 @@ public class Table {
      * Customers have no IDs, so when table is assigned, we associate the table with the orderID
      * @param order
      */
-    public void assign(int order){ 
-        occupied = true;
-        orderID = order;
+    public void assign(int order, int pax){ 
+        if (pax <= MAX_PAX){
+            System.out.printf("This table can only seat %d people. \n", pax);
+        }
+        else{
+            occupied = true;
+            orderID = order;
+        }
+        
     }
 
     /**
