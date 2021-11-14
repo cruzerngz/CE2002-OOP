@@ -1,16 +1,17 @@
 package ui;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 import util.*;
 
-public class MenuSetting implements BaseUI{
+public class MenuSettingUI implements BaseUI{
     private static Scanner x;
     
     
 
-    public MenuSetting() {
+    public MenuSettingUI() {
     }
 
     public void printOptions() {
@@ -22,7 +23,7 @@ public class MenuSetting implements BaseUI{
             Colour.println(Colour.TEXT_BLUE,"Menu Settings");
             Colour.println(Colour.TEXT_GREEN,"(1) Print existing menu");
             Colour.println(Colour.TEXT_GREEN,"(2) Create a new menu item");
-            Colour.println(Colour.TEXT_GREEN,"(3) Edit an existing menu item'/s details");
+            Colour.println(Colour.TEXT_GREEN,"(3) Edit an existing menu item's details");
             Colour.println(Colour.TEXT_GREEN,"(4) Delete a menu item");
             Colour.println(Colour.TEXT_GREEN,"(0) Back");
 
@@ -102,6 +103,34 @@ public class MenuSetting implements BaseUI{
         } while (choice != 0);
     }
 
+    /**
+     * Formats the menu to a printable state
+     * @param menuList Menu to be formatted
+     * @return
+     */
+    public static ArrayList<String[]> formatMenu(ArrayList<String[]> menuList) {
+
+        LinkedHashMap<String, String[]> tempMap = Data.parse(menuList);
+
+
+        for(int i=0; i<tempMap.get("price").length; i++) {
+            float temp = Float.parseFloat(tempMap.get("price")[i]);
+            tempMap.get("price")[i] = String.format("$%.2f", temp);
+        }
+        for(int i=0; i<tempMap.get("allergen").length; i++) {
+            if(tempMap.get("allergen")[i].equals("true")) {
+                tempMap.get("allergen")[i] = Colour.Red(tempMap.get("allergen")[i]);
+            }
+        }
+        for(int i=0; i<tempMap.get("recommend").length; i++) {
+            if(tempMap.get("recommend")[i].equals("true")) {
+                tempMap.get("recommend")[i] = Colour.Green(tempMap.get("recommend")[i]);
+            }
+        }
+
+        return Data.parse(tempMap);
+    }
+
     public static void menuOption1() {
         Scanner sc = new Scanner(System.in);
         ArrayList<String[]> tempArr = new  ArrayList<String[]>();
@@ -130,7 +159,8 @@ public class MenuSetting implements BaseUI{
                         printArr.add(row);
                     }
                 }
-                Data.printArrayList(Data.sortArrayList(printArr));
+                printArr = Data.sortArrayList(printArr);
+                Data.printArrayList(formatMenu(printArr));
                 break;
 
             case 2:
@@ -147,7 +177,8 @@ public class MenuSetting implements BaseUI{
                         printArr.add(row);
                     }
                 }
-                Data.printArrayList(Data.sortArrayList(printArr));
+                printArr = Data.sortArrayList(printArr);
+                Data.printArrayList(formatMenu(printArr));
                 break;
 
             case 3:
@@ -164,13 +195,15 @@ public class MenuSetting implements BaseUI{
                         printArr.add(row);
                     }
                 }
-                Data.printArrayList(Data.sortArrayList(printArr));
+                printArr = Data.sortArrayList(printArr);
+                Data.printArrayList(formatMenu(printArr));
                 break;
 
             case 4:
                 tempArr.clear();
                 tempArr = Data.readCSV(Path.menu);
-                Data.printArrayList(Data.sortArrayList(tempArr));
+                tempArr = Data.sortArrayList(tempArr);
+                Data.printArrayList(formatMenu(tempArr));
                 break;
 
             default:

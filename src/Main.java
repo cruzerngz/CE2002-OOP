@@ -44,8 +44,8 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    MenuSetting menusetting = new MenuSetting();
-                    menusetting.printOptions();
+                    MenuSettingUI menusettingui = new MenuSettingUI();
+                    menusettingui.printOptions();
                     break;
                 case 2:
                     PmenuUI pmenuui = new PmenuUI();

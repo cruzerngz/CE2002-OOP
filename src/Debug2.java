@@ -12,7 +12,11 @@ public class Debug2 {
     public static void main(String[] args) {
         MenuSetting temp = new MenuSetting();
 
-        temp.printOptions();
+        // temp.printOptions();
+
+        ArrayList<String[]> menu = Data.readCSV(Path.menu);
+        menu = MenuSetting.formatMenu(menu);
+        Data.printArrayList(menu);
     }
 
 }

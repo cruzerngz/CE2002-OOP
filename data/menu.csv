@@ -7,6 +7,7 @@ id,name,price,type,allergen,recommend
 113,Fishball Noodle,3.00,main,false,false
 115,Pizza,10.15,main,false,true
 200,Coffee,2.00,drinks,false,false
+201,Milo,1.70,drink,false,false
 215,Tea,1.50,drinks,false,false
 216,Water,0.50,drinks,false,false
 300,Banana Split,5.00,dessert,true,true
