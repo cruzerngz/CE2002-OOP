@@ -102,9 +102,9 @@ public class Order {
             return;
         }
         // by here i is the row we want to print
-        System.out.printf("orderID: %s", orderID);
-        System.out.printf("Staff name: %s", tempMap.get("emp_name")[i] ); 
-        System.out.printf("Staff ID: %s", tempMap.get("emp_id")[i] ); 
+        System.out.printf("orderID: %s ", orderID);
+        System.out.printf("Staff name: %s ", tempMap.get("emp_name")[i] ); 
+        System.out.printf("Staff ID: %s ", tempMap.get("emp_id")[i] ); 
         System.out.printf("Items: %s\n", tempMap.get("items")[i] ); 
     }
 
@@ -140,6 +140,7 @@ public class Order {
         tempArrayList = Data.parse(tempMap);
 
         Data.writeCSV(tempArrayList, "../data/Order.csv");
+        System.out.println("Item added");
     }
 
 
@@ -179,6 +180,7 @@ public class Order {
         tempArrayList = Data.parse(tempMap);
 
         Data.writeCSV(tempArrayList, "../data/Order.csv");
+        System.out.println("Item Removed");
 
     }
 

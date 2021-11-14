@@ -68,7 +68,7 @@ public class OrderUI implements BaseUI{
                 
                 orderID = null; //initialize to null as invalid id now, for compiler.
                 tempOrder = new Order(staffName, staffID, orderID); //pass in dummy orderID
-                orderID = tempOrder.create(staffID,staffName); //get actual orderID
+                orderID = tempOrder.create(staffName,staffID); //get actual orderID
 
                 res.checkReservation(date, time); //prints reserved tables
                 res.showEmptyTable(date); //prints empty tables (including reserved but empty tables)

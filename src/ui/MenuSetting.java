@@ -30,7 +30,7 @@ public class MenuSetting implements BaseUI{
             Colour.println(Colour.TEXT_GREEN,"(0) Back");
 
             System.out.println("");
-            System.out.printf("Enter your choice: ");
+            Colour.println(Colour.TEXT_GREEN, "Enter your choice: ");
             
             choice = sc.nextInt();
             String filepath = "../data/menu.csv";
@@ -87,10 +87,12 @@ public class MenuSetting implements BaseUI{
                 
                 this.deleteItem(filepath, Iddelete);
                 break;
-            case 5:
+            case 0:
                 System.out.println("Going back ….");
                 break;
             default:
+                System.out.println("Invalid choice");
+                break;
             }
         } while (choice != 0);
     }
