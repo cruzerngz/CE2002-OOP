@@ -1,2 +1,6 @@
 Staff_ID,Name,position,username,password,isLoggedIn
-1,Ali,Cook,ali,,
+1,Ali,cook,ali,888b19a43b151683c87895f6211d9f8640f97bdc8ef32f03dbe057c8f5e56d32,false
+2,Ben,waiter,ben,4fac6dbe26e823ed6edf999c63fab3507119cf3cbfb56036511aa62e258c35b4,false
+3,Mat,waiter,mat,446e21f212ab200933c4c9a0802e1ff0c410bbd75fca10168746fc49883096db,false
+4,Ter,cleaner,ter,591b59c1bdd9acd2847a202ddd02c3f14f9b5a049a5707c3279c1e967745ed4,false
+5,Tim,dishwasher,tim,1ed8eb363bcd64c52f5f8703ecd464008979ac2ef462e6c5df342fe56c561bd5,false
