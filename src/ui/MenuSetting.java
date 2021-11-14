@@ -11,6 +11,9 @@ import util.*;
 
 public class MenuSetting implements BaseUI{
     private static Scanner x;
+    
+    private String path = "../data/menu.csv";
+
     public MenuSetting() {
     }
 
@@ -24,7 +27,7 @@ public class MenuSetting implements BaseUI{
             Colour.println(Colour.TEXT_GREEN,"(2) Create a new menu item");
             Colour.println(Colour.TEXT_GREEN,"(3) Edit an existing menu item’s details");
             Colour.println(Colour.TEXT_GREEN,"(4) Delete a menu item");
-            Colour.println(Colour.TEXT_GREEN,"(5) Back");
+            Colour.println(Colour.TEXT_GREEN,"(0) Back");
 
             System.out.println("");
             System.out.printf("Enter your choice: ");
@@ -88,14 +91,16 @@ public class MenuSetting implements BaseUI{
                 break;
             case 5:
                 System.out.println("Going back ….");
+                break;
+            default:
             }
-        } while (choice < 5);
-        sc.close();
+        } while (choice != 0);
     }
 
     private void printMenu(int selection) throws FileNotFoundException{
         switch(selection){
             case 1:
+            // ArrayList<String[]> x = Data.readCSV(path);
             x = new Scanner(new File("menu.csv "));
             x.useDelimiter(",");
             String id = ""; String name ="";String price ="";String type ="";String allergen =""; String chefr = "";
@@ -134,7 +139,6 @@ public class MenuSetting implements BaseUI{
                 }
                 
             }
-            x.close();
             
             case 3:
             x = new Scanner(new File("menu.csv "));

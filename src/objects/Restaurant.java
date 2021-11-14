@@ -70,7 +70,7 @@ public class Restaurant {
         boolean x = true;
         while (x){
             System.out.printf("Table Number:");
-            seating.get(date).assignTable(tableNo,orderID, pax);
+            x = seating.get(date).assignTable(tableNo,orderID, pax);
         }
     }
 
