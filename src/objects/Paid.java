@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import util.Data;
 /**
  * Utility class to check if an order has been paid for and also set the variable to true
+ * @author Domi
  */
 public class Paid {
     /**

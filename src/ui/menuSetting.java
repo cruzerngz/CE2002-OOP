@@ -34,7 +34,7 @@ public class MenuSetting implements BaseUI{
                 System.out.println("Please select what you would like to print out(1 - main, 2 - drinks, 3 - dessert 4 - All): ");
                 int selection = 0;
                 selection = sc.nextInt();
-                this.printmenu(selection);
+                this.printMenu(selection);
                 break;
             case 2:
                 System.out.println("Please enter what type the item is(main,dessert or drink): ");
@@ -70,13 +70,13 @@ public class MenuSetting implements BaseUI{
                 System.out.println("Update chef reccomendation(TRUE/FALSE): ");
                 String newChefr= sc.nextLine();
                 
-                this.editmenu(Idedit,newId,  newname,  newprice, newType,newAllergen,newChefr,  filepath);
+                this.editMenu(Idedit,newId,  newname,  newprice, newType,newAllergen,newChefr,  filepath);
                 break;
             case 4:
                 System.out.println("Please enter item Id of item to be deleted: ");
                 String Iddelete = sc.nextLine();
                 
-                this.deleteitem(filepath, Iddelete);
+                this.deleteItem(filepath, Iddelete);
                 break;
             case 5:
                 System.out.println("Going back ….");
@@ -85,7 +85,7 @@ public class MenuSetting implements BaseUI{
         sc.close();
     }
 
-    private void printmenu(int selection) throws FileNotFoundException{
+    private void printMenu(int selection) throws FileNotFoundException{
         switch(selection){
             case 1:
             x = new Scanner(new File("menu.csv "));
@@ -153,7 +153,7 @@ public class MenuSetting implements BaseUI{
     }
 
     //Case 2 method
-    public void additem(String type,String Id ,String name, String price,String allergen,String chefr, String filepath){
+    public void addItem(String type,String Id ,String name, String price,String allergen,String chefr, String filepath){
         try{
             FileWriter fw = new FileWriter (filepath, true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -170,7 +170,7 @@ public class MenuSetting implements BaseUI{
     }
 
     //Case 3 method
-    public void editmenu(String Idedit, String newId, String newname, String newprice,String newType,String newAllergen,String newChefr, String filepath){
+    public void editMenu(String Idedit, String newId, String newname, String newprice,String newType,String newAllergen,String newChefr, String filepath){
         String tempfile = "tempfile.csv";
         File oldfile = new File(filepath);
         File newFile = new File(tempfile);
@@ -208,7 +208,7 @@ public class MenuSetting implements BaseUI{
         }
     } 
     //Case 4 method
-    public void deleteitem(String filepath, String Iddelete){
+    public void deleteItem(String filepath, String Iddelete){
         String tempFile = "temp.csv";
         File oldFile = new File(filepath);
         File newFile = new File(tempFile);

@@ -9,7 +9,7 @@ import objects.StaffRoster;
 
 public class AdminUI implements BaseUI{
     //TODO fix implements
-    public void printOptions(String[] args) throws FileNotFoundException {
+    public void printOptions() throws FileNotFoundException {
         int choice;
         Scanner sc = new Scanner(System.in);
         

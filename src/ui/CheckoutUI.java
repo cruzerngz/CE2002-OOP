@@ -5,7 +5,7 @@ import util.Colour;
 import objects.Checkout;
 /**
  * Interface or Menu for checkout functions, checkout and print invoice
- * 
+ * @author Domi
  */
 public class CheckoutUI implements BaseUI{
     private String orderID;

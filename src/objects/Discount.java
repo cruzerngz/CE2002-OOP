@@ -2,6 +2,7 @@ package objects;
 /**
  * getDiscount is an overloadble method that can be extended for any trait 
  * returns associated discount with trait
+ * @author Domi
  */
 public class Discount {
     /**

@@ -49,10 +49,12 @@ public class Main {
                     
                     break;
                 case 6: 
-                    SaleStatsUI.main(args);
+                    SaleStatsUI saleStatsUI = new SaleStatsUI();
+                    saleStatsUI.printOptions();
                     break;
                 case 7:
-                    AdminUI.main(args);
+                    AdminUI adminUI = new AdminUI();
+                    adminUI.printOptions();
                     break;
                 case 0:
                     System.out.println("Program terminating ...");

@@ -7,6 +7,11 @@ import java.util.LinkedHashMap;
 import util.Data;
 import util.DateTime;
 
+/**
+ * Contains methods to act on individual orders.
+ * Order object must have certain variables defined in order to function, minimally orderID
+ * @author Domi
+ */
 public class Order {
     
     private String emp_name, emp_id; //staff info
