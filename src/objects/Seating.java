@@ -105,7 +105,7 @@ public class Seating {
                     case "y":
                         table[tableNo - 1].assign(orderID, pax);
                         numEmptyTable -= 1;
-                        System.out.println("Table Assigned!");
+                        
                         repeat = false;
                         return (false);
                     case "N":
@@ -119,7 +119,7 @@ public class Seating {
         } else {
             table[tableNo - 1].assign(orderID, pax);
             numEmptyTable -= 1;
-            System.out.println("Table Assigned!");
+            
             return (false);
         }
         return (false);

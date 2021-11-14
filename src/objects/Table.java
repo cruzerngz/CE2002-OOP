@@ -136,7 +136,7 @@ public class Table {
             + date + " "
             + time + "hrs.");
         }
-        else if (pax <= MAX_PAX){
+        else if (pax >= MAX_PAX){
             System.out.printf("This table can only seat %d people. \n", pax);
         }
         else{
@@ -178,12 +178,13 @@ public class Table {
      * @param order
      */
     public void assign(int order, int pax){ 
-        if (pax <= MAX_PAX){
+        if (pax >= MAX_PAX){
             System.out.printf("This table can only seat %d people. \n", pax);
         }
         else{
             occupied = true;
             orderID = order;
+            System.out.println("Table Assigned!");
         }
         
     }
