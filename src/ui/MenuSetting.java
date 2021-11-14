@@ -106,7 +106,7 @@ public class MenuSetting implements BaseUI{
             String id = ""; String name ="";String price ="";String type ="";String allergen =""; String chefr = "";
             while(x.hasNext()){
                 id = x.next();
-                int ID = Integer.parseInt(id);
+                int ID = Integer.parseInt(id,10);
                 name = x.next();
                 price = x.next();
                 type = x.next();
@@ -126,7 +126,7 @@ public class MenuSetting implements BaseUI{
             id = ""; name =""; price =""; type =""; allergen =""; chefr = "";
             while(x.hasNext()){
                 id = x.next();
-                int ID = Integer.parseInt(id);
+                int ID = Integer.parseInt(id,10);
                 name = x.next();
                 price = x.next();
                 type = x.next();
@@ -144,7 +144,7 @@ public class MenuSetting implements BaseUI{
             id = ""; name =""; price =""; type =""; allergen =""; chefr = "";
             while(x.hasNext()){
                 id = x.next();
-                int ID = Integer.parseInt(id);
+                int ID = Integer.parseInt(id,10);
                 name = x.next();
                 price = x.next();
                 type = x.next();
