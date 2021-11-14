@@ -1,12 +1,10 @@
 package ui;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
-import util.Data;
+import util.*;
 
 public class PmenuUI implements BaseUI{
     private static Scanner x;
@@ -17,155 +15,171 @@ public class PmenuUI implements BaseUI{
         int choice;
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Menu Settings");
-        System.out.println("(1) Print existing menu");
-        System.out.println("(2) Create a new menu item");
-        System.out.println("(3) Edit an existing menu item’s details");
-        System.out.println("(4) Delete a menu item");
-        System.out.println("(5) Back");
         do {
+            System.out.println();
+            Colour.println(Colour.TEXT_BLUE,"Menu Settings");
+            Colour.println(Colour.TEXT_GREEN,"(1) Print existing menu");
+            Colour.println(Colour.TEXT_GREEN,"(2) Create a new menu item");
+            Colour.println(Colour.TEXT_GREEN,"(3) Edit an existing menu item's details");
+            Colour.println(Colour.TEXT_GREEN,"(4) Delete a menu item");
+            Colour.println(Colour.TEXT_GREEN,"(0) Back");
+
             System.out.println("");
-            System.out.printf("Enter your choice: ");
+            Colour.print(Colour.TEXT_GREEN, "Enter your choice: ");
             
             choice = sc.nextInt();
+            System.out.println();
             switch (choice) {
             //each of these cases call another method within this class
             case 1:
-                System.out.println("The following is the promotional menu: ");
-                this.printMenu();
+                PmenuPrint();
                 break;
             case 2:
-                System.out.println("Please enter item Id: ");
+                System.out.print("Please enter item Id: ");
                 String Id = sc.next();
-                System.out.println("Please enter item name: ");
-                String name= sc.nextLine();
-                System.out.println("Please enter item price: ");
+                System.out.println();
+                System.out.print("Please enter item name: ");
+                String name= sc.next();
+                System.out.println();
+                System.out.print("Please enter item price: ");
                 String price= sc.next();
-                System.out.println("Are there any allergen(TRUE/False): ");
-                String  allergen = sc.nextLine();
-                System.out.println("Does the chef recommend it(TRUE/FALSE): ");
-                String chefr= sc.nextLine();
-
-                this.addItem(Id , name,  price,allergen,chefr);
+                System.out.println();
+                System.out.print("Are there any allergen in dish (TRUE/FALSE): ");
+                Boolean allergen= Boolean.parseBoolean(sc.next());
+                System.out.println();
+                System.out.print("Does the chef reccomend the dish (TRUE/FALSE): ");
+                Boolean chefr= Boolean.parseBoolean(sc.next());
+                System.out.println();
+                this.addItem( Id , name,  price,Boolean.toString(allergen),Boolean.toString(chefr));
+                Colour.println(Colour.TEXT_CYAN, "Item added");
                 break;
             case 3:
-                System.out.println("Please enter what type the item is(main,side,dessert or drink): ");
-                System.out.println("Please enter item Id of item to be edited: ");
+                System.out.print("Please enter item Id of item to be edited: ");
                 String Idedit = sc.next();
-                System.out.println("Please enter item new Id: ");
+                System.out.println();
+                System.out.print("Please enter item new Id: ");
                 String newId = sc.next();
-                System.out.println("Please enter item new name: ");
-                String newname= sc.nextLine();
-                System.out.println("Please enter item new price: ");
+                System.out.println();
+                System.out.print("Please enter item new name: ");
+                String newname= sc.next();
+                System.out.println();
+                System.out.print("Please enter item new price: ");
                 String newprice= sc.next();
-                System.out.println("Update allergen(TRUE/FALSE): ");
-                String newAllergen= sc.nextLine();
-                System.out.println("Update chef reccomendation(TRUE/FALSE): ");
-                String newChefr= sc.nextLine();
-                this.editMenu(Idedit,newId,  newname,  newprice,newAllergen,newChefr);
+                System.out.println();
+                System.out.print("Update allergen(TRUE/FALSE): ");
+                Boolean newAllergen= Boolean.parseBoolean(sc.next());
+                System.out.println();
+                System.out.print("Update chef reccomendation(TRUE/FALSE): ");
+                Boolean newChefr= Boolean.parseBoolean(sc.next());
+                System.out.println();
+                this.editMenu(Idedit,newId,  newname,  newprice, Boolean.toString(newAllergen),Boolean.toString(newChefr));
+                Colour.println(Colour.TEXT_CYAN, "Item edited");
                 break;
             case 4:
-                System.out.println("Please enter what type the item is(main,side,dessert or drink): ");
-                System.out.println("Please enter item Id of item to be deleted: ");
+                System.out.print("Please enter item Id of item to be deleted: ");
                 String Iddelete = sc.next();
+                System.out.println();
                 this.deleteItem(Iddelete);
+                Colour.println(Colour.TEXT_CYAN, "Item deleted");
                 break;
-            case 5:
+            case 0:
                 System.out.println("Going back ….");
+                break;
+
+            default:
+                System.out.println("Invalid choice!");
+                break;
             }
-        } while (choice < 5);
+        } while (choice != 0);
     }
 
-    private void printMenu() {
+        /**
+     * Formats the menu to a printable state
+     * @param menuList Menu to be formatted
+     * @return
+     */
+    public static ArrayList<String[]> formatMenu(ArrayList<String[]> menuList) {
 
-        Data.printArrayList(Data.readCSV("../data/promomenu.csv"));
+        LinkedHashMap<String, String[]> tempMap = Data.parse(menuList);
+
+
+        for(int i=0; i<tempMap.get("price").length; i++) {
+            float temp = Float.parseFloat(tempMap.get("price")[i]);
+            tempMap.get("price")[i] = String.format("$%.2f", temp);
+        }
+        for(int i=0; i<tempMap.get("allergen").length; i++) {
+            if(tempMap.get("allergen")[i].equals("true")) {
+                tempMap.get("allergen")[i] = Colour.Red(tempMap.get("allergen")[i]);
+            }
+        }
+        for(int i=0; i<tempMap.get("recommend").length; i++) {
+            if(tempMap.get("recommend")[i].equals("true")) {
+                tempMap.get("recommend")[i] = Colour.Green(tempMap.get("recommend")[i]);
+            }
+        }
+
+        return Data.parse(tempMap);
+    }
+
+    private static void PmenuPrint() {
+        ArrayList<String[]> tempArr = new  ArrayList<String[]>();
+        tempArr.clear();
+        tempArr = Data.readCSV(Path.menu);
+        tempArr = Data.sortArrayList(tempArr);
+        Data.printArrayList(formatMenu(tempArr));
+
+        
     }
 
     //Case 2 method
     public void addItem(String Id ,String name, String price,String allergen,String chefr){
-        try{
-            FileWriter fw = new FileWriter ("../data/promomenu.csv", true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
+        String[] writeStr = new String[5];
+        writeStr[0] = Id;
+        writeStr[1] = name;
+        writeStr[2] = price;
+        writeStr[3] = allergen;
+        writeStr[4] = chefr;
 
-            pw.println (Id+","+name+","+price+","+allergen+","+chefr);
-            pw.flush();
-            pw.close();
-            System.out.println("done!");
-        }
-        catch(Exception e){
-            System.out.println("Try again!");
-        }
+        ArrayList<String[]> tempArr = Data.readCSV(Path.pMenu);
+        tempArr.add(writeStr);
+        Data.writeCSV(Data.sortArrayList(tempArr), Path.pMenu);
     }
 
     //Case 3 method
     public void editMenu(String Idedit, String newId, String newname, String newprice,String newAllergen,String newChefr){
-        String tempfile = "tempfile.txt";
-        File oldfile = new File("../data/promomenu.csv");
-        File newFile = new File(tempfile);
-        String Id3 = ""; String name3 = "";String price3 = ""; String allergen3 =""; String chefr3 ="";
+        String[] writeStr = new String[5];
+        writeStr[0] = newId;
+        writeStr[1] = newname;
+        writeStr[2] = newprice;
+        writeStr[3] = newAllergen;
+        writeStr[4] = newChefr;
 
-        try {
-            FileWriter fw = new FileWriter(tempfile,true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-            x = new Scanner(new File("../data/promomenu.csv"));
-            x.useDelimiter("[,\n]");
-
-            while (x.hasNext()){
-                Id3 = x.next();
-                name3 = x.next();
-                price3 = x.next();
-                if(Id3 == Idedit){
-                    pw.println(newId+","+newname+","+newprice+","+newAllergen+","+newChefr);
-                }
-                else{
-                    pw.println(Id3+","+name3+","+price3+","+allergen3+","+chefr3);
-                }
-                x.close();
-                pw.flush();
-                pw.close();
-                oldfile.delete();
-                File dump  = new File ("../data/promomenu.csv");
-                newFile.renameTo(dump);
+        ArrayList<String[]> tempArr = Data.readCSV(Path.pMenu);
+        for(int i=0; i<tempArr.size(); i++) {
+            if(i==0) {continue;} //skip col headers
+            if(Integer.parseInt(tempArr.get(i)[0]) == Integer.parseInt(newId)) {
+                tempArr.remove(i);
+                tempArr.add(writeStr);
+                tempArr = Data.sortArrayList(tempArr);
+                Data.writeCSV(tempArr, Path.pMenu);
             }
-        } catch (Exception e) {
-            System.out.println("Please try again!");
         }
+        
     } 
     //Case 4 method
     public void deleteItem(String Iddelete){
-        String tempFile = "temp.txt";
-        File oldFile = new File("../data/promomenu.csv");
-        File newFile = new File(tempFile);
-        String Id = ""; String name = ""; String price = "";String allergen =""; String chefr ="";
-        try{
-            FileWriter fw = new FileWriter(tempFile, true );
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-            x = new Scanner(new File("../data/promomenu.csv"));
-            x.useDelimiter("[,\n]");
+        ArrayList<String[]> tempArr = Data.readCSV(Path.pMenu);
 
-            while(x.hasNext()){
-                Id = x.next();
-                name = x.next();
-                price = x.next();
-                if (Id != Iddelete){
-                    pw.println(Id+","+name+","+price+","+allergen+","+chefr);
-                }
+        for(int i=0; i<tempArr.size(); i++) {
+            if(i==0) {continue;} //skip col headers
+            if(Integer.parseInt(tempArr.get(i)[0]) == Integer.parseInt(Iddelete)) {
+                tempArr.remove(i);
+                Data.writeCSV(tempArr, Path.pMenu);
             }
-           x.close();
-           pw.flush();
-           pw.close();
-           oldFile.delete();
-           File dump = new File("../data/promomenu.csv");
-           newFile.renameTo(dump);
-        }
-        catch(Exception e){
-            System.out.println("please try again");
-        }
+        }   
     }
+}
    
 
-}
+
 
