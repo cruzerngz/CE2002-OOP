@@ -25,9 +25,10 @@ public class OrderUI implements BaseUI{
     private String staffID, staffName;
     private Restaurant res;
     private Staff activeStaff; 
+    private static String filePath = Path.staff;
 
     public OrderUI(Restaurant res){
-        ArrayList<String[]> tempArr = Data.readCSV("../data/Staffroster.csv");
+        ArrayList<String[]> tempArr = Data.readCSV(filePath);
         for(int i=0; i<tempArr.size(); i++) {
             if(Boolean.parseBoolean(tempArr.get(i)[5]) == true) {
                 activeStaff = new Staff(tempArr.get(i)[1]);
@@ -68,7 +69,7 @@ public class OrderUI implements BaseUI{
                 
                 orderID = null; //initialize to null as invalid id now, for compiler.
                 tempOrder = new Order(staffName, staffID, orderID); //pass in dummy orderID
-                orderID = tempOrder.create(staffID,staffName); //get actual orderID
+                orderID = tempOrder.create(staffName,staffID); //get actual orderID
 
                 res.checkReservation(date, time); //prints reserved tables
                 res.showEmptyTable(date); //prints empty tables (including reserved but empty tables)

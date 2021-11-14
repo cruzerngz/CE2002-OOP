@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 
 import util.Data;
 import util.DateTime;
+import util.Path;
 
 /**
  * Contains methods to act on individual orders.
@@ -13,7 +14,7 @@ import util.DateTime;
  * @author Domi
  */
 public class Order {
-    
+    private static String filePath = Path.order;
     private String emp_name, emp_id; //staff info
     private String orderID; //id to pass around
     
@@ -47,7 +48,7 @@ public class Order {
     public String create(String emp_name, String emp_id) {
         //creates a new order
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
-        tempArrayList = Data.readCSV("../data/Order.csv");
+        tempArrayList = Data.readCSV(filePath);
         String[] temp = new String[tempArrayList.get(0).length];
         Arrays.fill(temp, "");
         tempArrayList.add(temp); //add empty row
@@ -73,7 +74,7 @@ public class Order {
 
         tempArrayList = Data.parse(tempMap);
 
-        Data.writeCSV(tempArrayList, "../data/Order.csv");
+        Data.writeCSV(tempArrayList, filePath);
         this.orderID = id; //store in object variable to initialize
         return id;
     }
@@ -85,7 +86,7 @@ public class Order {
     public void printOrder(String orderID) {
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
 
-        tempArrayList = Data.readCSV("../data/Order.csv");
+        tempArrayList = Data.readCSV(filePath);
         //read into arraylist
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
         int i=0;
@@ -102,9 +103,9 @@ public class Order {
             return;
         }
         // by here i is the row we want to print
-        System.out.printf("orderID: %s", orderID);
-        System.out.printf("Staff name: %s", tempMap.get("emp_name")[i] ); 
-        System.out.printf("Staff ID: %s", tempMap.get("emp_id")[i] ); 
+        System.out.printf("orderID: %s ", orderID);
+        System.out.printf("Staff name: %s ", tempMap.get("emp_name")[i] ); 
+        System.out.printf("Staff ID: %s ", tempMap.get("emp_id")[i] ); 
         System.out.printf("Items: %s\n", tempMap.get("items")[i] ); 
     }
 
@@ -115,7 +116,7 @@ public class Order {
      */
     public void addItem(String orderID, String itemID) {
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
-        tempArrayList = Data.readCSV("../data/Order.csv");
+        tempArrayList = Data.readCSV(filePath);
 
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
         int i=0;
@@ -139,7 +140,8 @@ public class Order {
 
         tempArrayList = Data.parse(tempMap);
 
-        Data.writeCSV(tempArrayList, "../data/Order.csv");
+        Data.writeCSV(tempArrayList, filePath);
+        System.out.println("Item added");
     }
 
 
@@ -151,7 +153,7 @@ public class Order {
     public void removeItem(String orderID, String itemID) {
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
 
-        tempArrayList = Data.readCSV("../data/Order.csv");
+        tempArrayList = Data.readCSV(filePath);
 
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
         int i=0;
@@ -178,7 +180,8 @@ public class Order {
         //WB to csv
         tempArrayList = Data.parse(tempMap);
 
-        Data.writeCSV(tempArrayList, "../data/Order.csv");
+        Data.writeCSV(tempArrayList, filePath);
+        System.out.println("Item Removed");
 
     }
 

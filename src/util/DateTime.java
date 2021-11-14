@@ -18,7 +18,7 @@ public class DateTime {
     private long deltaH;
     private long deltaD;
     private long unixTime;
-    private String savePath;
+    private String savePath = Path.timedata;
 
     //formatters
     static SimpleDateFormat timeFormat = new SimpleDateFormat("HHmm");
@@ -33,7 +33,6 @@ public class DateTime {
      * Specify a path to the data directory
      */
     public DateTime() {
-        savePath = "../data" + "/timeData.csv";
         try {update();}
         catch (FileNotFoundException e) {
             e.printStackTrace();

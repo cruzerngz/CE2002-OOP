@@ -1,13 +1,14 @@
 package objects;
 
 import util.Data;
+import util.Path;
+
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.LinkedHashMap;
 
 
 public class StaffRoster {
-    private static String savePath = "../data/Staffroster.csv";
-
+    private static String savePath = Path.staff;
     public static void showNumStaff(){
         ArrayList<String[]> tempArr = Data.readCSV(savePath);
         System.out.println("There are "+ (tempArr.size()-1) + " staff hired.");
@@ -15,7 +16,11 @@ public class StaffRoster {
 
     public static void showHired() {
         System.out.println("This is list of the Staff in the restaurant: ");
-        Data.printArrayList(Data.readCSV(savePath));
+        ArrayList<String[]> tempArr = Data.readCSV(savePath);
+        LinkedHashMap<String, String[]> tempMap = Data.parse(tempArr);
+
+        tempMap.remove("password"); //remove password col from display
+        Data.printArrayList(Data.parse(tempMap));
     }
 
     public static void hiring(int ID,String name, String position, String username, String password){
