@@ -113,10 +113,9 @@ public class MenuSetting implements BaseUI{
                 chefr = x.next();
                 if(id.compareTo("200")<0){
                     System.out.println(id+" "+name+" "+price+" "+type+" "+allergen+" "+chefr);
+                    System.out.println();
                 }
-                else{
-                    break;
-                }
+                
                 
             }
             x.close();
