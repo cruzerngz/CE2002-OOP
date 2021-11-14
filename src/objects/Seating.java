@@ -32,13 +32,13 @@ public class Seating {
      */
     public Seating(String date) {
         for (int i = 0; i < 10; ++i) {
-            table[i] = new Table(i-1, date, 2);
+            table[i] = new Table(i+1, date, 2);
         }
         for (int i = 10; i < 15; ++i) {
-            table[i] = new Table(i-1, date, 6);
+            table[i] = new Table(i+1, date, 6);
         }
         for (int i = 15; i < 20; ++i) {
-            table[i] = new Table(i-1, date, 10);
+            table[i] = new Table(i+1, date, 10);
         }
         this.date = date; // assigns a date to this Seating
     }
