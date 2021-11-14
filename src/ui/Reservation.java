@@ -38,20 +38,21 @@ public class Reservation implements BaseUI{
                 String date = sc.nextLine();
                 System.out.println("Time:");
                 int time = sc.nextInt();
+                sc.nextLine();
                 System.out.println("Table Number:");
-                int tableNo = sc.nextInt();
+                String tableNo = sc.nextLine();
                 System.out.println("Customer's name:");
                 String custName = sc.nextLine();
                 System.out.println("Phone Number:");
-                int phoneNo = sc.nextInt();
+                String phoneNo = sc.nextLine();
                 System.out.println("Pax:");
                 int pax = sc.nextInt();
-                res.reserve(date, tableNo, time, custName, phoneNo, pax);
+                sc.nextLine();
+                res.reserve(date, Integer.parseInt(tableNo), time, custName, Integer.parseInt(phoneNo), pax);
                 break;
             case 2:
                 System.out.println("_____Check for reservation booking_____");
                 System.out.println("Enter date:");
-                // while(!sc.hasNextLine()){}
                 String date2 = sc.nextLine();
                 System.out.println("Time:");
                 int time2 = sc.nextInt();
