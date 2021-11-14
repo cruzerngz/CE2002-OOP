@@ -1,7 +1,6 @@
 package objects;
 import util.*;
 import java.util.HashMap;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Restaurant {
@@ -17,7 +16,7 @@ public class Restaurant {
     ArrayList<String[]> reserve = Data.readCSV(path);
     
 
-    public Restaurant() throws FileNotFoundException {
+    public Restaurant() {
         String date = new String();
         // loop creates a series of "Seatings" one week into the future
         for (int i = 0; i < 7; ++i) {

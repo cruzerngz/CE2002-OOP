@@ -1,4 +1,5 @@
-package objects;
+package ui;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,13 +8,14 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 import ui.BaseUI;
+import util.Data;
 
-public class Pmenu implements BaseUI{
+public class PmenuUI implements BaseUI{
     private static Scanner x;
-    public Pmenu() {
-    }
 
-    public void printOptions() throws FileNotFoundException {
+    public PmenuUI() {}
+
+    public void printOptions() {
         int choice;
         Scanner sc = new Scanner(System.in);
 
@@ -76,16 +78,9 @@ public class Pmenu implements BaseUI{
         } while (choice < 5);
     }
 
-    private void printMenu() throws FileNotFoundException{
-    
-        x = new Scanner(new File("promomenu.csv"));
-        x.useDelimiter(",");
-        while(x.hasNext()){
-            System.out.print(x.next());
-        }
-        x.close();
-        
-        
+    private void printMenu() {
+
+        Data.printArrayList(Data.readCSV("../data/promomenu.csv"));
     }
 
     //Case 2 method

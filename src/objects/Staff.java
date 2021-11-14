@@ -15,7 +15,6 @@ public class Staff {
     private String password;
     private boolean status; // if person is currently logged in
     private boolean registered; // if person is registered in system (name in file)
-    private static Scanner x;
     private String savePath = "../data/staffRoster.csv";
     
     /**
