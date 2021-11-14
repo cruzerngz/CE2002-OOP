@@ -2,6 +2,7 @@ package objects;
 import util.*;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Restaurant {
 
@@ -67,9 +68,12 @@ public class Restaurant {
      * @param orderID
      */
     public void assignTable(String date, int tableNo, int orderID, int pax) {
-        boolean x = true;
+        boolean x;
+        x = seating.get(date).assignTable(tableNo,orderID, pax);
         while (x){
-            // System.out.printf("Table Number:");
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Choose another table:");
+            tableNo = sc.nextInt();
             x = seating.get(date).assignTable(tableNo,orderID, pax);
         }
     }
