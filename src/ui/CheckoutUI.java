@@ -12,7 +12,7 @@ public class CheckoutUI implements BaseUI{
     
     /**
      * Constructor: Simple object created so it can store orderID until the end of use, passing it to other linked classes.
-     * @param orderID
+     * @param orderID Order to checkout
      */
     public CheckoutUI(String orderID) {
         this.orderID = orderID; //assigned from outside for use later       

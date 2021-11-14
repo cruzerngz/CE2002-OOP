@@ -2,12 +2,10 @@ package ui;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-import ui.BaseUI;
 import util.Data;
 
 public class PmenuUI implements BaseUI{

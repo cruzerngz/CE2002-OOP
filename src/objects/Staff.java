@@ -1,11 +1,9 @@
 package objects;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-import util.Data;
-import util.Password;
+import util.*;
 
 public class Staff {
     private int staffID;
@@ -15,7 +13,7 @@ public class Staff {
     private String password;
     private boolean status; // if person is currently logged in
     private boolean registered; // if person is registered in system (name in file)
-    private String savePath = "../data/staffRoster.csv";
+    private String savePath = Path.staff;
     
     /**
      * Create staff with new credentials

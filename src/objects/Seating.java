@@ -185,8 +185,15 @@ public class Seating {
      * @param time
      */
     public void checkReservation(int time) {
+        int numReserve = 0;
         for (int i = 0; i < 20; ++i) {
             table[i].checkReservation(time);
+            if (table[i].isReserved(time)){
+                numReserve+=1;
+            }
+        }
+        if (numReserve == 0){
+            System.out.println("There are no reservations.");
         }
     }
 }
