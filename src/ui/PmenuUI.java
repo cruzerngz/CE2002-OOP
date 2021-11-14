@@ -124,7 +124,7 @@ public class PmenuUI implements BaseUI{
     private static void PmenuPrint() {
         ArrayList<String[]> tempArr = new  ArrayList<String[]>();
         tempArr.clear();
-        tempArr = Data.readCSV(Path.menu);
+        tempArr = Data.readCSV(Path.pMenu);
         tempArr = Data.sortArrayList(tempArr);
         Data.printArrayList(formatMenu(tempArr));
 
@@ -157,7 +157,7 @@ public class PmenuUI implements BaseUI{
         ArrayList<String[]> tempArr = Data.readCSV(Path.pMenu);
         for(int i=0; i<tempArr.size(); i++) {
             if(i==0) {continue;} //skip col headers
-            if(Integer.parseInt(tempArr.get(i)[0]) == Integer.parseInt(newId)) {
+            if(Integer.parseInt(tempArr.get(i)[0]) == Integer.parseInt(Idedit)) {
                 tempArr.remove(i);
                 tempArr.add(writeStr);
                 tempArr = Data.sortArrayList(tempArr);
