@@ -23,7 +23,9 @@ public class Seating {
      * time is the current time
      */
     DateTime dt = new DateTime();
+    
     private int time = dt.getTime();
+    
 
     /**
      * Numbers the tables from 1 to 20, inclusive
@@ -41,6 +43,10 @@ public class Seating {
             table[i] = new Table(i+1, date, 10);
         }
         this.date = date; // assigns a date to this Seating
+
+        // dt.deltaHour(16); 
+
+        time = time/100 * 100; //rounds the time down to last hour.
     }
 
     /**
