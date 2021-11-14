@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import util.*;
+
 public class MenuSetting implements BaseUI{
     private static Scanner x;
     public MenuSetting() {
@@ -16,12 +18,12 @@ public class MenuSetting implements BaseUI{
         int choice;
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Menu Settings");
-        System.out.println("(1) Print existing menu");
-        System.out.println("(2) Create a new menu item");
-        System.out.println("(3) Edit an existing menu item’s details");
-        System.out.println("(4) Delete a menu item");
-        System.out.println("(5) Back");
+        Colour.println(Colour.TEXT_BLUE,"Menu Settings");
+        Colour.println(Colour.TEXT_GREEN,"(1) Print existing menu");
+        Colour.println(Colour.TEXT_GREEN,"(2) Create a new menu item");
+        Colour.println(Colour.TEXT_GREEN,"(3) Edit an existing menu item’s details");
+        Colour.println(Colour.TEXT_GREEN,"(4) Delete a menu item");
+        Colour.println(Colour.TEXT_GREEN,"(5) Back");
         do {
             System.out.println("");
             System.out.printf("Enter your choice: ");
