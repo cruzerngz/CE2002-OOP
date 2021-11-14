@@ -1,2 +1,4 @@
 id,name,price,allergen,recommend
-01,lunchset,10,false,false
+02,Breakfast,10,false,false
+03,dinnerset,12,true,false
+04,brunchset,15,true,true
