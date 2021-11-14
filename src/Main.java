@@ -11,13 +11,19 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Restaurant res = new Restaurant();
 
-        Colour.println(Colour.TEXT_YELLOW, "Enter Staff name:");
-        String staffName = sc.next(); 
-        Staff activeStaff = new Staff(staffName);
-        activeStaff.makeActive();
+        Boolean successful = false;
+        do {
+            System.out.print("Please enter your username: ");
+            String Lusername = sc.next();
+            System.out.println();
+            System.out.print("please enter your password: ");
+            String Lpassword = sc.next();
+            System.out.println();
+            successful = StaffRoster.login(Lusername,Lpassword);
+        } while(successful == false);
 
         do {
-            System.out.println("\n" + System.getProperty("user.dir"));
+            // System.out.println("\n" + System.getProperty("user.dir"));
             System.out.println();
             Colour.println(Colour.TEXT_BLUE, "MAIN MENU");
             Colour.println(Colour.TEXT_GREEN, "(1) Menu Management");          //F.R. 1
@@ -32,7 +38,7 @@ public class Main {
             System.out.printf("Enter your choice: ");
             choice = sc.nextInt();
             System.out.println();
-            
+
             switch (choice) {
                 case 1:
                     MenuSetting menusetting = new MenuSetting();
@@ -43,7 +49,7 @@ public class Main {
                     pmenuui.printOptions();
                     break;
                 case 3: 
-                    OrderUI orderUI = new OrderUI(res, staffName, staffID);
+                    OrderUI orderUI = new OrderUI(res);
                     orderUI.printOptions(); //pass to orderui
                     break;
                 case 4: 
@@ -63,12 +69,14 @@ public class Main {
                     adminUI.printOptions();
                     break;
                 case 0:
-                    System.out.println("Program terminating ...");
                     break;
                 default:
                     break;
             }
         } while (choice != 0);
+
+        StaffRoster.logout();
+        System.out.println("Program terminating ...");
         sc.close();
     }
 }

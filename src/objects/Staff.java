@@ -155,6 +155,14 @@ public class Staff {
         return name;
     }
 
+    public int getID() {
+        return staffID;
+    }
+
+    public String getIDString() {
+        return Integer.toString(staffID);
+    }
+
     /**
      * Converts staff object into a writable array
      * @return

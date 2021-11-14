@@ -1,4 +1,5 @@
 package ui;
+import java.util.ArrayList;
 import java.util.Scanner;
 import objects.*;
 import util.*;
@@ -23,11 +24,19 @@ public class OrderUI implements BaseUI{
     private String date = dt.getDate().toString();
     private String staffID, staffName;
     private Restaurant res;
+    private Staff activeStaff; 
 
-    public OrderUI(Restaurant res, String staffID, String staffName){
+    public OrderUI(Restaurant res){
+        ArrayList<String[]> tempArr = Data.readCSV("../data/Staffroster.csv");
+        for(int i=0; i<tempArr.size(); i++) {
+            if(Boolean.parseBoolean(tempArr.get(i)[5]) == true) {
+                activeStaff = new Staff(tempArr.get(i)[1]);
+            }
+        }
+
         this.res = res;
-        this.staffID = staffID;
-        this.staffName = staffName;
+        this.staffID = activeStaff.getIDString();
+        this.staffName = activeStaff.getName();
     }
 
     public void printOptions(){

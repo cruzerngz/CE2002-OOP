@@ -116,7 +116,6 @@ public class AdminUI implements BaseUI{
         } while(choice != 0);
     }
 
-
     /**
      * UI for handling date-time related stuff
      */
