@@ -31,14 +31,14 @@ public class Seating {
      * @param date
      */
     public Seating(String date) {
-        for (int i = 1; i < 11; ++i) {
-            table[i] = new Table(i, date, 2);
+        for (int i = 0; i < 10; ++i) {
+            table[i] = new Table(i-1, date, 2);
         }
-        for (int i = 11; i < 16; ++i) {
-            table[i] = new Table(i, date, 6);
+        for (int i = 10; i < 15; ++i) {
+            table[i] = new Table(i-1, date, 6);
         }
-        for (int i = 16; i < 21; ++i) {
-            table[i] = new Table(i, date, 10);
+        for (int i = 15; i < 20; ++i) {
+            table[i] = new Table(i-1, date, 10);
         }
         this.date = date; // assigns a date to this Seating
     }
