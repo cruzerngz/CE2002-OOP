@@ -112,7 +112,13 @@ public class MenuSetting implements BaseUI{
                 type = x.next();
                 allergen = x.next();
                 chefr = x.next();
+                try{
                 if(ID<200){
+                    System.out.println(id+" "+name+" "+price+" "+type+" "+allergen+" "+chefr);
+                    System.out.println();
+                }
+            }
+                catch (Exception numberFormatException){
                     System.out.println(id+" "+name+" "+price+" "+type+" "+allergen+" "+chefr);
                     System.out.println();
                 }
@@ -132,11 +138,19 @@ public class MenuSetting implements BaseUI{
                 type = x.next();
                 allergen = x.next();
                 chefr = x.next();
-                if(ID>=200 && ID<300){
-                    System.out.println(id+" "+name+" "+price+" "+type+" "+allergen+" "+chefr);
+                try{
+                    if(ID>=200&&ID<300){
+                        System.out.println(id+" "+name+" "+price+" "+type+" "+allergen+" "+chefr);
+                        System.out.println();
+                    }
                 }
-                
-            }
+                    catch (Exception numberFormatException){
+                        System.out.println(id+" "+name+" "+price+" "+type+" "+allergen+" "+chefr);
+                        System.out.println();
+                    }
+                    
+                    
+                }
             
             case 3:
             x = new Scanner(new File(filepath));
@@ -150,11 +164,21 @@ public class MenuSetting implements BaseUI{
                 type = x.next();
                 allergen = x.next();
                 chefr = x.next();
-                if(ID>= 300){
-                    System.out.println(id+" "+name+" "+price+" "+type+" "+allergen+" "+chefr);
+                try{
+                    if(ID<300){
+                        System.out.println(id+" "+name+" "+price+" "+type+" "+allergen+" "+chefr);
+                        System.out.println();
+                    }
+                }
+                    catch (Exception numberFormatException){
+                        System.out.println(id+" "+name+" "+price+" "+type+" "+allergen+" "+chefr);
+                        System.out.println();
+                    }
+                    
+                    
                 }
                 
-            }
+            
             x.close();
             case 4:
             x = new Scanner(new File(filepath));
@@ -168,8 +192,10 @@ public class MenuSetting implements BaseUI{
             }
             x.close();
         }
+        }
         
-    }
+    
+
 
     //Case 2 method
     public void addItem(String type,String Id ,String name, String price,String allergen,String chefr, String filepath){
