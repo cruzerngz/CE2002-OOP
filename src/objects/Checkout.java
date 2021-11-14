@@ -10,12 +10,15 @@ import java.util.Scanner;
 
 import util.Data;
 import util.DateTime;
+import util.Path;
 
 /**
  * Contains static methods to act on orderID.
  * Checkout contains 2 functions 
  */
 public class Checkout {
+    private static String orderPath = Path.order;
+    private static String menuPath = Path.menu;
        
         /**
          * Calculate sum total to be paid by customer, assumes staff will definitely collect money.
@@ -29,7 +32,7 @@ public class Checkout {
         //read raw price before discount
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
 
-        tempArrayList = Data.readCSV("../data/Order.csv");
+        tempArrayList = Data.readCSV(orderPath);
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
         int i=0;
         String[] orderRows = tempMap.get("orderNO");
@@ -75,7 +78,7 @@ public class Checkout {
             tempMap.put("salesTax", salesTaxRows);
             
             tempArrayList = Data.parse(tempMap);
-            Data.writeCSV(tempArrayList, "../data/Order.csv");
+            Data.writeCSV(tempArrayList, orderPath);
         }
         //else no discount applied, no need edit csv
         //set paid
@@ -101,7 +104,7 @@ public class Checkout {
         //table number from Yu Ze or maybe store in order csv as well
         //server
         ArrayList<String[]> tempArrayList = new ArrayList<String[]>();
-        tempArrayList = Data.readCSV("../data/Order.csv");
+        tempArrayList = Data.readCSV(orderPath);
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
         int i=0;
         String[] orderRows = tempMap.get("orderNO");
@@ -130,7 +133,7 @@ public class Checkout {
         String[] itemRows = tempMap.get("items");
         String[] itemlist = itemRows[i].split("."); //each element is id
         
-        ArrayList<String[]> menuArrayList = Data.readCSV("../data/menu.csv"); //read menu csv before enter loop
+        ArrayList<String[]> menuArrayList = Data.readCSV(menuPath); //read menu csv before enter loop
         tempMap = Data.parse(menuArrayList);
 
         String[] idRows = tempMap.get("id");

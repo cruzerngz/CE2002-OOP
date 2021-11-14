@@ -12,7 +12,7 @@ import util.*;
  */
 public class SaleStats {
     private ArrayList<String[]> revMatrix;
-    private String filePath;
+    private String filePath = Path.revMatrix;
     private DecimalFormat dF = new DecimalFormat("0.00");
     
     /**
@@ -20,7 +20,6 @@ public class SaleStats {
      * @param path Path to the revenue matrix file
      */
     public SaleStats() {
-        filePath = "../data" + "/revenueMatrix.csv";
         read();
     }
 

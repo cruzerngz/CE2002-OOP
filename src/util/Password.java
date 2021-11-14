@@ -15,7 +15,6 @@ public class Password {
      * Hashes a given string using SHA256
      * @param input String to be hashed
      * @return 256-bit result
-     * @throws NoSuchAlgorithmException
      */
     private static byte[] SHA256(String input) {
         MessageDigest msg = null;
@@ -49,7 +48,6 @@ public class Password {
      * Hash strings using SHA256
      * @param input String to be hashed
      * @return 64 char string
-     * @throws NoSuchAlgorithmException
      */
     public static String hash(String input) {
         return toString(SHA256(input));

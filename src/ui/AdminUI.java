@@ -42,7 +42,6 @@ public class AdminUI implements BaseUI{
 
     /**
      * UI for handling staff related stuff hello
-     * @throws FileNotFoundException
      */
     public static void staffUI() {
         int choice;
