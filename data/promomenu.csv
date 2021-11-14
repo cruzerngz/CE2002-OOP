@@ -1,2 +1,2 @@
-ID,name,price
-01,lunchset,10
+id,name,price,allergen,recommend
+01,lunchset,10,false,false
