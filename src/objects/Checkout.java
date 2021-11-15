@@ -25,7 +25,7 @@ public class Checkout {
          * Immediately sets paid status to true upon executing
          * @param orderID which is used in order.csv to identify a customer
          */
-       public static void checkout(String orderID){
+       public static void checkout(String orderID,Restaurant res){
         //Assume cash
         Scanner sc = new Scanner(System.in);
         
@@ -90,12 +90,15 @@ public class Checkout {
         //add to revenue stats
         SaleStats stats = new SaleStats();
         DateTime dt = new DateTime();
-        stats.addRevenue(dt.getDaysSinceEpoch(), tempsaleprice);
+        stats.addRevenue(dt.getDaysSinceEpoch(), tempMap.get("items")[i]);
        
         System.out.printf("Total payment to receive: $%.2f", tempsaleprice);
         //temporary test
         
         Paid.setPaid(i);
+
+        //unassign table
+        res.unassignTable(dt.getDate(), Integer.parseInt(tempMap.get("id")[i]));
     }
     
 

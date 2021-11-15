@@ -1,5 +1,6 @@
 package ui;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 import objects.*;
 import util.*;
@@ -82,6 +83,16 @@ public class OrderUI implements BaseUI{
                 int tableNo = sc.nextInt();
                 res.assignTable(date, tableNo, Integer.parseInt(orderID), pax);
 
+                //assign table in csv
+                ArrayList<String[]> tempArrayList = Data.readCSV(Path.order);
+                LinkedHashMap<String,String[]> tempMap = Data.parse(tempArrayList);
+                
+                String[] tableRows = tempMap.get("id");
+                tableRows[tableRows.length-1] = String.valueOf(tableNo);
+                tempMap.put("id", tableRows);
+                
+                Data.writeCSV(Data.parse(tempMap), Path.order);
+                
                 System.out.printf("Order created! ID = %s\n",orderID);
                 break;
             case 2:
@@ -109,7 +120,7 @@ public class OrderUI implements BaseUI{
             case 5:
                 System.out.println("Enter order ID");
                 orderID = sc.next(); 
-                CheckoutUI checkout = new CheckoutUI(orderID); //may change to static method later
+                CheckoutUI checkout = new CheckoutUI(orderID,res); //may change to static method later
                 checkout.printOptions(); //pass to checkout ui
                 break;
             case 0:
