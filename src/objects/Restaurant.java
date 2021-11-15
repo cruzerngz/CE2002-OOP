@@ -172,8 +172,21 @@ public class Restaurant {
      * @param time
      */
     public void checkReservation(String date, int time){ 
-        System.out.println("At " + date + " " + time + "hrs:");
-        seating.get(date).checkReservation(time);
+        if(dt.getTime()-time>=10 ){
+            System.out.println();
+            for(int i=1 ; i<21 ; i++){
+                seating.get(date).unreserveTable(i,dt.getTime(),false);
+            }
+            System.out.println("table unreserved due to time expire");
+            System.out.println();
+            
+        }
+        else{
+            System.out.println("At " + date + " " + time + "hrs:");
+            seating.get(date).checkReservation(time);
+            System.out.println();
+        }
+        
     }
     
     public boolean checkFullReservation(String date, int time){

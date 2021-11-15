@@ -84,6 +84,7 @@ public class Reservation implements BaseUI{
                     switch (choice) {
                     case 1:
                         System.out.println("Enter date:");
+                        sc.nextLine();
                         String date4 = sc.nextLine();
                         res.showReservationStatus_Day(date4);
                         break;
