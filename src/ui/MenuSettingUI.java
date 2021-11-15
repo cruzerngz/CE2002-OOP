@@ -17,6 +17,8 @@ public class MenuSettingUI implements BaseUI{
     public void printOptions() {
         int choice;
         Scanner sc = new Scanner(System.in);
+        Scanner x = new Scanner(System.in);
+
 
         do {
             System.out.println();
@@ -45,7 +47,7 @@ public class MenuSettingUI implements BaseUI{
                 String Id = sc.next();
                 System.out.println();
                 System.out.print("Please enter item name: ");
-                String name= sc.next();
+                String name= x.nextLine();
                 System.out.println();
                 System.out.print("Please enter item price: ");
                 String price= sc.next();
@@ -68,7 +70,7 @@ public class MenuSettingUI implements BaseUI{
                 String newId = sc.next();
                 System.out.println();
                 System.out.print("Please enter item new name: ");
-                String newname= sc.next();
+                String newname= x.nextLine();
                 System.out.println();
                 System.out.print("Please enter item new price: ");
                 String newprice= sc.next();
@@ -227,13 +229,14 @@ public class MenuSettingUI implements BaseUI{
 
     //Case 2 method
     public void addItem(String type,String Id ,String name, String price,String allergen,String chefr){
-        String[] writeStr = new String[6];
+        String[] writeStr = new String[7];
         writeStr[0] = Id;
         writeStr[1] = name;
         writeStr[2] = price;
         writeStr[3] = type;
-        writeStr[4] = allergen;
-        writeStr[5] = chefr;
+        writeStr[4] = "";
+        writeStr[5] = allergen;
+        writeStr[6] = chefr;
 
         ArrayList<String[]> tempArr = Data.readCSV(Path.menu);
         tempArr.add(writeStr);
@@ -242,13 +245,14 @@ public class MenuSettingUI implements BaseUI{
 
     //Case 3 method
     public void editMenu(String Idedit, String newId, String newname, String newprice,String newType,String newAllergen,String newChefr){
-        String[] writeStr = new String[6];
+        String[] writeStr = new String[7];
         writeStr[0] = newId;
         writeStr[1] = newname;
         writeStr[2] = newprice;
         writeStr[3] = newType;
-        writeStr[4] = newAllergen;
-        writeStr[5] = newChefr;
+        writeStr[4] = "";
+        writeStr[5] = newAllergen;
+        writeStr[6] = newChefr;
 
         ArrayList<String[]> tempArr = Data.readCSV(Path.menu);
         for(int i=0; i<tempArr.size(); i++) {

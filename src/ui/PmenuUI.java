@@ -130,60 +130,73 @@ public class PmenuUI implements BaseUI{
 
     private static void PmenuPrint() {
         ArrayList<String[]> tempArr = new  ArrayList<String[]>();
+        ArrayList<String[]> printArr = new ArrayList<String[]>();
         tempArr.clear();
-        tempArr = Data.readCSV(Path.pMenu);
-        tempArr = Data.sortArrayList(tempArr);
-        Data.printArrayList(formatMenu(tempArr));
-
+        printArr.clear();
+        tempArr = Data.readCSV(Path.menu);
+        printArr = new ArrayList<String[]>();
+        printArr.add(tempArr.get(0));
+        tempArr.remove(0);
+        
+        for(String[] row: tempArr) {
+            if(Integer.parseInt(row[0]) < 100) {
+                printArr.add(row);
+            }
+        }
+        printArr = Data.sortArrayList(printArr);
+        Data.printArrayList(formatMenu(printArr));
+        
         
     }
 
     //Case 2 method
     public void addItem(String Id ,String name, String price,String description,String allergen,String chefr){
-        String[] writeStr = new String[6];
+        String[] writeStr = new String[7];
         writeStr[0] = Id;
         writeStr[1] = name;
         writeStr[2] = price;
-        writeStr[3] = description;
-        writeStr[4] = allergen;
-        writeStr[5] = chefr;
+        writeStr[3] = "";
+        writeStr[4] = description;
+        writeStr[5] = allergen;
+        writeStr[6] = chefr;
 
-        ArrayList<String[]> tempArr = Data.readCSV(Path.pMenu);
+        ArrayList<String[]> tempArr = Data.readCSV(Path.menu);
         tempArr.add(writeStr);
-        Data.writeCSV(Data.sortArrayList(tempArr), Path.pMenu);
+        Data.writeCSV(Data.sortArrayList(tempArr), Path.menu);
     }
 
     //Case 3 method
     public void editMenu(String Idedit, String newId, String newname, String newprice,String newdescription,String newAllergen,String newChefr){
-        String[] writeStr = new String[6];
+        String[] writeStr = new String[7];
         writeStr[0] = newId;
         writeStr[1] = newname;
         writeStr[2] = newprice;
-        writeStr[3] = newdescription;
-        writeStr[4] = newAllergen;
-        writeStr[5] = newChefr;
+        writeStr[3] = "";
+        writeStr[4] = newdescription;
+        writeStr[5] = newAllergen;
+        writeStr[6] = newChefr;
 
-        ArrayList<String[]> tempArr = Data.readCSV(Path.pMenu);
+        ArrayList<String[]> tempArr = Data.readCSV(Path.menu);
         for(int i=0; i<tempArr.size(); i++) {
             if(i==0) {continue;} //skip col headers
             if(Integer.parseInt(tempArr.get(i)[0]) == Integer.parseInt(Idedit)) {
                 tempArr.remove(i);
                 tempArr.add(writeStr);
                 tempArr = Data.sortArrayList(tempArr);
-                Data.writeCSV(tempArr, Path.pMenu);
+                Data.writeCSV(tempArr, Path.menu);
             }
         }
         
     } 
     //Case 4 method
     public void deleteItem(String Iddelete){
-        ArrayList<String[]> tempArr = Data.readCSV(Path.pMenu);
+        ArrayList<String[]> tempArr = Data.readCSV(Path.menu);
 
         for(int i=0; i<tempArr.size(); i++) {
             if(i==0) {continue;} //skip col headers
             if(Integer.parseInt(tempArr.get(i)[0]) == Integer.parseInt(Iddelete)) {
                 tempArr.remove(i);
-                Data.writeCSV(tempArr, Path.pMenu);
+                Data.writeCSV(tempArr, Path.menu);
             }
         }   
     }
