@@ -1,8 +1,10 @@
 package ui;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import objects.SaleStats;
 import util.DateTime;
+import util.Path;
 import util.Colour;
 import util.Data;
 
@@ -58,13 +60,17 @@ public class SaleStatsUI implements BaseUI{
      * Show stats on the current day
      */
     public static void statsNow() {
-        float amount;
+        ArrayList<String[]> table;
         DateTime dt = new DateTime();
         SaleStats stats = new SaleStats();
 
-        amount = stats.dayRevenue(dt.getDaysSinceEpoch());
-        System.out.printf("Sales for %s:\n", dt.getDayDate());
-        // Colour.println(Colour.TEXT_CYAN, String.format("$%.2f", amount));
+        table = stats.dayRevenue(dt.getDaysSinceEpoch());
+        if(table == null) {
+            System.out.printf(Colour.Red("No sales data found for %s\n"), dt.getDayDate());
+        } else {
+            System.out.printf("Sales for %s:\n", dt.getDayDate());
+            Data.printArrayList(table);
+        }
     }
 
     /**
@@ -73,12 +79,12 @@ public class SaleStatsUI implements BaseUI{
     public static void statsDay() {
         int y, m, d;
         String date;
-        float amount;
+        ArrayList<String[]> table;
         DateTime dt = new DateTime();
         SaleStats stats = new SaleStats();
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter year:  ");
+        System.out.print("Enter year: ");
         y = sc.nextInt();
         System.out.print("\nEnter month: ");
         m = sc.nextInt();
@@ -88,11 +94,17 @@ public class SaleStatsUI implements BaseUI{
 
         date = dt.daysToDayDate(dt.ymdToEpochDay(y, m, d));
         //get the day
-        amount = stats.dayRevenue(
+        table = stats.dayRevenue(
             dt.ymdToEpochDay(y, m, d)
         );
-        System.out.printf("Sales for %s:\n", date);
-        // Colour.println(Colour.TEXT_CYAN, String.format("$%.2f", amount));
+
+        if(table == null) {
+            System.out.printf(Colour.Red("No sales data found for %s\n"), date);
+        } else {
+            System.out.printf("Sales for %s:\n", date);
+            Data.printArrayList(table);
+        }
+
     }
 
     /**
@@ -101,7 +113,7 @@ public class SaleStatsUI implements BaseUI{
     public static void statsMth() {
         int y, m, mStart, mEnd;
         String date;
-        float amount;
+        ArrayList<String[]> table;
         DateTime dt = new DateTime();
         SaleStats stats = new SaleStats();
         Scanner sc = new Scanner(System.in);
@@ -117,11 +129,15 @@ public class SaleStatsUI implements BaseUI{
             m = 0; y++;
         }
         mEnd = dt.ymdToEpochDay(y, m+1, 1) - 1;
-        amount = stats.rangeRevenue(mStart, mEnd);
+        table = stats.rangeRevenue(mStart, mEnd);
         date = dt.daysToMonthYear(mEnd);
 
-        System.out.printf("Sales for %s is ", date);
-        Colour.println(Colour.TEXT_CYAN, String.format("$%.2f", amount));
+        if(table == null) {
+            System.out.printf(Colour.Red("No sales data found for %s\n"), date);
+        } else {
+            System.out.printf("Sales for %s:\n", date);
+            Data.printArrayList(table);
+        }
 
     }
 
@@ -130,6 +146,18 @@ public class SaleStatsUI implements BaseUI{
      */
     public static void statsAll() {
         SaleStats stats = new SaleStats();
-        Data.printArrayList(stats.getPrintMatrix());
+        ArrayList<String[]> table;
+        ArrayList<String[]> revMatrix = Data.readCSV(Path.revMatrix);
+        int max = revMatrix.size() - 1;
+        int start = Integer.parseInt(revMatrix.get(1)[0]);
+        int end = Integer.parseInt(revMatrix.get(max)[0]);
+        table = stats.rangeRevenue(start, end);
+
+        if(table == null) {
+            Colour.println(Colour.TEXT_RED, "No sales data found");
+        } else {
+            System.out.println("Showing all records:");
+            Data.printArrayList(table);
+        }
     }
 }

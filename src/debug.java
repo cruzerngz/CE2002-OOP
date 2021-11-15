@@ -10,18 +10,20 @@ import objects.*;
 
 public class debug {
     public static void main(String[] args) {
-        // SaleStatsUI ui = new SaleStatsUI();
-        // ui.printOptions();
+        SaleStatsUI ui = new SaleStatsUI();
+        ui.printOptions();
         SaleStats stats = new SaleStats();
         DateTime time = new DateTime();
 
-        stats.reset();
-        stats.addRevenue(time.getDaysSinceEpoch(), "100");
-        stats.addRevenue(time.getDaysSinceEpoch(), "200");
-        stats.addRevenue(time.getDaysSinceEpoch(), "100.300.100.300.200");
+        // stats.reset();
+        // stats.addRevenue(time.getDaysSinceEpoch(), "100");
+        // stats.addRevenue(time.getDaysSinceEpoch(), "200");
+        // stats.addRevenue(time.getDaysSinceEpoch(), "100.300.100.300.200");
 
         ArrayList<String[]> x  = stats.dayRevenue(18946);
         Data.printArrayList(x);
+        ArrayList<String[]> y = stats.rangeRevenue(18946, 18949);
+        Data.printArrayList(y);
         // ArrayList<String[]> x = SaleStats.parseStringToArrayList("2*100.1*200.5*300");
         // Data.printArrayList(x);
         // x = Data.sortRevFullArrayList(x);
