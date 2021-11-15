@@ -176,8 +176,29 @@ public class Restaurant {
         seating.get(date).checkReservation(time);
     }
     
-    public void checkFullReservation(String date, int time){
-        seating.get(date).checkFullReservation(time);
+    public boolean checkFullReservation(String date, int time){
+        String today = dt.getDate().toString();
+        dt.deltaDay(1);
+        String tmr = dt.getDate().toString();
+        dt.deltaDay(1);
+        String tmr2 = dt.getDate().toString();
+        dt.deltaDay(1);
+        String tmr3 = dt.getDate().toString();
+        dt.deltaDay(1);
+        String tmr4 = dt.getDate().toString();
+        dt.deltaDay(1);
+        String tmr5 = dt.getDate().toString();
+        dt.deltaDay(1);
+        String tmr6 = dt.getDate().toString();
+        dt.deltaDay(1);
+        if (!(date.equals(today) || date.equals(tmr) || date.equals(tmr2) || date.equals(tmr3) || date.equals(tmr4) || date.equals(tmr5) || date.equals(tmr6))){
+            System.out.println("Reservation can only be made 1 week in advance!");
+            return false;
+        }
+        else{
+            return (seating.get(date).checkFullReservation(time));
+        }
+        
     }
 
     /**
