@@ -3,6 +3,7 @@ package ui;
 //import java.io.FileNotFoundException;
 import java.util.Scanner;
 import objects.Restaurant;
+import util.*;
 
 public class Reservation implements BaseUI{
 
@@ -19,11 +20,12 @@ public class Reservation implements BaseUI{
 
         do {
             System.out.println("");
-            System.out.println("(1) Create a new reservation booking");
-            System.out.println("(2) Check for reservation booking");
-            System.out.println("(3) Remove reservation booking");
-            System.out.println("(4) List existing reservations");
-            System.out.println("(0) Back");
+            Colour.println(Colour.TEXT_BLUE, "Reservation");
+            Colour.println(Colour.TEXT_GREEN,"(1) Create a new reservation booking");
+            Colour.println(Colour.TEXT_GREEN,"(2) Check for reservation booking");
+            Colour.println(Colour.TEXT_GREEN,"(3) Remove reservation booking");
+            Colour.println(Colour.TEXT_GREEN,"(4) List existing reservations");
+            Colour.println(Colour.TEXT_GREEN,"(0) Back");
 
             System.out.println("");
             System.out.printf("Enter your choice: ");
