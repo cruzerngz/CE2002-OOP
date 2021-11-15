@@ -173,8 +173,8 @@ public class Seating {
      * @param tableNo
      * @param time
      */
-    public void unreserveTable(int tableNo, int time) {
-        table[tableNo - 1].unreserve(time);
+    public void unreserveTable(int tableNo, int time, boolean print) {
+        table[tableNo - 1].unreserve(time, print);
     }
 
     /**

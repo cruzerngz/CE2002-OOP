@@ -133,8 +133,8 @@ public class Restaurant {
      * @param tableNo
      * @param time
      */
-    public void unreserveTable(String date, int tableNo, int time) {
-        seating.get(date).unreserveTable(tableNo, time);
+    public void unreserveTable(String date, int tableNo, int time, boolean print) {
+        seating.get(date).unreserveTable(tableNo, time, print);
         for (int j = 1; j < reserve.size(); ++j) {
             if (date == reserve.get(j)[1] && String.valueOf(time) == reserve.get(j)[2] && String.valueOf(tableNo)== reserve.get(j)[3]){
                 reserve.remove(j);                

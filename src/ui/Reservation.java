@@ -67,7 +67,7 @@ public class Reservation implements BaseUI{
                 int time3 = sc.nextInt();
                 System.out.println("Table Number:");
                 int tableNo3 = sc.nextInt();
-                res.unreserveTable(date3, tableNo3, time3);
+                res.unreserveTable(date3, tableNo3, time3, true);
                 break;
 
             case 4:

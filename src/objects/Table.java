@@ -192,15 +192,18 @@ public class Table {
      * A method to unreserve the table
      * @param time the time that the reservation was made for
      */
-    public void unreserve(int time){ 
+    public void unreserve(int time, boolean print){ 
         reserved[time/100 - 11] = false;
         customerPhone[time/100 - 11] = -1;
         customerName[time/100 - 11] = "None";
-        System.out.println("Table " + tableNo
+        if (print){
+            System.out.println("Table " + tableNo
             + " unreserved at "
             + time
             + "hrs"
             );
+        }
+        
     }
     
     /**
