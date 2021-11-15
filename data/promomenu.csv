@@ -1,4 +1,4 @@
-id,name,price,allergen,recommend
-02,Breakfast,10,false,false
-03,dinnerset,12,true,false
-04,brunchset,15,true,true
+id,name,price,description,allergen,recommend
+02,Breakfast,10,eggs and toast with coffee,false,false
+03,dinnerset,12,steak and egg with wine,true,false
+04,brunchset,cake and scones with tea,15,true,true
