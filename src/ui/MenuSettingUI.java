@@ -96,7 +96,7 @@ public class MenuSettingUI implements BaseUI{
                 Colour.println(Colour.TEXT_CYAN, "Item deleted");
                 break;
             case 0:
-                System.out.println("Going back ….");
+                System.out.println("Going back...");
                 break;
             default:
                 System.out.println("Invalid choice");

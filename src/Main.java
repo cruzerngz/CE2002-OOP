@@ -54,7 +54,7 @@ public class Main {
                     orderUI.printOptions(); //pass to orderui
                     break;
                 case 4: 
-                    Reservation reservation = new Reservation(res);
+                    ReservationUI reservation = new ReservationUI(res);
                     reservation.printOptions();
                     break;
                 // case 5:

@@ -5,11 +5,11 @@ import java.util.Scanner;
 import objects.Restaurant;
 import util.*;
 
-public class Reservation implements BaseUI{
+public class ReservationUI implements BaseUI{
 
     Restaurant res;
 
-    public Reservation(Restaurant res){
+    public ReservationUI(Restaurant res){
         this.res = res;
     }
 

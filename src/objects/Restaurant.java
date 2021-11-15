@@ -177,7 +177,7 @@ public class Restaurant {
             for(int i=1 ; i<21 ; i++){
                 seating.get(date).unreserveTable(i,dt.getTime(),false);
             }
-            System.out.println("table unreserved due to time expire");
+            Colour.println(Colour.TEXT_RED, "tables unreserved due to late reservation");
             System.out.println();
             
         }
@@ -203,7 +203,7 @@ public class Restaurant {
         String tmr5 = dt.getDate().toString();
         dt.deltaDay(1);
         String tmr6 = dt.getDate().toString();
-        dt.deltaDay(1);
+        dt.deltaDay(-6); //revert
         if (!(date.equals(today) || date.equals(tmr) || date.equals(tmr2) || date.equals(tmr3) || date.equals(tmr4) || date.equals(tmr5) || date.equals(tmr6))){
             System.out.println("Reservation can only be made 1 week in advance!");
             return false;

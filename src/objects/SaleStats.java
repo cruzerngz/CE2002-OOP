@@ -58,7 +58,7 @@ public class SaleStats {
             returnRow[0] = menuRow[1];
             returnRow[1] = dataRow[0];
             returnRow[2] = Float.toString(
-              Float.parseFloat(menuRow[2]) * Integer.parseInt(returnRow[1])  
+              Float.parseFloat(menuRow[2]) * Integer.parseInt(returnRow[1]) * 1.17f
             );
             returnArr.add(returnRow);
         }
@@ -129,7 +129,7 @@ public class SaleStats {
             returnRow[0] = menuRow[1]; //item
             returnRow[1] = dataRow[0]; //count
             returnRow[2] = Float.toString( //sales for that item
-              Float.parseFloat(menuRow[2]) * Integer.parseInt(dataRow[0])  
+              Float.parseFloat(menuRow[2]) * Integer.parseInt(dataRow[0]) * 1.17f
             );
 
             returnArr.add(returnRow);

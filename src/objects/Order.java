@@ -200,7 +200,7 @@ public class Order {
         while(i<orderRows.length) //no match and never reach end
             {
                 if(orderRows[i].equals(orderID)) {
-                    System.out.println(orderRows[i]);
+                    // System.out.println(orderRows[i]);
                     break;
                 }
                 else i++;
@@ -212,7 +212,7 @@ public class Order {
         }
 
         String[] itemRows = tempMap.get("items");
-        itemRows[i] = itemRows[i].replace(itemID, ""); //replace with blank
+        itemRows[i] = itemRows[i].replaceFirst(itemID, ""); //replace with blank
 
         //remove outlier dots
         itemRows[i] = itemRows[i].replaceAll("^\\.|\\.$", "").replaceAll("\\.\\.",".");
@@ -223,7 +223,8 @@ public class Order {
         for(j=0; j<menuArr.size(); j++) {
             if(j==0) {continue;} //skip col
             if(menuArr.get(j)[0].equals(itemID)) {
-                salePrice += Float.parseFloat(menuArr.get(j)[2]);
+                salePrice = salePrice - Float.parseFloat(menuArr.get(j)[2]);
+                break;
             }
         }
         
@@ -236,7 +237,7 @@ public class Order {
 
         //subtract from order
         String[] sales = tempMap.get("saleprice");
-        salePrice = Float.parseFloat(sales[i]) - salePrice;
+        salePrice = Float.parseFloat(sales[i]) + salePrice;
         sales[i] = Float.toString(salePrice);
         //write to map
         tempMap.put("saleprice", sales);
