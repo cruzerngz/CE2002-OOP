@@ -87,6 +87,21 @@ public class Checkout {
             Data.writeCSV(tempArrayList, orderPath);
         }
         //else no discount applied, no need edit csv
+        else {
+            
+            
+            // get twax
+            salepriceRows[i] = String.valueOf(tempsaleprice);
+            String[] salesTaxRows = tempMap.get("salesTax");
+            float tempsalesTax = tempsaleprice * 0.17f;
+            
+            //WB new tax value
+            salesTaxRows[i] = String.valueOf(tempsalesTax);
+            tempMap.put("salesTax", salesTaxRows);
+            
+            tempArrayList = Data.parse(tempMap);
+            Data.writeCSV(tempArrayList, orderPath);
+        }
         //set paid
         //add to revenue stats
         SaleStats stats = new SaleStats();
