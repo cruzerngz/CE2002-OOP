@@ -3,19 +3,22 @@ import java.util.Scanner;
 
 import util.Colour;
 import objects.Checkout;
+import objects.Restaurant;
 /**
  * Interface or Menu for checkout functions, checkout and print invoice
  * @author Domi
  */
 public class CheckoutUI implements BaseUI{
     private String orderID;
+    private Restaurant res;
     
     /**
      * Constructor: Simple object created so it can store orderID until the end of use, passing it to other linked classes.
      * @param orderID Order to checkout
      */
-    public CheckoutUI(String orderID) {
+    public CheckoutUI(String orderID, Restaurant res) {
         this.orderID = orderID; //assigned from outside for use later
+        this.res = res;
     }
 
     /**
@@ -38,7 +41,7 @@ public class CheckoutUI implements BaseUI{
             switch (choice) {
             //each of these cases call another method within this class
             case 1:
-                Checkout.checkout(orderID);
+                Checkout.checkout(orderID,res);
                 break;
             case 2:
                 Checkout.printInvoice(orderID);

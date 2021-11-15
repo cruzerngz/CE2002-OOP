@@ -3,5 +3,6 @@
     "java.project.referencedLibraries": [],
     "java.project.sourcePaths": [
         "src"
-    ]
+    ],
+    "java.dependency.packagePresentation": "hierarchical"
 }
