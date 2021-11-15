@@ -149,6 +149,10 @@ public class SaleStatsUI implements BaseUI{
         ArrayList<String[]> table;
         ArrayList<String[]> revMatrix = Data.readCSV(Path.revMatrix);
         int max = revMatrix.size() - 1;
+        if(max == 0) { //if no data in revenue matrix file
+            Colour.println(Colour.TEXT_RED, "No sales data found");
+            return;
+        }
         int start = Integer.parseInt(revMatrix.get(1)[0]);
         int end = Integer.parseInt(revMatrix.get(max)[0]);
         table = stats.rangeRevenue(start, end);

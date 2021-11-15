@@ -203,7 +203,7 @@ public class Seating {
         }
     }
 
-    public void checkFullReservation(int time) {
+    public boolean checkFullReservation(int time) {
         int numReserve = 0;
         for (int i = 0; i < 20; ++i) {
             if (table[i].isReserved(time)){
@@ -212,6 +212,10 @@ public class Seating {
         }
         if (numReserve == 20){
             System.out.println("Reservations are full for this timing.");
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }
