@@ -63,8 +63,8 @@ public class SaleStatsUI implements BaseUI{
         SaleStats stats = new SaleStats();
 
         amount = stats.dayRevenue(dt.getDaysSinceEpoch());
-        System.out.printf("Sales for %s is ", dt.getDayDate());
-        Colour.println(Colour.TEXT_CYAN, String.format("$%.2f", amount));
+        System.out.printf("Sales for %s:\n", dt.getDayDate());
+        // Colour.println(Colour.TEXT_CYAN, String.format("$%.2f", amount));
     }
 
     /**
@@ -91,8 +91,8 @@ public class SaleStatsUI implements BaseUI{
         amount = stats.dayRevenue(
             dt.ymdToEpochDay(y, m, d)
         );
-        System.out.printf("Sales for %s is ", date);
-        Colour.println(Colour.TEXT_CYAN, String.format("$%.2f", amount));
+        System.out.printf("Sales for %s:\n", date);
+        // Colour.println(Colour.TEXT_CYAN, String.format("$%.2f", amount));
     }
 
     /**

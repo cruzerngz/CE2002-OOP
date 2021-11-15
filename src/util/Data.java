@@ -163,6 +163,7 @@ public class Data {
 
     /**
      * Sorts arraylist by first column index
+     * Assumes that first row are col headers
      * Assumes that the first column contains integers
      * @param arrIn Array list to be sorted
      * @return Sorted array list
@@ -175,6 +176,29 @@ public class Data {
         for(int i=2; i<returnArr.size(); i++) {
             for(int j=i; j>1; j--) {
                 if(Integer.parseInt(returnArr.get(j)[0]) < 
+                   Integer.parseInt(returnArr.get(j-1)[0])) {
+
+                    Collections.swap(returnArr, j, j-1);
+                }
+            }
+        }
+        return returnArr;
+    }
+
+        /**
+     * Sorts arraylist by first column. 
+     * Assumes that the first column contains integers
+     * Assumes ALL col fields are integers
+     * @param arrIn Array list to be sorted
+     * @return Sorted array list
+     */
+    public static ArrayList<String[]> sortRevFullArrayList(ArrayList<String[]> arrIn) {
+        ArrayList<String[]> returnArr = deepCopy(arrIn);
+
+        //sort by first col
+        for(int i=1; i<returnArr.size(); i++) {
+            for(int j=i; j>0; j--) {
+                if(Integer.parseInt(returnArr.get(j)[0]) > 
                    Integer.parseInt(returnArr.get(j-1)[0])) {
 
                     Collections.swap(returnArr, j, j-1);

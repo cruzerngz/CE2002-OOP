@@ -10,7 +10,7 @@ import objects.*;
 
 public class debug {
     public static void main(String[] args) {
-        SaleStatsUI ui = new SaleStatsUI();
+        // SaleStatsUI ui = new SaleStatsUI();
         // ui.printOptions();
         SaleStats stats = new SaleStats();
         DateTime time = new DateTime();
@@ -20,6 +20,12 @@ public class debug {
         stats.addRevenue(time.getDaysSinceEpoch(), "200");
         stats.addRevenue(time.getDaysSinceEpoch(), "100.300.100.300.200");
 
+        ArrayList<String[]> x  = stats.dayRevenue(18946);
+        Data.printArrayList(x);
+        // ArrayList<String[]> x = SaleStats.parseStringToArrayList("2*100.1*200.5*300");
+        // Data.printArrayList(x);
+        // x = Data.sortRevFullArrayList(x);
+        // Data.printArrayList(x);
         // ArrayList<String[]> x = SaleStats.parseStringToArrayList("100.111.3*300.4*001");
         // // Data.printArrayList(x);
         // // "100.100.100"

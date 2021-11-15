@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.regex.PatternSyntaxException;
 
 import util.*;
@@ -27,40 +28,56 @@ public class SaleStats {
 
     /**
      * Get the revenue a stated day
-     * @Depreceated
      * @param epochDay Target day
      * @return Revenue
      */
-    public float dayRevenue(int epochDay) {
-        float result = 0;
+    public ArrayList<String[]> dayRevenue(int epochDay) {
+        //set the headers for returnArr
+        ArrayList<String[]> returnArr = new ArrayList<String[]>();
 
+        String[] row = null;
         for(int i=0; i<revMatrix.size(); i++) {
             if(i==0) continue; //skip col headers
             if(epochDay == Integer.parseInt(revMatrix.get(i)[0])) {
-                result += Float.parseFloat(revMatrix.get(i)[1]);
+                row = revMatrix.get(i);
                 break;
             }
         }
-        return result;
-    }
+        if(row == null) return null; //return nothing if no match
+        ArrayList<String[]> dataArr = parseStringToArrayList(row[1]);
+        dataArr = Data.sortRevFullArrayList(dataArr);
 
-    /**
-     * Get the revenue for past 30 days, inclusive
-     * @Depreceated
-     * @param epochDay Target day
-     * @return Revenue
-     */
-    public float monthRevenue(int epochDay) {
-        float result = 0;
+        //building the return arr
+        returnArr.add(new String[]{
+            "item","count","sales"
+        });
 
-        for(int i=0; i<revMatrix.size(); i++) {
-            if(i==0) continue; //skip col headers
-            if(epochDay - Integer.parseInt(revMatrix.get(i)[0]) >= 0 && 
-               epochDay - Integer.parseInt(revMatrix.get(i)[0]) < 30) {
-                result += Float.parseFloat(revMatrix.get(i)[1]);
-            }
+        for(String[] dataRow: dataArr) {
+            String[] menuRow = getMenuItem(dataRow[1]);
+            String[] returnRow = new String[3];
+            returnRow[0] = menuRow[1];
+            returnRow[1] = dataRow[0];
+            returnRow[2] = Float.toString(
+              Float.parseFloat(menuRow[2]) * Integer.parseInt(returnRow[1])  
+            );
+            returnArr.add(returnRow);
+            
         }
-        return result;
+        
+        //adding total row to bottom
+        String[] totalRow = new String[3];
+        float total = 0f;
+        for(int i=0; i<returnArr.size(); i++) {
+            if(i==0) {continue;}
+            total += 
+            Float.parseFloat(returnArr.get(i)[1]) * Float.parseFloat(returnArr.get(i)[2]);
+        }
+        totalRow[0] = "total";
+        totalRow[1] = "";
+        totalRow[2] = Float.toString(total);
+        returnArr.add(totalRow);
+
+        return formatReport(returnArr);
     }
 
     /**
@@ -78,6 +95,25 @@ public class SaleStats {
             //if in range, add
             if(Integer.parseInt(revMatrix.get(i)[0]) >= epochDayStart && 
                Integer.parseInt(revMatrix.get(i)[0]) <= epochDayEnd) {
+                result += Float.parseFloat(revMatrix.get(i)[1]);
+            }
+        }
+        return result;
+    }
+    
+    /**
+     * Get the revenue for past 30 days, inclusive
+     * @Depreceated
+     * @param epochDay Target day
+     * @return Revenue
+     */
+    public float monthRevenue(int epochDay) {
+        float result = 0;
+
+        for(int i=0; i<revMatrix.size(); i++) {
+            if(i==0) continue; //skip col headers
+            if(epochDay - Integer.parseInt(revMatrix.get(i)[0]) >= 0 && 
+               epochDay - Integer.parseInt(revMatrix.get(i)[0]) < 30) {
                 result += Float.parseFloat(revMatrix.get(i)[1]);
             }
         }
@@ -119,28 +155,6 @@ public class SaleStats {
             return true;
         }
         return false;
-    }
-
-    /**
-     * Subtract the revenue for a selected day
-     * @param epochDay Target day
-     * @param amount Revenue to subtract
-     * @return true if successful
-     */
-    public boolean subRevenue(int epochDay, float amount) {
-        int i;
-        for(i=0; i<revMatrix.size(); i++) { 
-            if(i==0) continue; //ignoring col header
-
-            //if match, write
-            if(epochDay == Integer.parseInt(revMatrix.get(i)[0])) {
-                amount = Float.parseFloat(revMatrix.get(i)[1]) - amount;
-                revMatrix.get(i)[1] = Float.toString(amount);
-                save();
-                return true;
-            }
-        }
-        return false; //assume that days without any rev cannot have rev subtracted
     }
 
     /**
@@ -253,7 +267,7 @@ public class SaleStats {
      * @param stringIn
      * @return
      */
-    private ArrayList<String[]> parseStringToArrayList(String stringIn) {
+    public static ArrayList<String[]> parseStringToArrayList(String stringIn) {
         ArrayList<String[]> returnArr = new ArrayList<String[]>();
         for(String item:stringIn.split("\\.")) {
             String[] temp;
@@ -268,6 +282,39 @@ public class SaleStats {
             returnArr.add(temp);
         }
         return returnArr;
+    }
+
+    private String[] getMenuItem(String itemID) {
+        for(String[] row: menuArr) {
+            if(row[0].equals(itemID)) {
+                return row;
+            }
+        }
+        return null;
+    }
+
+    private ArrayList<String[]> formatReport(ArrayList<String[]> report) {
+        ArrayList<String[]> returnArr = Data.deepCopy(report);
+        LinkedHashMap<String, String[]> returnMap = Data.parse(returnArr);
+        
+        String[] salesCol = returnMap.get("sales");
+
+        for(int i=0; i<salesCol.length; i++) {
+            float temp = Float.parseFloat(salesCol[i]);
+            salesCol[i] = String.format("$%.2f", temp);
+        }
+        returnMap.put("sales", salesCol);
+
+        int max = returnMap.size();
+        String[] newItem = returnMap.get("item");
+        newItem[max] = Colour.Green(newItem[max]);
+        returnMap.put("item", newItem);
+        String[] newSales = returnMap.get("sales");
+        newSales[max] = Colour.Green(newSales[max]);
+        returnMap.put("sales", newSales);
+        
+
+        return Data.parse(returnMap);
     }
 
     /**
