@@ -208,6 +208,10 @@ public class Restaurant {
             System.out.println("Reservation can only be made 1 week in advance!");
             return false;
         }
+        else if(date.equals(today) && dt.getTime()>time){
+            System.out.println("The time has passed!");
+            return false;
+        }
         else{
             return (seating.get(date).checkFullReservation(time));
         }
