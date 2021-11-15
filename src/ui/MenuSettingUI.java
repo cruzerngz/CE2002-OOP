@@ -137,6 +137,7 @@ public class MenuSettingUI implements BaseUI{
         Scanner sc = new Scanner(System.in);
         ArrayList<String[]> tempArr = new  ArrayList<String[]>();
         ArrayList<String[]> printArr = new ArrayList<String[]>();
+        LinkedHashMap<String, String[]> printMap = new LinkedHashMap<String, String[]>();
 
         Colour.println(Colour.TEXT_GREEN,"(1) Main");
         Colour.println(Colour.TEXT_GREEN,"(2) Drinks");
@@ -150,6 +151,7 @@ public class MenuSettingUI implements BaseUI{
             case 1:
                 tempArr.clear();
                 printArr.clear();
+                printMap.clear();
                 tempArr = Data.readCSV(Path.menu);
                 printArr = new ArrayList<String[]>();
                 printArr.add(tempArr.get(0));
@@ -162,12 +164,16 @@ public class MenuSettingUI implements BaseUI{
                     }
                 }
                 printArr = Data.sortArrayList(printArr);
+                printMap = Data.parse(printArr);
+                printMap.remove("description");
+                printArr = Data.parse(printMap);
                 Data.printArrayList(formatMenu(printArr));
                 break;
 
             case 2:
                 tempArr.clear();
                 printArr.clear();
+                printMap.clear();
                 tempArr = Data.readCSV(Path.menu);
                 printArr = new ArrayList<String[]>();
                 printArr.add(tempArr.get(0));
@@ -180,12 +186,16 @@ public class MenuSettingUI implements BaseUI{
                     }
                 }
                 printArr = Data.sortArrayList(printArr);
+                printMap = Data.parse(printArr);
+                printMap.remove("description");
+                printArr = Data.parse(printMap);
                 Data.printArrayList(formatMenu(printArr));
                 break;
 
             case 3:
                 tempArr.clear();
                 printArr.clear();
+                printMap.clear();
                 tempArr = Data.readCSV(Path.menu);
                 printArr = new ArrayList<String[]>();
                 printArr.add(tempArr.get(0));
@@ -198,12 +208,16 @@ public class MenuSettingUI implements BaseUI{
                     }
                 }
                 printArr = Data.sortArrayList(printArr);
+                printMap = Data.parse(printArr);
+                printMap.remove("description");
+                printArr = Data.parse(printMap);
                 Data.printArrayList(formatMenu(printArr));
                 break;
 
             case 4:
                 tempArr.clear();
                 printArr.clear();
+                printMap.clear();
                 tempArr = Data.readCSV(Path.menu);
                 printArr = new ArrayList<String[]>();
                 printArr.add(tempArr.get(0));
@@ -216,6 +230,9 @@ public class MenuSettingUI implements BaseUI{
                     }
                 }
                 printArr = Data.sortArrayList(printArr);
+                printMap = Data.parse(printArr);
+                printMap.remove("description");
+                printArr = Data.parse(printMap);
                 Data.printArrayList(formatMenu(printArr));
                 break;
 

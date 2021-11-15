@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
+import util.Colour;
 import util.Data;
 import util.DateTime;
 import util.Path;
@@ -92,7 +93,7 @@ public class Checkout {
         DateTime dt = new DateTime();
         stats.addRevenue(dt.getDaysSinceEpoch(), tempMap.get("items")[i]);
        
-        System.out.printf("Total payment to receive: $%.2f", tempsaleprice);
+        System.out.printf("Total payment to receive: " + Colour.Cyan("$%.2f\n"), tempsaleprice);
         //temporary test
         
         Paid.setPaid(i);
@@ -108,7 +109,7 @@ public class Checkout {
      * @param orderID String to search order csv
      */
     public static void printInvoice(String orderID){ //receipt format
-        
+        ArrayList<String[]> receiptArr = new ArrayList<String[]>();
         
         //server
         ArrayList<String[]> tempArrayList = Data.readCSV(orderPath);
@@ -135,8 +136,8 @@ public class Checkout {
         }
         //timestamp is orderid
         //print staff who served
-        System.out.printf("Staff:   %s\n",tempMap.get("emp_name")[i]);
-
+        // System.out.printf("Staff:\t\t\t%s\n",tempMap.get("emp_name")[i]);
+        receiptArr.add(new String[]{"Staff:",tempMap.get("emp_name")[i]}); //name header for receipt
         //item list with price at side
         String[] itemRows = tempMap.get("items");
         String[] itemlist = itemRows[i].split("\\."); //each element is id
@@ -144,7 +145,7 @@ public class Checkout {
 
         ArrayList<String[]> menuArrayList = Data.readCSV(menuPath); //read menu csv before enter loop
         LinkedHashMap<String, String[]> tempMap2 = Data.parse(menuArrayList);
-
+        
         String[] idRows = tempMap2.get("id");
         String[] nameRows = tempMap2.get("name");
         String[] priceRows = tempMap2.get("price");
@@ -159,16 +160,34 @@ public class Checkout {
                     break;
             }
             
-            System.out.printf("%s              $%s\n",nameRows[index],priceRows[index]);
+            // System.out.printf("%s\t$%s\n",nameRows[index],priceRows[index]);
+            receiptArr.add(new String[]{
+                nameRows[index], priceRows[index]
+            });
         }
         
         //subtotal followed by discount then tax amt then total
         String subtotal = tempMap.get("saleprice")[i]; //saleprice at row i error here
         String tax = tempMap.get("salesTax")[i];
-        System.out.printf("Subtotal (after discounts)      $%s\n",subtotal); 
-        System.out.printf("Tax          $%s\n",tax);
+        tax = String.format("%.2f", Float.parseFloat(tax));
+        // System.out.printf("Subtotal\t\t$%s\n",subtotal); 
+        // System.out.printf("Tax\t\t\t$%s\n",tax);
         float total = Float.parseFloat(subtotal) + Float.parseFloat(tax);
-        System.out.printf("Total          %.2f",total);
+        // System.out.printf("Total\t\t\t$%.2f",total);
+
+        receiptArr.add(new String[]{"Subtotal", tempMap.get("saleprice")[i]});
+        receiptArr.add(new String[]{"Tax", tempMap.get("salesTax")[i]});
+        receiptArr.add(new String[]{"Total", Float.toString(total)});
+
+        //format receipt with dollar sign
+        for(int j=0; j<receiptArr.size(); j++) {
+            if(j==0) {continue;}
+            String[] row = receiptArr.get(j);
+            Float temp = Float.parseFloat(row[1]);
+            row[1] = String.format("$%.2f", temp);
+            receiptArr.set(j, row);
+        }
+        Data.printArrayList(receiptArr);
 
     }
 

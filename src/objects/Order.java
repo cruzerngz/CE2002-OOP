@@ -161,6 +161,7 @@ public class Order {
                 itemRows[i] = itemRows[i].replaceAll("^\\.|\\.$", "").replaceAll("\\.\\.",".");
                 tempMap.put("items", itemRows);
                 salePrice += Float.parseFloat(menuArr.get(j)[2]);
+                break;
             }
         }
 

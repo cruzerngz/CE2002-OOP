@@ -131,6 +131,8 @@ public class PmenuUI implements BaseUI{
     private static void PmenuPrint() {
         ArrayList<String[]> tempArr = new  ArrayList<String[]>();
         ArrayList<String[]> printArr = new ArrayList<String[]>();
+        LinkedHashMap<String, String[]> printMap = new LinkedHashMap<String, String[]>();
+
         tempArr.clear();
         printArr.clear();
         tempArr = Data.readCSV(Path.menu);
@@ -144,6 +146,9 @@ public class PmenuUI implements BaseUI{
             }
         }
         printArr = Data.sortArrayList(printArr);
+        printMap = Data.parse(printArr);
+        printMap.remove("type");
+        printArr = Data.parse(printMap);
         Data.printArrayList(formatMenu(printArr));
         
         
