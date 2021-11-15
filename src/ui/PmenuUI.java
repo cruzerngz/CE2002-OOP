@@ -18,11 +18,11 @@ public class PmenuUI implements BaseUI{
 
         do {
             System.out.println();
-            Colour.println(Colour.TEXT_BLUE,"Menu Settings");
-            Colour.println(Colour.TEXT_GREEN,"(1) Print existing menu");
-            Colour.println(Colour.TEXT_GREEN,"(2) Create a new menu item");
-            Colour.println(Colour.TEXT_GREEN,"(3) Edit an existing menu item's details");
-            Colour.println(Colour.TEXT_GREEN,"(4) Delete a menu item");
+            Colour.println(Colour.TEXT_BLUE,"Promo Menu Settings");
+            Colour.println(Colour.TEXT_GREEN,"(1) Print existing packages");
+            Colour.println(Colour.TEXT_GREEN,"(2) Create a new package item");
+            Colour.println(Colour.TEXT_GREEN,"(3) Edit an existing package item's details");
+            Colour.println(Colour.TEXT_GREEN,"(4) Delete a package from menu");
             Colour.println(Colour.TEXT_GREEN,"(0) Back");
 
             System.out.println("");
