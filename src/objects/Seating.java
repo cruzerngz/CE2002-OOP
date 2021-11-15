@@ -193,13 +193,25 @@ public class Seating {
     public void checkReservation(int time) {
         int numReserve = 0;
         for (int i = 0; i < 20; ++i) {
-            table[i].checkReservation(time);
             if (table[i].isReserved(time)){
                 numReserve+=1;
+                table[i].checkReservation(time);
             }
         }
         if (numReserve == 0){
             System.out.println("There are no reservations.");
+        }
+    }
+
+    public void checkFullReservation(int time) {
+        int numReserve = 0;
+        for (int i = 0; i < 20; ++i) {
+            if (table[i].isReserved(time)){
+                numReserve+=1;
+            }
+        }
+        if (numReserve == 20){
+            System.out.println("Reservations are full for this timing.");
         }
     }
 }

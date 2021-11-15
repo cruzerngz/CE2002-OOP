@@ -39,6 +39,7 @@ public class Reservation implements BaseUI{
                 System.out.println("Time:");
                 int time = sc.nextInt();
                 sc.nextLine();
+                res.checkFullReservation(date, time);
                 System.out.println("Table Number:");
                 String tableNo = sc.nextLine();
                 System.out.println("Customer's name:");

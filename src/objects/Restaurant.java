@@ -125,6 +125,8 @@ public class Restaurant {
         dt.deltaDay(-7);
     }
 
+    
+
     /**
      * Unreserves a table
      * @param date
@@ -174,6 +176,10 @@ public class Restaurant {
         seating.get(date).checkReservation(time);
     }
     
+    public void checkFullReservation(String date, int time){
+        seating.get(date).checkFullReservation(time);
+    }
+
     /**
      * Writes the new reservations into the CSV file to store the data.
      */
