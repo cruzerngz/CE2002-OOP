@@ -131,8 +131,8 @@ public class Checkout {
             return;
         }
         //timestamp is orderid
-        //convert or just print?
-        //System.out.println(orderID);
+        //print staff who served
+        System.out.printf("Staff:   %s\n",tempMap.get("emp_name")[i]);
 
         //item list with price at side
         String[] itemRows = tempMap.get("items");
@@ -162,7 +162,7 @@ public class Checkout {
         //subtotal followed by discount then tax amt then total
         String subtotal = tempMap.get("saleprice")[i]; //saleprice at row i error here
         String tax = tempMap.get("salesTax")[i];
-        System.out.printf("Subtotal         $%s\n",subtotal); 
+        System.out.printf("Subtotal (after discounts)      $%s\n",subtotal); 
         System.out.printf("Tax          $%s\n",tax);
         float total = Float.parseFloat(subtotal) + Float.parseFloat(tax);
         System.out.printf("Total          %.2f",total);
