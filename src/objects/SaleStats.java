@@ -34,6 +34,9 @@ public class SaleStats {
     public ArrayList<String[]> dayRevenue(int epochDay) {
         //set the headers for returnArr
         ArrayList<String[]> returnArr = new ArrayList<String[]>();
+        returnArr.add(new String[]{
+            "item","count","sales"
+        });
 
         String[] row = null;
         for(int i=0; i<revMatrix.size(); i++) {
@@ -48,10 +51,6 @@ public class SaleStats {
         dataArr = Data.sortRevFullArrayList(dataArr);
 
         //building the return arr
-        returnArr.add(new String[]{
-            "item","count","sales"
-        });
-
         for(String[] dataRow: dataArr) {
             String[] menuRow = getMenuItem(dataRow[1]);
             String[] returnRow = new String[3];
@@ -69,8 +68,7 @@ public class SaleStats {
         float total = 0f;
         for(int i=0; i<returnArr.size(); i++) {
             if(i==0) {continue;}
-            total += 
-            Float.parseFloat(returnArr.get(i)[1]) * Float.parseFloat(returnArr.get(i)[2]);
+            total += Float.parseFloat(returnArr.get(i)[2]);
         }
         totalRow[0] = "total";
         totalRow[1] = "";
@@ -82,42 +80,72 @@ public class SaleStats {
 
     /**
      * Get the revenue for a given range of days, inclusive
-     * @Depreceated
      * @param epochDayStart Starting day
      * @param epochDayEnd Ending day
      * @return Revenue
      */
-    public float rangeRevenue(int epochDayStart, int epochDayEnd) {
-        float result = 0;
+    public ArrayList<String[]> rangeRevenue(int epochDayStart, int epochDayEnd) {
+        //setting headers for returnArr
+        ArrayList<String[]> returnArr = new ArrayList<String[]>();
+        returnArr.add(new String[]{
+            "item","count","sales"
+        });
+        String itemStr = null;
 
         for(int i=0; i<revMatrix.size(); i++) {
             if(i==0) continue; //skip col headers
-            //if in range, add
+            //if in range, add to item string
             if(Integer.parseInt(revMatrix.get(i)[0]) >= epochDayStart && 
                Integer.parseInt(revMatrix.get(i)[0]) <= epochDayEnd) {
-                result += Float.parseFloat(revMatrix.get(i)[1]);
-            }
-        }
-        return result;
-    }
-    
-    /**
-     * Get the revenue for past 30 days, inclusive
-     * @Depreceated
-     * @param epochDay Target day
-     * @return Revenue
-     */
-    public float monthRevenue(int epochDay) {
-        float result = 0;
 
-        for(int i=0; i<revMatrix.size(); i++) {
-            if(i==0) continue; //skip col headers
-            if(epochDay - Integer.parseInt(revMatrix.get(i)[0]) >= 0 && 
-               epochDay - Integer.parseInt(revMatrix.get(i)[0]) < 30) {
-                result += Float.parseFloat(revMatrix.get(i)[1]);
+                    if(itemStr == null) {
+                        ArrayList<String[]> tempArrList = parseStringToArrayList(revMatrix.get(i)[1]);
+                        ArrayList<String> tempArr = new ArrayList<String>();
+                        for(String[] row: tempArrList) {
+                            tempArr.add(String.join("*", row));
+                        }
+                        itemStr = String.join(".", tempArr);
+                    } else {
+                        itemStr = addTo(itemStr, revMatrix.get(i)[1]);
+                    }
+                    
             }
         }
-        return result;
+        // System.out.println(itemStr);
+        //return null if no entry
+        if(itemStr == null) {return null;}
+        //continue if have entries
+        ArrayList<String[]> dataArr = parseStringToArrayList(itemStr);
+        dataArr = Data.sortRevFullArrayList(dataArr);
+
+
+        //building the return arr
+        for(String[] dataRow: dataArr) {
+            String[] menuRow = getMenuItem(dataRow[1]);
+            String[] returnRow = new String[3];
+            returnRow[0] = menuRow[1];
+            returnRow[1] = dataRow[0];
+            returnRow[2] = Float.toString(
+              Float.parseFloat(menuRow[2]) * Integer.parseInt(dataRow[0])  
+            );
+
+            returnArr.add(returnRow);
+            
+        }
+        
+        //adding total row to bottom
+        String[] totalRow = new String[3];
+        float total = 0f;
+        for(int i=0; i<returnArr.size(); i++) {
+            if(i==0) {continue;}
+            total += Float.parseFloat(returnArr.get(i)[2]);
+        }
+        totalRow[0] = "total";
+        totalRow[1] = "";
+        totalRow[2] = Float.toString(total);
+        returnArr.add(totalRow);
+
+        return formatReport(returnArr);
     }
 
     /**
@@ -179,6 +207,7 @@ public class SaleStats {
 
     /**
      * Returns a formatted array list for printing
+     * @Depreceated
      * @return printable array
      */
     public ArrayList<String[]> getPrintMatrix() {
@@ -230,18 +259,19 @@ public class SaleStats {
      * @return Formatted target
      */
     private String addTo(String target, String addition) {
-        String[] addArr = addition.split("\\.");
+        ArrayList<String[]> addArr = parseStringToArrayList(addition);
         ArrayList<String[]> targetArr = parseStringToArrayList(target);
 
-        for(String item: addArr) {
+        for(String[] item: addArr) {
             Boolean complete = false;
             int i;
             //increment the count if match
             for(i=0; i<targetArr.size(); i++) {
-                if(item.equals(targetArr.get(i)[1])) {
+                if(item[1].equals(targetArr.get(i)[1])) {
                     String[] temprow = targetArr.get(i);
                     int x = Integer.parseInt(temprow[0]);
-                    temprow[0] = Integer.toString(++x);
+                    x += Integer.parseInt(item[0]);
+                    temprow[0] = Integer.toString(x);
 
                     targetArr.set(i, temprow);
                     complete = true;
@@ -249,9 +279,7 @@ public class SaleStats {
             }
             //add new line if no match
             if(!complete) {
-                targetArr.add(new String[]{
-                    "1",item
-                });
+                targetArr.add(item);
             }
         }
 
