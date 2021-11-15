@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import ui.*;
 import util.*;
@@ -7,53 +9,40 @@ import objects.*;
 
 
 public class debug {
-    // public static void main(String args[]) throws IOException {
+    public static void main(String[] args) {
+        SaleStatsUI ui = new SaleStatsUI();
+        // ui.printOptions();
+        SaleStats stats = new SaleStats();
+        DateTime time = new DateTime();
 
-    //     SaleStatsUI.main(args);
-    //     // testTime();
-    //     // testStats();
-    //     // testColour();
-    //     // DateTime date = new DateTime();
-    //     // int epochDay = date.ymdToEpochDay(2021, 11, 12);
-    //     // System.out.println(epochDay);
-    //     // epochDay = date.getDaysSinceEpoch();
-    //     // System.out.println(epochDay);
+        stats.reset();
+        stats.addRevenue(time.getDaysSinceEpoch(), "100");
+        stats.addRevenue(time.getDaysSinceEpoch(), "200");
+        stats.addRevenue(time.getDaysSinceEpoch(), "100.300.100.300.200");
 
-    // }
-    // public static void testTime() throws IOException {
-    //     DateTime datetime = new DateTime();
-    //     System.out.println(datetime.getDateTime());
-    //     datetime.deltaHour(1);
-    //     datetime.deltaDay(-112);
-    //     datetime.reset();
-    // }
+        // ArrayList<String[]> x = SaleStats.parseStringToArrayList("100.111.3*300.4*001");
+        // // Data.printArrayList(x);
+        // // "100.100.100"
 
-    // public static void testStats() {
-    //     SaleStats stats = new SaleStats();
-    //     stats.reset(); //clear all data
-    //     System.out.println("Adding 50 days of data");
-    //     for(int i=18938; i>18888; i--) {
-    //         stats.addRevenue(i,10f);
-    //     }
-    //     System.out.print("removing one day of data: ");
-    //     System.out.println(stats.delRevenue(18900));
+        // // String[] y = "1*100".split("\\*");
+        // // System.out.println(String.join("*", y));
+        // // System.out.println(Arrays.asList(new String[]{"1","2"}));
+        // // System.out.println(Arrays.asList(y));
 
-    //     System.out.print("subtracting revenue from one day: ");
-    //     System.out.println(stats.subRevenue(18901, 5f));
+        // String a = "1*100.2*200.3*300.400.500";
+        // String b = "100.100.200.300.600.700";
+        // String c = SaleStats.addTo(a, b);
+        // System.out.println(c);
 
-    //     Data.printArrayList(stats.getPrintMatrix());
+        // ArrayList<String[]> z = new ArrayList<String[]>();
+        // ArrayList<String[]> q = new ArrayList<String[]>();
+        // z.add(new String[]{"1","2"});
+        // q.add(new String[]{"1","3"});
 
-    //     System.out.print("Showing month data: ");
-    //     Float x = stats.monthRevenue(18936);
-    //     System.out.println(x);
+        // if(z.get(0)[0].equals(z.get(0)[0])) {
+        //     System.out.println("match");
+        // }
 
-    //     System.out.print("Showing day data if any: ");
-    //     x = stats.dayRevenue(18950);
-    //     System.out.println(x);
-    // }
-
-    // public static void testColour() {
-    //     Colour.print(Colour.TEXT_BLUE, "testing... printing single line. ");
-    //     Colour.println(Colour.TEXT_YELLOW, "new colour haha");
-    // }
+    }
+    
 }

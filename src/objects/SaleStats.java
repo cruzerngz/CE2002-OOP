@@ -2,7 +2,9 @@ package objects;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.regex.PatternSyntaxException;
 
 import util.*;
 
@@ -12,12 +14,12 @@ import util.*;
  */
 public class SaleStats {
     private ArrayList<String[]> revMatrix;
+    private ArrayList<String[]> menuArr;
     private String filePath = Path.revMatrix;
     private DecimalFormat dF = new DecimalFormat("0.00");
     
     /**
      * Loads sale information from data
-     * @param path Path to the revenue matrix file
      */
     public SaleStats() {
         read();
@@ -25,6 +27,7 @@ public class SaleStats {
 
     /**
      * Get the revenue a stated day
+     * @Depreceated
      * @param epochDay Target day
      * @return Revenue
      */
@@ -43,6 +46,7 @@ public class SaleStats {
 
     /**
      * Get the revenue for past 30 days, inclusive
+     * @Depreceated
      * @param epochDay Target day
      * @return Revenue
      */
@@ -61,6 +65,7 @@ public class SaleStats {
 
     /**
      * Get the revenue for a given range of days, inclusive
+     * @Depreceated
      * @param epochDayStart Starting day
      * @param epochDayEnd Ending day
      * @return Revenue
@@ -85,23 +90,29 @@ public class SaleStats {
      * @param amount Revenue for that day
      * @return true if successful
      */
-    public boolean addRevenue(int epochDay, float amount) {
+    public boolean addRevenue(int epochDay, String items) {
         int i;
         for(i=0; i<revMatrix.size(); i++) { 
             if(i==0) continue; //ignoring col header
 
             //if match, write
             if(epochDay == Integer.parseInt(revMatrix.get(i)[0])) {
-                amount += Float.parseFloat(revMatrix.get(i)[1]);
-                revMatrix.get(i)[1] = Float.toString(amount);
+                String[] row = revMatrix.get(i);
+                row[1] = addTo(row[1], items);
                 save();
                 return true;
             }
         }
         //if no match, create new entry
         if(i==revMatrix.size()) {
+            ArrayList<String[]> temp = parseStringToArrayList(items);
+            ArrayList<String> tempItems = new ArrayList<String>();
+            for(String[] row: temp) {
+                tempItems.add(String.join("*", row));
+            }
+
             String[] writeStr = new String[]{
-                Integer.toString(epochDay),Float.toString(amount)
+                Integer.toString(epochDay), String.join(".",tempItems)
             };
             revMatrix.add(writeStr);
             sort();
@@ -199,22 +210,71 @@ public class SaleStats {
     }
 
     /**
+     * Adds orders to the target
+     * @param target
+     * @param addition
+     * @return Formatted target
+     */
+    private String addTo(String target, String addition) {
+        String[] addArr = addition.split("\\.");
+        ArrayList<String[]> targetArr = parseStringToArrayList(target);
+
+        for(String item: addArr) {
+            Boolean complete = false;
+            int i;
+            //increment the count if match
+            for(i=0; i<targetArr.size(); i++) {
+                if(item.equals(targetArr.get(i)[1])) {
+                    String[] temprow = targetArr.get(i);
+                    int x = Integer.parseInt(temprow[0]);
+                    temprow[0] = Integer.toString(++x);
+
+                    targetArr.set(i, temprow);
+                    complete = true;
+                }
+            }
+            //add new line if no match
+            if(!complete) {
+                targetArr.add(new String[]{
+                    "1",item
+                });
+            }
+        }
+
+        ArrayList<String> temp = new ArrayList<String>();
+        for(String[] row: targetArr) {
+            temp.add(String.join("*", row));
+        }
+        return String.join(".", temp);
+    }
+
+    /**
+     * Convert dot-separated elements into an arraylist
+     * @param stringIn
+     * @return
+     */
+    private ArrayList<String[]> parseStringToArrayList(String stringIn) {
+        ArrayList<String[]> returnArr = new ArrayList<String[]>();
+        for(String item:stringIn.split("\\.")) {
+            String[] temp;
+            //add to arrayList
+            if(item.split("\\*").length == 1) {
+                temp = new String[]{
+                    "1",item
+                };
+            } else {
+                temp = item.split("\\*");
+            }
+            returnArr.add(temp);
+        }
+        return returnArr;
+    }
+
+    /**
      * Sorts the entries by day, then writes to file
      */
     private void sort() {
-
-        if(revMatrix.size() <= 2) return; //no need to sort
-
-        //using insertionsort
-        for(int i=2; i<revMatrix.size(); i++) {
-            for(int j=i; j>1; j--) {
-                //if index j is smaller than j-1, swap
-                if(Integer.parseInt(revMatrix.get(j)[0]) < 
-                   Integer.parseInt(revMatrix.get(j-1)[0])) {
-                    Collections.swap(revMatrix, j, j-1);
-                }
-            }
-        }
+        revMatrix = Data.sortArrayList(revMatrix);
         save();
     }
 
@@ -223,6 +283,7 @@ public class SaleStats {
      */
     private void read() {
         revMatrix = Data.readCSV(filePath);
+        menuArr = Data.readCSV(Path.menu);
     }
 
     /**
