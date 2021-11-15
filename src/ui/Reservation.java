@@ -76,10 +76,10 @@ public class Reservation implements BaseUI{
 
             case 4:
                 do {
-                    System.out.println("_____List existing reservations_____");
-                    System.out.println("(1) List specific day");
-                    System.out.println("(2) List all");
-                    System.out.println("(0) Back");
+                    Colour.println(Colour.TEXT_BLUE,"_____List existing reservations_____");
+                    Colour.println(Colour.TEXT_GREEN,"(1) List specific day");
+                    Colour.println(Colour.TEXT_GREEN,"(2) List all");
+                    Colour.println(Colour.TEXT_GREEN,"(0) Back");
                     System.out.println("");
                     System.out.printf("Enter your choice: ");
                     choice = sc.nextInt();
