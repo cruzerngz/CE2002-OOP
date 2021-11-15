@@ -49,6 +49,7 @@ public class SaleStats {
         if(row == null) return null; //return nothing if no match
         ArrayList<String[]> dataArr = parseStringToArrayList(row[1]);
         dataArr = Data.sortRevFullArrayList(dataArr);
+        // Data.printArrayList(dataArr);
 
         //building the return arr
         for(String[] dataRow: dataArr) {
@@ -60,8 +61,8 @@ public class SaleStats {
               Float.parseFloat(menuRow[2]) * Integer.parseInt(returnRow[1])  
             );
             returnArr.add(returnRow);
-            
         }
+        // Data.printArrayList(returnArr);
         
         //adding total row to bottom
         String[] totalRow = new String[3];
@@ -74,6 +75,8 @@ public class SaleStats {
         totalRow[1] = "";
         totalRow[2] = Float.toString(total);
         returnArr.add(totalRow);
+
+        // Data.printArrayList(returnArr);
 
         return formatReport(returnArr);
     }
@@ -123,9 +126,9 @@ public class SaleStats {
         for(String[] dataRow: dataArr) {
             String[] menuRow = getMenuItem(dataRow[1]);
             String[] returnRow = new String[3];
-            returnRow[0] = menuRow[1];
-            returnRow[1] = dataRow[0];
-            returnRow[2] = Float.toString(
+            returnRow[0] = menuRow[1]; //item
+            returnRow[1] = dataRow[0]; //count
+            returnRow[2] = Float.toString( //sales for that item
               Float.parseFloat(menuRow[2]) * Integer.parseInt(dataRow[0])  
             );
 
@@ -313,6 +316,7 @@ public class SaleStats {
     }
 
     private String[] getMenuItem(String itemID) {
+        read();
         for(String[] row: menuArr) {
             if(row[0].equals(itemID)) {
                 return row;
@@ -333,7 +337,7 @@ public class SaleStats {
         }
         returnMap.put("sales", salesCol);
 
-        int max = returnMap.size();
+        int max = returnArr.size() - 1;
         String[] newItem = returnMap.get("item");
         newItem[max] = Colour.Green(newItem[max]);
         returnMap.put("item", newItem);

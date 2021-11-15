@@ -59,7 +59,7 @@ public class Checkout {
         
         String[] salepriceRows = tempMap.get("saleprice");
         float tempsaleprice = Float.parseFloat(salepriceRows[i]); //calculate saleprice
-
+        float tempsalesTax;
 
         System.out.println("Is customer member? Y/N");
         if(sc.next().charAt(0) == 'Y')
@@ -76,7 +76,7 @@ public class Checkout {
             //discount tax separately for ease
             salepriceRows[i] = String.valueOf(tempsaleprice);
             String[] salesTaxRows = tempMap.get("salesTax");
-            float tempsalesTax = tempsaleprice * 0.17f;
+            tempsalesTax = tempsaleprice * 0.17f;
             tempsalesTax = tempsalesTax * discount;
             
             //WB new tax value
@@ -93,7 +93,7 @@ public class Checkout {
             // get twax
             salepriceRows[i] = String.valueOf(tempsaleprice);
             String[] salesTaxRows = tempMap.get("salesTax");
-            float tempsalesTax = tempsaleprice * 0.17f;
+            tempsalesTax = tempsaleprice * 0.17f;
             
             //WB new tax value
             salesTaxRows[i] = String.valueOf(tempsalesTax);
@@ -108,7 +108,7 @@ public class Checkout {
         DateTime dt = new DateTime();
         stats.addRevenue(dt.getDaysSinceEpoch(), tempMap.get("items")[i]);
        
-        System.out.printf("Total payment to receive: " + Colour.Cyan("$%.2f\n"), tempsaleprice);
+        System.out.printf("Total payment to receive: " + Colour.Cyan("$%.2f\n"), tempsaleprice + tempsalesTax);
         //temporary test
         
         Paid.setPaid(i);
@@ -190,6 +190,10 @@ public class Checkout {
         float total = Float.parseFloat(subtotal) + Float.parseFloat(tax);
         // System.out.printf("Total\t\t\t$%.2f",total);
 
+        //add 2 empty rows before summary
+        for(int k=0; k<2; k++) {
+            receiptArr.add(new String[]{"",""});
+        }
         receiptArr.add(new String[]{"Subtotal", tempMap.get("saleprice")[i]});
         receiptArr.add(new String[]{"Tax", tempMap.get("salesTax")[i]});
         receiptArr.add(new String[]{"Total", Float.toString(total)});
@@ -197,10 +201,15 @@ public class Checkout {
         //format receipt with dollar sign
         for(int j=0; j<receiptArr.size(); j++) {
             if(j==0) {continue;}
-            String[] row = receiptArr.get(j);
-            Float temp = Float.parseFloat(row[1]);
-            row[1] = String.format("$%.2f", temp);
-            receiptArr.set(j, row);
+            try {
+                String[] row = receiptArr.get(j);
+                Float temp = Float.parseFloat(row[1]);
+                row[1] = String.format("$%.2f", temp);
+                receiptArr.set(j, row);
+            } catch(Exception e) {
+                continue;
+            }
+            
         }
         Data.printArrayList(receiptArr);
 
