@@ -156,7 +156,7 @@ public class Checkout {
             //look for id match
             for(index=0;index<idRows.length;++index)
             {
-                if(idRows[index].equals(idRows[j])) //string match
+                if(idRows[index].equals(itemlist[j])) //string match
                     break;
             }
             
