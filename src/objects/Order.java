@@ -134,7 +134,7 @@ public class Order {
         Float salePrice = 0f;
 
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
-        int i=0;
+        int i=0,j=0;
         String[] orderRows = tempMap.get("orderNO");
         while(i<orderRows.length) //no match and never reach end
             {
@@ -150,16 +150,24 @@ public class Order {
         
         //add item to arraylist and WB
         String[] itemRows = tempMap.get("items");
-        itemRows[i] += ("."+itemID); 
-        itemRows[i] = itemRows[i].replaceAll("^\\.|\\.$", "").replaceAll("\\.\\.",".");
-        tempMap.put("items", itemRows);
+        
 
         //increment the sale price
-        for(int j=0; j<menuArr.size(); j++) {
+        
+        for(j=0; j<menuArr.size(); j++) {
             if(j==0) {continue;} //skip col
             if(menuArr.get(j)[0].equals(itemID)) {
+                itemRows[i] += ("."+itemID); 
+                itemRows[i] = itemRows[i].replaceAll("^\\.|\\.$", "").replaceAll("\\.\\.",".");
+                tempMap.put("items", itemRows);
                 salePrice += Float.parseFloat(menuArr.get(j)[2]);
             }
+        }
+
+        if(j==menuArr.size())
+        {
+            Colour.println(Colour.TEXT_RED, "No such item");
+            return;
         }
         //add to order
         String[] sales = tempMap.get("saleprice");
@@ -185,7 +193,7 @@ public class Order {
         ArrayList<String[]> menuArr = Data.readCSV(Path.menu);
         LinkedHashMap<String, String[]> tempMap = Data.parse(tempArrayList);
         Float salePrice = 0f;
-        int i=0;
+        int i=0,j=0;
         String[] orderRows = tempMap.get("orderNO");
 
         while(i<orderRows.length) //no match and never reach end
@@ -208,15 +216,23 @@ public class Order {
         //remove outlier dots
         itemRows[i] = itemRows[i].replaceAll("^\\.|\\.$", "").replaceAll("\\.\\.",".");
         tempMap.put("items", itemRows);
-
+        //nothing will happen if nonexistent
 
         //get the sale price
-        for(int j=0; j<menuArr.size(); j++) {
+        for(j=0; j<menuArr.size(); j++) {
             if(j==0) {continue;} //skip col
             if(menuArr.get(j)[0].equals(itemID)) {
                 salePrice += Float.parseFloat(menuArr.get(j)[2]);
             }
         }
+        
+        if(j==menuArr.size())
+        {
+            Colour.println(Colour.TEXT_RED, "No such item");
+            return;
+        }
+
+
         //subtract from order
         String[] sales = tempMap.get("saleprice");
         salePrice = Float.parseFloat(sales[i]) - salePrice;

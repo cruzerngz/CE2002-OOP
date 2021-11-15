@@ -136,8 +136,9 @@ public class Checkout {
 
         //item list with price at side
         String[] itemRows = tempMap.get("items");
-        String[] itemlist = itemRows[i].split("."); //each element is id
+        String[] itemlist = itemRows[i].split("\\."); //each element is id
         
+
         ArrayList<String[]> menuArrayList = Data.readCSV(menuPath); //read menu csv before enter loop
         LinkedHashMap<String, String[]> tempMap2 = Data.parse(menuArrayList);
 
@@ -146,12 +147,12 @@ public class Checkout {
         String[] priceRows = tempMap2.get("price");
 
         int index;
-        for(String item:itemlist) 
+        for(int j=0;j<itemlist.length;++j) 
         {
             //look for id match
             for(index=0;index<idRows.length;++index)
             {
-                if(item.equals(idRows[index])) //string match
+                if(idRows[index].equals(idRows[j])) //string match
                     break;
             }
             
@@ -159,7 +160,7 @@ public class Checkout {
         }
         
         //subtotal followed by discount then tax amt then total
-        String subtotal = tempMap.get("Saleprice")[i]; //saleprice at row i error here
+        String subtotal = tempMap.get("saleprice")[i]; //saleprice at row i error here
         String tax = tempMap.get("salesTax")[i];
         System.out.printf("Subtotal         $%s\n",subtotal); 
         System.out.printf("Tax          $%s\n",tax);

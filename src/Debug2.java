@@ -11,14 +11,14 @@ import util.*;
 
 public class Debug2 {
     public static void main(String[] args) {
-        MenuSetting temp = new MenuSetting();
-
-        // temp.printOptions();
+        OrderUI orderui = new OrderUI();
+        orderui.printOptions();
 
         ArrayList<String[]> menu = Data.readCSV(Path.menu);
         LinkedHashMap<String, String[]> map = Data.parse(menu);
 
-        map.get("recommend")[0] = "asd";
+        
+        //map.get("recommend")[0] = "asd";
         
     }
 

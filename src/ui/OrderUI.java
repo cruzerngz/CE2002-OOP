@@ -40,6 +40,9 @@ public class OrderUI implements BaseUI{
         this.staffName = activeStaff.getName();
     }
 
+    public OrderUI() { //TODO delete debug constructor
+    }
+
     public void printOptions(){
          int choice;
          String orderID, itemID;
